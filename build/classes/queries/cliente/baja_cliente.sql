@@ -1,0 +1,1 @@
+UPDATE Clientes  SET Eliminado = 1 WHERE DNI = ?;

@@ -1,0 +1,273 @@
+package daoImpl;
+
+import java.io.File;
+import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import dao.IUsuarioDao;
+import entidad.Tipo;
+import entidad.Usuario;
+import exceptions.IngresoDuplicado;
+import exceptions.IngresoLargo;
+
+public class UsuarioDaoImpl implements IUsuarioDao {
+	private String login = this.abrirQuery("./queries/usuario/login.sql");
+	
+	private String insertar = this.abrirQuery("./queries/usuario/insertar_usuario.sql");
+	private String buscarId = this.abrirQuery("./queries/usuario/buscar_id_usuario.sql");
+	private String bajaUsuario = this.abrirQuery("./queries/usuario/baja_usuario.sql");
+	private String altaUsuario = this.abrirQuery("./queries/usuario/alta_usuario.sql");
+	private String cambioPassUsuario = this.abrirQuery("./queries/usuario/cambio_pass_usuario.sql");
+	private String editarUsuario = this.abrirQuery("./queries/usuario/editar_usuario.sql");
+	
+	/**
+	 * The function "abrirQuery" reads the contents of a file given its path and returns the content as a
+	 * string.
+	 * 
+	 * @param ruta The parameter "ruta" is a String that represents the file path of the query file that
+	 * needs to be opened and read.
+	 * @return The method is returning a String.
+	 */
+	public String abrirQuery(String ruta) {
+		String result = "";
+		try {
+			File archivo = new File(ruta);
+			FileReader reader = new FileReader(archivo);
+			char[] buffer = new char[(int) archivo.length()];
+			reader.read(buffer);
+			reader.close();
+			result = new String(buffer);
+			return result;
+		} catch (Exception e) {
+			System.out.println("Exeption opening the file");
+			return result;
+		}
+	}
+	
+	/**
+	 * The login function takes a user object as input, queries the database to find a matching user, and
+	 * returns the user object if found, otherwise returns null.
+	 * 
+	 * @param usuario The "usuario" parameter is an object of the "Usuario" class, which represents a user
+	 * in the system. It contains the following attributes:
+	 * @return The method is returning an object of type "Usuario" if the "Id" property of the "usuario"
+	 * object is not equal to 0. Otherwise, it returns null.
+	 */
+	public Usuario login(Usuario usuario) {
+		Connection connection = Conexion.getConexion().getSQLConexion();
+		try {
+			PreparedStatement pStatement =  connection.prepareStatement(login);
+			pStatement.setString(1, usuario.getEmail());
+			pStatement.setString(2, usuario.getContraseña());
+			ResultSet rSet = pStatement.executeQuery();
+			while(rSet.next()) {
+				int id = rSet.getInt("Id");
+				int idRol = rSet.getInt("Id_rol");
+				String nombreUsuario = rSet.getString("Nombre_usuario");
+				String mail = rSet.getString("Email");
+				String contraseña = rSet.getString("Pass");
+				Boolean eliminado = rSet.getBoolean("Eliminado");
+				usuario.setId(id);
+				Tipo tipoRol = new Tipo();
+				tipoRol.setId(idRol);
+				usuario.setNombreUsuario(nombreUsuario);
+				usuario.setTipoRol(tipoRol);
+				usuario.setEmail(mail);
+				usuario.setContraseña(contraseña);
+				usuario.setEliminado(eliminado);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		if(usuario.getId() != 0) {
+			return usuario;
+		} else {
+			return null;
+		}
+	}
+	/**
+	 * The function "crearUsuario" is used to insert a new user into a database table.
+	 * 
+	 * @param usuario The "usuario" parameter is an object of the class "Usuario" which contains the
+	 * following attributes:
+	 * @return The method is returning a Boolean value, indicating whether the user creation was
+	 * successful or not.
+	 * @throws IngresoDuplicado 
+	 */
+	public String crearUsuario(Usuario usuario) throws IngresoDuplicado, IngresoLargo {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		String isInsertExitoso = "";
+		try
+		{
+			statement = conexion.prepareStatement(insertar);
+			statement.setInt(1, usuario.getTipoRol().getId());;
+			statement.setString(2, usuario.getNombreUsuario());
+			statement.setString(3, usuario.getEmail());
+			statement.setString(4, usuario.getContraseña());
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isInsertExitoso = "1";
+				return isInsertExitoso;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			if(e.getMessage().contains("Duplicate entry") && e.getMessage().contains("Email")) {
+				IngresoDuplicado ingresoDuplicado = new IngresoDuplicado("email");
+				throw ingresoDuplicado;
+			}
+			if(e.getMessage().contains("Duplicate entry") && e.getMessage().contains("Nombre_usuario")) {
+				IngresoDuplicado ingresoDuplicado = new IngresoDuplicado("nombre usuario");
+				throw ingresoDuplicado;
+			}
+			if(e.getMessage().contains("Data too long for column 'Pass'")) {
+				IngresoLargo ingresoLargo = new IngresoLargo("contraseña");
+				throw ingresoLargo;
+			}
+			return e.getMessage();
+		}
+		
+		return isInsertExitoso;
+	}
+	
+	public int buscarId(String nombreUsuario) {
+		Connection connection = Conexion.getConexion().getSQLConexion();
+		int id = 0;
+		try {
+			PreparedStatement pStatement =  connection.prepareStatement(buscarId);
+			pStatement.setString(1, nombreUsuario);
+			ResultSet rSet = pStatement.executeQuery();
+			while(rSet.next()) {
+				id = rSet.getInt("Id");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return id;
+	}
+	@Override
+	public Boolean bajaUsuario(int id) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		Boolean isInsertExitoso = false;
+		try
+		{
+			statement = conexion.prepareStatement(bajaUsuario);
+			statement.setInt(1, id);
+			
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isInsertExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.getMessage();
+		}
+		
+		return isInsertExitoso;
+	}
+	@Override
+	public Boolean altaUsuario(int Idcliente) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		Boolean isInsertExitoso = false;
+		try
+		{
+			statement = conexion.prepareStatement(altaUsuario);
+			statement.setInt(1, Idcliente);
+			
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isInsertExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.getMessage();
+		}
+		
+		return isInsertExitoso;
+	}
+	@Override
+	public Boolean cambiarPassUsuario(int Idcliente, String nuevaPass) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		Boolean isInsertExitoso = false;
+		try
+		{
+			statement = conexion.prepareStatement(cambioPassUsuario);
+			statement.setString(1, nuevaPass);
+			statement.setInt(2, Idcliente);
+			
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isInsertExitoso = true;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.getMessage();
+		}
+		
+		return isInsertExitoso;
+	}
+	@Override
+	public String editarUsuario(Usuario usuario) {
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		String isInsertExitoso = "";
+		try
+		{
+			statement = conexion.prepareStatement(editarUsuario);
+			statement.setString(1, usuario.getEmail());
+			statement.setInt(2, usuario.getId());
+			if(statement.executeUpdate() > 0)
+			{
+				conexion.commit();
+				isInsertExitoso = "1";
+				return isInsertExitoso;
+			}
+		} 
+		catch (SQLException e) 
+		{
+			System.out.println(e.getMessage());
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+		}
+		
+		return isInsertExitoso;
+	}
+}

@@ -1,0 +1,1 @@
+SELECT c.Id FROM Clientes c WHERE c.Id_usuario = ?;

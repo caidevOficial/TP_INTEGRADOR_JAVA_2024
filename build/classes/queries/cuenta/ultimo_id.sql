@@ -1,0 +1,1 @@
+SELECT MAX(c.Id) + 1 AS Id FROM Cuentas AS c;
