@@ -16,50 +16,45 @@ import exceptions.IngresoDuplicado;
 import exceptions.NoExiste;
 import exceptions.SaldoNegativo;
 import exceptions.TriggerCreacionExcedida;
+import queries.Queries;
 
 public class CuentaDaoImpl implements ICuentaDao {
-	private String getCuentas = this.abrirQuery("./queries/cuenta/get_cuentas.sql");
-	private String getCuentasBuscar = this.abrirQuery("./queries/cuenta/get_cuentas_buscar.sql");
-	private String getCuentasCliente = this.abrirQuery("./queries/cuenta/get_cuentas_cliente.sql");
-	private String crearCuenta = this.abrirQuery("./queries/cuenta/crear_cuenta.sql");
-	private String bajaCuenta = this.abrirQuery("./queries/cuenta/baja_cuenta.sql");
-	private String altaCuenta = this.abrirQuery("./queries/cuenta/alta_cuenta.sql");
-	private String actualizarSaldoSumar = this.abrirQuery("./queries/cuenta/sumar_saldo.sql");
-	private String actualizarSaldoRestar = this.abrirQuery("./queries/cuenta/restar_saldo.sql");
-	private String ultimoId = this.abrirQuery("./queries/cuenta/ultimo_id.sql");
-	private String cuentaPorCBU = this.abrirQuery("./queries/cuenta/cuenta_por_cbu.sql");
-	private String idPorIdCliente = this.abrirQuery("./queries/cuenta/id_por_idcliente.sql");
-	private String EditarCuenta = this.abrirQuery("./queries/cuenta/editar_cuenta.sql");
 	
-	/**
-	 * The function "abrirQuery" reads the contents of a file given its path and returns the content as a
-	 * string.
-	 * 
-	 * @param ruta The parameter "ruta" is a String that represents the file path of the query file that
-	 * needs to be opened and read.
-	 * @return The method is returning a String.
-	 */
-	public String abrirQuery(String ruta) {
-		String result = "";
-		try {
-			File archivo = new File(ruta);
-			FileReader reader = new FileReader(archivo);
-			char[] buffer = new char[(int) archivo.length()];
-			reader.read(buffer);
-			reader.close();
-			result = new String(buffer);
-			return result;
-		} catch (Exception e) {
-			System.out.println("Exeption opening the file");
-			return result;
-		}
+	Queries queryManager;
+	
+	private String getCuentas;
+	private String getCuentasBuscar;
+	private String getCuentasCliente;
+	private String crearCuenta;
+	private String bajaCuenta;
+	private String altaCuenta; 
+	private String actualizarSaldoSumar;
+	private String actualizarSaldoRestar;
+	private String ultimoId;
+	private String cuentaPorCBU; 
+	private String idPorIdCliente; 
+	private String editarCuenta;
+	
+	public CuentaDaoImpl() {
+		this.altaCuenta = this.queryManager.altaCuenta;
+		this.bajaCuenta = this.queryManager.bajaCuenta;
+		this.crearCuenta = this.queryManager.crearCuenta;
+		this.editarCuenta = this.queryManager.editarCuenta;
+		this.getCuentas = this.queryManager.getCuentas;
+		this.getCuentasBuscar = this.queryManager.getCuentasBuscar;
+		this.getCuentasCliente = this.queryManager.getCuentasClientes;
+		this.actualizarSaldoSumar = this.queryManager.sumarSaldo;
+		this.actualizarSaldoRestar = this.queryManager.restarSaldo;
+		this.ultimoId = this.queryManager.ultimoId;
+		this.cuentaPorCBU = this.queryManager.cuentaPorCbu;
+		this.idPorIdCliente = this.queryManager.idPorIdCliente;
 	}
 
 	public ArrayList<Cuenta> obtenerCuentas() {
 		Connection connection = Conexion.getConexion().getSQLConexion();
 		ArrayList<Cuenta> cuentas = new ArrayList<Cuenta>();
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(this.abrirQuery("./queries/cuenta/get_cuentas.sql"));
+			PreparedStatement pStatement =  connection.prepareStatement(this.getCuentas);
 			ResultSet rSet = pStatement.executeQuery();
 			while(rSet.next()) {
 				Cuenta cuenta = new Cuenta();
@@ -96,7 +91,7 @@ public class CuentaDaoImpl implements ICuentaDao {
 		String isInsertExitoso = "0";
 		try
 		{
-			statement = conexion.prepareStatement(this.abrirQuery("./queries/cuenta/crear_cuenta.sql"));
+			statement = conexion.prepareStatement(this.crearCuenta);
 			statement.setInt(1, cuenta.getCliente().getId());;
 			statement.setString(2, cuenta.getNumeroCuenta());
 			statement.setString(3, cuenta.getCbu());
@@ -150,7 +145,7 @@ public class CuentaDaoImpl implements ICuentaDao {
 		Boolean isInsertExitoso = false;
 		try
 		{
-			statement = conexion.prepareStatement(this.abrirQuery("./queries/cuenta/baja_cuenta.sql"));
+			statement = conexion.prepareStatement(this.bajaCuenta);
 			statement.setInt(1, id);
 			
 			if(statement.executeUpdate() > 0)
@@ -179,7 +174,7 @@ public class CuentaDaoImpl implements ICuentaDao {
 		Boolean isInsertExitoso = false;
 		try
 		{
-			statement = conexion.prepareStatement(this.abrirQuery("./queries/cuenta/alta_cuenta.sql"));
+			statement = conexion.prepareStatement(this.altaCuenta);
 			statement.setInt(1, id);
 			
 			if(statement.executeUpdate() > 0)
@@ -207,7 +202,7 @@ public class CuentaDaoImpl implements ICuentaDao {
 		ArrayList<Cuenta> cuentas = new ArrayList<Cuenta>();
 		int id = 0;
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(this.abrirQuery("./queries/cuenta/ultimo_id.sql"));
+			PreparedStatement pStatement =  connection.prepareStatement(this.ultimoId);
 			ResultSet rSet = pStatement.executeQuery();
 			while(rSet.next()) {
 				id = rSet.getInt("Id");
@@ -226,7 +221,7 @@ public class CuentaDaoImpl implements ICuentaDao {
 		Boolean isInsertExitoso = false;
 		try
 		{
-			statement = conexion.prepareStatement(this.abrirQuery("./queries/cuenta/sumar_saldo.sql"));
+			statement = conexion.prepareStatement(this.actualizarSaldoSumar);
 			statement.setBigDecimal(1, nuevosaldo);
 			statement.setInt(2, cuenta.getId());
 			
@@ -256,7 +251,7 @@ public class CuentaDaoImpl implements ICuentaDao {
 		String isInsertExitoso = "0";
 		try
 		{
-			statement = conexion.prepareStatement(this.abrirQuery("./queries/cuenta/restar_saldo.sql"));
+			statement = conexion.prepareStatement(this.actualizarSaldoRestar);
 			statement.setBigDecimal(1, nuevosaldo);
 			statement.setInt(2, cuenta.getId());
 			
@@ -287,7 +282,7 @@ public class CuentaDaoImpl implements ICuentaDao {
 		Connection connection = Conexion.getConexion().getSQLConexion();
 		ArrayList<Cuenta> cuentas = new ArrayList<Cuenta>();
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(this.abrirQuery("./queries/cuenta/get_cuentas_cliente.sql"));
+			PreparedStatement pStatement =  connection.prepareStatement(this.getCuentasCliente);
 			pStatement.setInt(1, clienteCuenta.getId());
 			ResultSet rSet = pStatement.executeQuery();
 			while(rSet.next()) {
@@ -324,7 +319,7 @@ public class CuentaDaoImpl implements ICuentaDao {
 		ArrayList<Cuenta> cuentas = new ArrayList<Cuenta>();
 		terminoBuscar = "%" + terminoBuscar + "%";
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(this.abrirQuery("./queries/cuenta/get_cuentas_buscar.sql"));
+			PreparedStatement pStatement =  connection.prepareStatement(this.getCuentasBuscar);
 			pStatement.setString(1, terminoBuscar);
 			pStatement.setString(2, terminoBuscar);
 			pStatement.setString(3, terminoBuscar);
@@ -368,7 +363,7 @@ public class CuentaDaoImpl implements ICuentaDao {
 	public Cuenta obtenerCBU(Cuenta cuenta) {
 		Connection connection = Conexion.getConexion().getSQLConexion();
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(this.abrirQuery("./queries/cuenta/cuenta_por_cbu.sql"));
+			PreparedStatement pStatement =  connection.prepareStatement(this.cuentaPorCBU);
 			pStatement.setString(1, cuenta.getCbu());
 			ResultSet rSet = pStatement.executeQuery();
 			while(rSet.next()) {
@@ -393,11 +388,10 @@ public class CuentaDaoImpl implements ICuentaDao {
 		Connection connection = Conexion.getConexion().getSQLConexion();
 		Cuenta cuenta = new Cuenta();
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(this.abrirQuery("./queries/cuenta/id_por_idcliente.sql"));
+			PreparedStatement pStatement =  connection.prepareStatement(this.idPorIdCliente);
 			pStatement.setInt(1, cliente.getId());
 			ResultSet rSet = pStatement.executeQuery();
 			while(rSet.next()) {
-//c.CBU As CBU, c.Saldo AS Saldo, tc.Id As IdTipoCuenta, tc.Descripcion As DescripcionTipo, cAS Eliminado
 				cuenta.setId(rSet.getInt("IdCliente"));
 			}
 		} catch (Exception e) {
@@ -413,7 +407,7 @@ public class CuentaDaoImpl implements ICuentaDao {
 		String isInsertExitoso = "0";
 		try
 		{
-			statement = conexion.prepareStatement(this.abrirQuery("./queries/cuenta/editar_cuenta.sql"));
+			statement = conexion.prepareStatement(this.editarCuenta);
 			statement.setString(1, cuenta.getNumeroCuenta());
 			statement.setString(2, cuenta.getCbu());
 			statement.setBigDecimal(3, cuenta.getSaldo());
