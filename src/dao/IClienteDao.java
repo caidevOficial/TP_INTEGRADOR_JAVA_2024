@@ -17,5 +17,4 @@ public interface IClienteDao {
 	public Cliente obtenerCliente(Cliente clienteBuscar);
 	public Boolean bajaCliente(String dni);
 	public Boolean altaCliente(String dni);
-	
 }
