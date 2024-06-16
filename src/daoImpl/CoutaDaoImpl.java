@@ -11,33 +11,18 @@ import java.util.ArrayList;
 import dao.ICoutaDao;
 import entidad.Couta;
 import entidad.Prestamo;
+import queries.Queries;
 
 public class CoutaDaoImpl implements ICoutaDao {
-	private String getCoutasPrestamo = this.abrirQuery("./queries/cuota/get_cuotas_prestamo.sql");
-	//private String this.abrirQuery("./queries/cuota/set_cuota.sql") = this.abrirQuery("./queries/cuota/set_cuota.sql");
 	
-	/**
-	 * The function "abrirQuery" reads the contents of a file given its path and returns the content as a
-	 * string.
-	 * 
-	 * @param ruta The parameter "ruta" is a String that represents the file path of the query file that
-	 * needs to be opened and read.
-	 * @return The method is returning a String.
-	 */
-	public String abrirQuery(String ruta) {
-		String result = "";
-		try {
-			File archivo = new File(ruta);
-			FileReader reader = new FileReader(archivo);
-			char[] buffer = new char[(int) archivo.length()];
-			reader.read(buffer);
-			reader.close();
-			result = new String(buffer);
-			return result;
-		} catch (Exception e) {
-			System.out.println("Exeption opening the file");
-			return result;
-		}
+	Queries queryManager;
+	
+	private String getCoutasPrestamo; 
+	private String setCuotasPrestamo;
+			
+	public CoutaDaoImpl() {
+		this.getCoutasPrestamo = this.queryManager.getCoutasPrestamo;
+		this.setCuotasPrestamo = this.queryManager.setCuotaPrestamo;
 	}
 
 	@Override
@@ -45,7 +30,7 @@ public class CoutaDaoImpl implements ICoutaDao {
 		Connection connection = Conexion.getConexion().getSQLConexion();
 		ArrayList<Couta> coutas = new ArrayList<Couta>();
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(this.abrirQuery("./queries/cuota/get_cuotas_prestamo.sql"));
+			PreparedStatement pStatement =  connection.prepareStatement(this.getCoutasPrestamo);
 			pStatement.setInt(1, prestamo.getId());
 			ResultSet rSet = pStatement.executeQuery();
 			while(rSet.next()) {
@@ -72,7 +57,7 @@ public class CoutaDaoImpl implements ICoutaDao {
 		Boolean isInsertExitoso = false;
 		try
 		{
-			statement = conexion.prepareStatement(this.abrirQuery("./queries/cuota/set_cuota.sql"));
+			statement = conexion.prepareStatement(this.setCuotasPrestamo);
 			statement.setInt(1, couta.getId());
 			
 			if(statement.executeUpdate() > 0)
