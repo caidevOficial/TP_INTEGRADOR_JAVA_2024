@@ -12,47 +12,37 @@ import entidad.Cliente;
 import entidad.Cuenta;
 import entidad.Prestamo;
 import entidad.Tipo;
+import queries.Queries;
 
 public class PrestamoDaoImpl implements IPrestamoDao {
-	private String getPrestamos = this.abrirQuery("./queries/prestamo/get_prestamo.sql");
-	private String getPrestamosPendientes = this.abrirQuery("./queries/prestamo/get_prestamos_pendientes.sql");
-	private String getPrestamosAprobados = this.abrirQuery("./queries/prestamo/get_prestamos_aprobados.sql");
-	private String getPrestamosPendientesBuscar = this.abrirQuery("./queries/prestamo/_buscar.sql");
-	private String rechazar = this.abrirQuery("./queries/prestamo/rechazar_prestamo.sql");
-	private String aceptar = this.abrirQuery("./queries/prestamo/aceptar_prestamo.sql");
-	private String insertarPrestamo = this.abrirQuery("./queries/prestamo/insertar_prestamo.sql");
-	private String informe = this.abrirQuery("./queries/prestamo/informe_prestamos.sql");
+	Queries queryManager;
+	private String getPrestamos;
+	private String getPrestamosPendientes;
+	private String getPrestamosAprobados;
+	private String getPrestamosPendientesBuscar;
+	private String rechazar;
+	private String aceptar;
+	private String insertarPrestamo;
+	private String informe;
 
-	/**
-	 * The function "abrirQuery" reads the contents of a file given its path and returns the content as a
-	 * string.
-	 * 
-	 * @param ruta The parameter "ruta" is a String that represents the file path of the query file that
-	 * needs to be opened and read.
-	 * @return The method is returning a String.
-	 */
-	public String abrirQuery(String ruta) {
-		String result = "";
-		try {
-			File archivo = new File(ruta);
-			FileReader reader = new FileReader(archivo);
-			char[] buffer = new char[(int) archivo.length()];
-			reader.read(buffer);
-			reader.close();
-			result = new String(buffer);
-			return result;
-		} catch (Exception e) {
-			System.out.println("Exeption opening the file");
-			return result;
-		}
+	public PrestamoDaoImpl() {
+		this.queryManager = new Queries();
+		this.getPrestamos = this.queryManager.getPrestamos;
+		this.getPrestamosPendientes = this.queryManager.getPrestamosPendientes;
+		this.getPrestamosAprobados = this.queryManager.getPrestamosAprobados;
+		this.getPrestamosPendientesBuscar = this.queryManager.getPrestamosPendientesBuscar;
+		this.rechazar = this.queryManager.rechazarPrestamo;
+		this.aceptar = this.queryManager.aceptarPrestamo;
+		this.insertarPrestamo = this.queryManager.insertarPrestamo;
+		this.informe = this.queryManager.informe;
 	}
-
+	
 	@Override
 	public ArrayList<Prestamo> getPrestamos() {
 		Connection connection = Conexion.getConexion().getSQLConexion();
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(getPrestamos);
+			PreparedStatement pStatement =  connection.prepareStatement(this.getPrestamos);
 			ResultSet rSet = pStatement.executeQuery();
 			while(rSet.next()) {
 				Prestamo prestamo = new Prestamo();
@@ -84,7 +74,7 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 		Connection connection = Conexion.getConexion().getSQLConexion();
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(this.abrirQuery("./queries/prestamo/get_prestamos_pendientes.sql"));
+			PreparedStatement pStatement =  connection.prepareStatement(this.getPrestamosPendientes);
 			ResultSet rSet = pStatement.executeQuery();
 			while(rSet.next()) {
 				Prestamo prestamo = new Prestamo();
@@ -118,7 +108,7 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 		Boolean isInsertExitoso = false;
 		try
 		{
-			statement = conexion.prepareStatement(aceptar);
+			statement = conexion.prepareStatement(this.aceptar);
 			statement.setInt(1, prestamo.getId());
 			
 			if(statement.executeUpdate() > 0)
@@ -147,7 +137,7 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 		Boolean isInsertExitoso = false;
 		try
 		{
-			statement = conexion.prepareStatement(rechazar);
+			statement = conexion.prepareStatement(this.rechazar);
 			statement.setInt(1, prestamo.getId());
 			
 			if(statement.executeUpdate() > 0)
@@ -175,7 +165,7 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 		terminoBuscar = "%" + terminoBuscar + "%";
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(this.abrirQuery("./queries/prestamo/_buscar.sql"));
+			PreparedStatement pStatement =  connection.prepareStatement(this.getPrestamosPendientesBuscar);
 			pStatement.setString(1, terminoBuscar);
 			pStatement.setString(2, terminoBuscar);
 			pStatement.setString(3, terminoBuscar);
@@ -216,7 +206,7 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 		String isInsertExitoso = "0";
 		try
 		{
-			statement = conexion.prepareStatement(insertarPrestamo);
+			statement = conexion.prepareStatement(this.insertarPrestamo);
 			statement.setInt(1, prestamo.getCuenta().getId());
 			statement.setBigDecimal(2, prestamo.getMontoSolicitado());
 			statement.setBigDecimal(3, prestamo.getMontoCuota());
@@ -246,7 +236,7 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 		Connection connection = Conexion.getConexion().getSQLConexion();
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(this.abrirQuery("./queries/movimiento/get_importe_total.sql"));
+			PreparedStatement pStatement =  connection.prepareStatement(this.queryManager.getImporteTotal);
 			pStatement.setInt(1, cliente.getId());
 			ResultSet rSet = pStatement.executeQuery();
 			while(rSet.next()) {
@@ -279,7 +269,7 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 		Connection connection = Conexion.getConexion().getSQLConexion();
 		int[] info = new int[3];
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(informe);
+			PreparedStatement pStatement =  connection.prepareStatement(this.informe);
 			pStatement.setInt(1, mes);
 			ResultSet rSet = pStatement.executeQuery();
 			while(rSet.next()) {
