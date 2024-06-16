@@ -11,41 +11,30 @@ import entidad.Tipo;
 import entidad.Usuario;
 import exceptions.IngresoDuplicado;
 import exceptions.IngresoLargo;
+import queries.Queries;
 
 public class UsuarioDaoImpl implements IUsuarioDao {
-	private String login = this.abrirQuery("./queries/usuario/login.sql");
+	Queries queryManager;
+	private String login;
 	
-	private String insertar = this.abrirQuery("./queries/usuario/insertar_usuario.sql");
-	private String buscarId = this.abrirQuery("./queries/usuario/buscar_id_usuario.sql");
-	private String bajaUsuario = this.abrirQuery("./queries/usuario/baja_usuario.sql");
-	private String altaUsuario = this.abrirQuery("./queries/usuario/alta_usuario.sql");
-	private String cambioPassUsuario = this.abrirQuery("./queries/usuario/cambio_pass_usuario.sql");
-	private String editarUsuario = this.abrirQuery("./queries/usuario/editar_usuario.sql");
+	private String insertar;
+	private String buscarId;
+	private String bajaUsuario;
+	private String altaUsuario;
+	private String cambioPassUsuario;
+	private String editarUsuario;
 	
-	/**
-	 * The function "abrirQuery" reads the contents of a file given its path and returns the content as a
-	 * string.
-	 * 
-	 * @param ruta The parameter "ruta" is a String that represents the file path of the query file that
-	 * needs to be opened and read.
-	 * @return The method is returning a String.
-	 */
-	public String abrirQuery(String ruta) {
-		String result = "";
-		try {
-			File archivo = new File(ruta);
-			FileReader reader = new FileReader(archivo);
-			char[] buffer = new char[(int) archivo.length()];
-			reader.read(buffer);
-			reader.close();
-			result = new String(buffer);
-			return result;
-		} catch (Exception e) {
-			System.out.println("Exeption opening the file");
-			return result;
-		}
+	public UsuarioDaoImpl() {
+		this.queryManager = new Queries();
+		this.login = this.queryManager.loginUsuario;
+		this.insertar = this.queryManager.insertarUsuario;
+		this.buscarId = this.queryManager.buscarIdUsuario;
+		this.bajaUsuario = this.queryManager.bajaUsuario;
+		this.altaUsuario = this.queryManager.altaUsuario;
+		this.cambioPassUsuario = this.queryManager.cambioPassUsuario;
+		this.editarUsuario = this.queryManager.editarUsuario;
 	}
-	
+		
 	/**
 	 * The login function takes a user object as input, queries the database to find a matching user, and
 	 * returns the user object if found, otherwise returns null.
@@ -58,7 +47,7 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 	public Usuario login(Usuario usuario) {
 		Connection connection = Conexion.getConexion().getSQLConexion();
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(login);
+			PreparedStatement pStatement =  connection.prepareStatement(this.login);
 			pStatement.setString(1, usuario.getEmail());
 			pStatement.setString(2, usuario.getContraseña());
 			ResultSet rSet = pStatement.executeQuery();
@@ -103,7 +92,7 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 		String isInsertExitoso = "";
 		try
 		{
-			statement = conexion.prepareStatement(insertar);
+			statement = conexion.prepareStatement(this.insertar);
 			statement.setInt(1, usuario.getTipoRol().getId());;
 			statement.setString(2, usuario.getNombreUsuario());
 			statement.setString(3, usuario.getEmail());
@@ -144,7 +133,7 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 		Connection connection = Conexion.getConexion().getSQLConexion();
 		int id = 0;
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(buscarId);
+			PreparedStatement pStatement =  connection.prepareStatement(this.buscarId);
 			pStatement.setString(1, nombreUsuario);
 			ResultSet rSet = pStatement.executeQuery();
 			while(rSet.next()) {
@@ -163,7 +152,7 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 		Boolean isInsertExitoso = false;
 		try
 		{
-			statement = conexion.prepareStatement(bajaUsuario);
+			statement = conexion.prepareStatement(this.bajaUsuario);
 			statement.setInt(1, id);
 			
 			if(statement.executeUpdate() > 0)
@@ -191,7 +180,7 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 		Boolean isInsertExitoso = false;
 		try
 		{
-			statement = conexion.prepareStatement(altaUsuario);
+			statement = conexion.prepareStatement(this.altaUsuario);
 			statement.setInt(1, Idcliente);
 			
 			if(statement.executeUpdate() > 0)
@@ -219,7 +208,7 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 		Boolean isInsertExitoso = false;
 		try
 		{
-			statement = conexion.prepareStatement(cambioPassUsuario);
+			statement = conexion.prepareStatement(this.cambioPassUsuario);
 			statement.setString(1, nuevaPass);
 			statement.setInt(2, Idcliente);
 			
@@ -248,7 +237,7 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 		String isInsertExitoso = "";
 		try
 		{
-			statement = conexion.prepareStatement(editarUsuario);
+			statement = conexion.prepareStatement(this.editarUsuario);
 			statement.setString(1, usuario.getEmail());
 			statement.setInt(2, usuario.getId());
 			if(statement.executeUpdate() > 0)
