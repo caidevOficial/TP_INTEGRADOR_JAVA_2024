@@ -159,5 +159,7 @@ public class Queries {
 		// TODO Auto-generated method stub
 
 	}
+	
+	public static void test() {}
 
 }
