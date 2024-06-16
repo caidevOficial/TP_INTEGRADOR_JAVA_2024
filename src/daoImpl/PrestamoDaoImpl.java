@@ -236,7 +236,7 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 		Connection connection = Conexion.getConexion().getSQLConexion();
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement("./queries/movimiento/get_importe_total.sql");
+			PreparedStatement pStatement =  connection.prepareStatement(this.queryManager.getImporteTotal);
 			pStatement.setInt(1, cliente.getId());
 			ResultSet rSet = pStatement.executeQuery();
 			while(rSet.next()) {
