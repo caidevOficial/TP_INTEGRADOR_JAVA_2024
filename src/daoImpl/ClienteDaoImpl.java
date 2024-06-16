@@ -31,17 +31,17 @@ public class ClienteDaoImpl implements IClienteDao {
 	/***
 	 * 
 	 */
-	private ClienteDaoImpl() {
+	public ClienteDaoImpl() {
 		this.queryManager = new Queries();
-		this.buscarId = queryManager.queryBuscarId;
-		this.buscarIdUsuario = queryManager.buscarIdUsuario;
-		this.getClientes = queryManager.getClientes;
-		this.getCliente = queryManager.getCliente;
-		this.getClientesPorTermino = queryManager.getClientesPorTermino;
-		this.crearCliente = queryManager.crearCliente;
-		this.bajaCliente = queryManager.bajaCliente;
-		this.altaCliente = queryManager.altaCliente;
-		this.editarCliente = queryManager.editarCliente;
+		this.buscarId = this.queryManager.queryBuscarId;
+		this.buscarIdUsuario = this.queryManager.buscarIdCliente;
+		this.getClientes = this.queryManager.getClientes;
+		this.getCliente = this.queryManager.getCliente;
+		this.getClientesPorTermino = this.queryManager.getClientesPorTermino;
+		this.crearCliente = this.queryManager.crearCliente;
+		this.bajaCliente = this.queryManager.bajaCliente;
+		this.altaCliente = this.queryManager.altaCliente;
+		this.editarCliente = this.queryManager.editarCliente;
 	}
 
 	/**

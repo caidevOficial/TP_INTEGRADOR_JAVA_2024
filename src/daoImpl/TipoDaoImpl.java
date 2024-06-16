@@ -5,18 +5,25 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import queries.Queries;
 
 import dao.ITipoDao;
 import entidad.Tipo;
 
 public class TipoDaoImpl implements ITipoDao {
-	private static final String getTipo = "SELECT Id, Descripcion, Eliminado FROM ";
+	private String getTipo;
+	Queries queryManager;
 
+	public TipoDaoImpl() {
+		this.queryManager = new Queries();
+		this.getTipo = this.queryManager.getTipo;
+	}
+	
 	public ArrayList<Tipo> getTipos(String tipoBuscar) {
 		Connection connection = Conexion.getConexion().getSQLConexion();
 		ArrayList<Tipo> tipos = new ArrayList<Tipo>();
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(getTipo + tipoBuscar);
+			PreparedStatement pStatement =  connection.prepareStatement(String.format("%s %s", this.getTipo, tipoBuscar));
 			ResultSet rSet = pStatement.executeQuery();
 			while(rSet.next()) {
 				Tipo tipo = new Tipo();
