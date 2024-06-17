@@ -5,32 +5,32 @@ public class Usuario {
 	private Tipo tipoRol;
 	private String nombreUsuario;
 	private String email;
-	private String contraseña;
+	private String password;
 	private Boolean eliminado;
 	
 	public Usuario() {
 		// TODO Auto-generated constructor stub
 	}
 	
-	public Usuario(String email, String contraseña) {
+	public Usuario(String email, String password) {
 		super();
 		this.email = email;
-		this.contraseña = contraseña;
+		this.password = password;
 	}
 	
-	public Usuario(String nombreUsuario, String email, String contraseña) {
+	public Usuario(String nombreUsuario, String email, String password) {
 		super();
 		this.email = email;
-		this.contraseña = contraseña;
+		this.password = password;
 		this.nombreUsuario = nombreUsuario;
 	}
 
-	public Usuario(int id, Tipo tipoRol, String email, String contraseña, Boolean eliminado) {
+	public Usuario(int id, Tipo tipoRol, String email, String password, Boolean eliminado) {
 		super();
 		this.id = id;
 		this.tipoRol = tipoRol;
 		this.email = email;
-		this.contraseña = contraseña;
+		this.password = password;
 		this.eliminado = eliminado;
 	}
 
@@ -66,12 +66,12 @@ public class Usuario {
 		this.email = email;
 	}
 
-	public String getContraseña() {
-		return contraseña;
+	public String getPassword() {
+		return password;
 	}
 
-	public void setContraseña(String contraseña) {
-		this.contraseña = contraseña;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public Boolean getEliminado() {

@@ -376,7 +376,7 @@ public class servletAdminstrador extends HttpServlet {
 		usuario.setTipoRol(tipoRol);
 		usuario.setNombreUsuario(request.getParameter("txtNombreUsuario"));
 		usuario.setEmail(request.getParameter("txtEmail"));
-		usuario.setContraseña(request.getParameter("txtPassword"));
+		usuario.setPassword(request.getParameter("txtPassword"));
 		try {
 			request.setAttribute("usuarioInsertado", usuarioNegocio.crearUsuario(usuario));
 		} catch (SQLException e) {
@@ -394,7 +394,7 @@ public class servletAdminstrador extends HttpServlet {
 		usuario.setTipoRol(tipoRol);
 		usuario.setNombreUsuario(request.getParameter("txtNombreUsuario"));
 		usuario.setEmail(request.getParameter("txtEmail"));
-		usuario.setContraseña(request.getParameter("txtPassword"));
+		usuario.setPassword(request.getParameter("txtPassword"));
 		try {
 			request.setAttribute("usuarioClienteInsertado", usuarioNegocio.crearUsuario(usuario));
 		} catch (SQLException e) {

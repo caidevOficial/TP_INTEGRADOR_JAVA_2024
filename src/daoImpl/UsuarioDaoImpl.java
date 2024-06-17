@@ -49,14 +49,14 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 		try {
 			PreparedStatement pStatement =  connection.prepareStatement(this.login);
 			pStatement.setString(1, usuario.getEmail());
-			pStatement.setString(2, usuario.getContraseña());
+			pStatement.setString(2, usuario.getPassword());
 			ResultSet rSet = pStatement.executeQuery();
 			while(rSet.next()) {
 				int id = rSet.getInt("Id");
 				int idRol = rSet.getInt("Id_rol");
 				String nombreUsuario = rSet.getString("Nombre_usuario");
 				String mail = rSet.getString("Email");
-				String contraseña = rSet.getString("Pass");
+				String password = rSet.getString("Pass");
 				Boolean eliminado = rSet.getBoolean("Eliminado");
 				usuario.setId(id);
 				Tipo tipoRol = new Tipo();
@@ -64,7 +64,7 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 				usuario.setNombreUsuario(nombreUsuario);
 				usuario.setTipoRol(tipoRol);
 				usuario.setEmail(mail);
-				usuario.setContraseña(contraseña);
+				usuario.setPassword(password);
 				usuario.setEliminado(eliminado);
 			}
 			
@@ -96,7 +96,7 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 			statement.setInt(1, usuario.getTipoRol().getId());;
 			statement.setString(2, usuario.getNombreUsuario());
 			statement.setString(3, usuario.getEmail());
-			statement.setString(4, usuario.getContraseña());
+			statement.setString(4, usuario.getPassword());
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
@@ -120,7 +120,7 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 				throw ingresoDuplicado;
 			}
 			if(e.getMessage().contains("Data too long for column 'Pass'")) {
-				IngresoLargo ingresoLargo = new IngresoLargo("contraseña");
+				IngresoLargo ingresoLargo = new IngresoLargo("contraseï¿½a");
 				throw ingresoLargo;
 			}
 			return e.getMessage();
