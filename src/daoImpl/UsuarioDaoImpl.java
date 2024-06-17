@@ -70,6 +70,7 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+			System.out.println("Se rompe acá");
 		}
 		if(usuario.getId() != 0) {
 			return usuario;

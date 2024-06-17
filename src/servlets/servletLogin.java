@@ -44,17 +44,28 @@ public class servletLogin extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		if (request.getParameter("btnIngresar") != null) {
 			UsuarioNegocioImpl usuarioNegocio = new UsuarioNegocioImpl();
-			Usuario usuario = new Usuario(request.getParameter("mail").toString(), request.getParameter("password").toString());
-			usuario = usuarioNegocio.login(usuario);
-			if(usuario != null) {
-				request.getSession().setAttribute("usuario", usuario);
-				RequestDispatcher rd = request.getRequestDispatcher("/Inicio.jsp");   
-		        rd.forward(request, response);
-			} else {
-				request.setAttribute("errorLogin", "Usuario o contraseña invalidos");
+			String mail = request.getParameter("mail").toString();
+			String password = request.getParameter("password").toString();
+			if(mail != null && !mail.isEmpty() && password != null && !password.isEmpty()) {
+				Usuario usuario = new Usuario(mail, password);
+				usuario = usuarioNegocio.login(usuario);
+				if(usuario != null) {
+					request.getSession().setAttribute("usuario", usuario);
+					RequestDispatcher rd = request.getRequestDispatcher("/Inicio.jsp");   
+			        rd.forward(request, response);
+				} else {
+					request.setAttribute("errorLogin", "Email o contraseña invalidos");
+					RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");   
+			        rd.forward(request, response);
+				}
+			}
+			else {
+				request.setAttribute("errorLogin", "Por favor completa el email y la contraseña");
 				RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");   
 		        rd.forward(request, response);
 			}
+			
+			
 		}
 	}
 
