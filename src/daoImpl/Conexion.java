@@ -12,9 +12,9 @@ public class Conexion {
 	{
 		try
 		{
-			String host = "jdbc:mysql://localhost:3306/bdBanco";
-			String user= "root";
-			String password = "helloJava";
+			String host = "jdbc:mysql://localhost:3306/effort_TPFinal";
+			String user= "effort_admin";
+			String password = "admin";
 			this.connection = DriverManager.getConnection(host, user, password);
 			this.connection.setAutoCommit(false);
 		}
