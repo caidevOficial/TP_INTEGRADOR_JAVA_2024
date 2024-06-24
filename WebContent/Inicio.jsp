@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <jsp:include page="LibreriasHead.html"></jsp:include>
-<title>Banco G7</title>
+<title>UTN GAMING BANK</title>
 </head>
 <body>
 	<% Usuario usuario = (Usuario)request.getSession().getAttribute("usuario"); %>
@@ -21,7 +21,7 @@
 		<jsp:include page="MenuDefault.html"></jsp:include>
 	<% } %>
 	
-	<h1>Bienvenido al Banco G7</h1>
+	<h1>Bienvenido al UTN GAMING BANK</h1>
 	
 	<jsp:include page="LibreriasBody.html"></jsp:include>
 </body>
