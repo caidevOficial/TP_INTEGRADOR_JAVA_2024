@@ -1,7 +1,5 @@
-package daoImpl;
+package daoimpl;
 
-import java.io.File;
-import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,8 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.ICoutaDao;
-import entidad.Couta;
-import entidad.Prestamo;
+import entidades.Couta;
+import entidades.Prestamo;
 import queries.Queries;
 
 public class CoutaDaoImpl implements ICoutaDao {

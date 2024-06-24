@@ -12,19 +12,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entidad.Cliente;
-import entidad.Couta;
-import entidad.Cuenta;
-import entidad.Movimiento;
-import entidad.Prestamo;
-import entidad.Tipo;
-import entidad.Usuario;
-import negocioImpl.ClienteNegocioImpl;
-import negocioImpl.CoutaNegocioImpl;
-import negocioImpl.CuentaNegocioImpl;
-import negocioImpl.MovimientoNegocioImpl;
-import negocioImpl.PrestamoNegocioImpl;
-import negocioImpl.TipoNegocioImpl;
+import entidades.Cliente;
+import entidades.Couta;
+import entidades.Cuenta;
+import entidades.Movimiento;
+import entidades.Prestamo;
+import entidades.Tipo;
+import entidades.Usuario;
+import negocioimpl.ClienteNegocioImpl;
+import negocioimpl.CoutaNegocioImpl;
+import negocioimpl.CuentaNegocioImpl;
+import negocioimpl.MovimientoNegocioImpl;
+import negocioimpl.PrestamoNegocioImpl;
+import negocioimpl.TipoNegocioImpl;
 
 /**
  * Servlet implementation class servletCliente
@@ -163,6 +163,7 @@ public class servletCliente extends HttpServlet {
 		CoutaNegocioImpl coutasNegocioImpl = new CoutaNegocioImpl();
 		int prestamoSeleccionado = Integer.valueOf(request.getParameter("ddlPrestamos"));
 		request.getSession().setAttribute("selected", prestamoSeleccionado);
+		@SuppressWarnings("unchecked")
 		ArrayList<Prestamo> prestamos = (ArrayList<Prestamo>)request.getSession().getAttribute("prestamos");
 		Prestamo prestamo = new Prestamo();
 		for(Prestamo prestamoFor : prestamos) {

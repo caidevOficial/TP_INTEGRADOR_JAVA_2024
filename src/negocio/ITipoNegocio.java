@@ -2,7 +2,7 @@ package negocio;
 
 import java.util.ArrayList;
 
-import entidad.Tipo;
+import entidades.Tipo;
 
 public interface ITipoNegocio {
 	public ArrayList<Tipo> getTipos(String tipoBuscar);

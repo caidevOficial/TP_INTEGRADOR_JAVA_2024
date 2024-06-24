@@ -1,8 +1,8 @@
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.NumberFormat"%>
 <%@page import="java.util.ArrayList"%>
-<%@page import="entidad.Prestamo"%>
-<%@page import="entidad.Usuario"%>
+<%@page import="entidades.Prestamo"%>
+<%@page import="entidades.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>

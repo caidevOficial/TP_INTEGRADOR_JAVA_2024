@@ -1,4 +1,4 @@
-package daoImpl;
+package daoimpl;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import queries.Queries;
 
 import dao.ITipoDao;
-import entidad.Tipo;
+import entidades.Tipo;
 
 public class TipoDaoImpl implements ITipoDao {
 	private String getTipo;

@@ -1,17 +1,15 @@
-package daoImpl;
+package daoimpl;
 
-import java.io.File;
-import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import dao.IPrestamoDao;
-import entidad.Cliente;
-import entidad.Cuenta;
-import entidad.Prestamo;
-import entidad.Tipo;
+import entidades.Cliente;
+import entidades.Cuenta;
+import entidades.Prestamo;
+import entidades.Tipo;
 import queries.Queries;
 
 public class PrestamoDaoImpl implements IPrestamoDao {

@@ -2,8 +2,8 @@ package negocio;
 
 import java.util.ArrayList;
 
-import entidad.Cliente;
-import entidad.Usuario;
+import entidades.Cliente;
+import entidades.Usuario;
 import exceptions.IngresoDuplicado;
 import exceptions.TriggerCreacionExcedida;
 

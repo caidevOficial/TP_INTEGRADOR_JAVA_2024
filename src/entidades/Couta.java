@@ -1,4 +1,4 @@
-package entidad;
+package entidades;
 
 import java.sql.Date;
 
@@ -10,7 +10,7 @@ public class Couta {
 	private Boolean paga;
 	
 	public Couta() {
-		// TODO Auto-generated constructor stub
+		
 	}
 
 	public Couta(int id, Prestamo prestamo, Date fecha_pago, int numeroCouta, Boolean paga) {

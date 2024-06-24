@@ -1,10 +1,10 @@
-package negocioImpl;
+package negocioimpl;
 
 import java.util.ArrayList;
 
-import daoImpl.CoutaDaoImpl;
-import entidad.Couta;
-import entidad.Prestamo;
+import daoimpl.CoutaDaoImpl;
+import entidades.Couta;
+import entidades.Prestamo;
 import negocio.ICoutaNegocio;
 
 public class CoutaNegocioImpl implements ICoutaNegocio {

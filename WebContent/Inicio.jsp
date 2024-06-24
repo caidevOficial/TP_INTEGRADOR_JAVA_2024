@@ -1,4 +1,4 @@
-<%@page import="entidad.Usuario"%>
+<%@page import="entidades.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <jsp:include page="LibreriasHead.html"></jsp:include>
-<title>Banco Nombre Banco</title>
+<title>Banco G7</title>
 </head>
 <body>
 	<% Usuario usuario = (Usuario)request.getSession().getAttribute("usuario"); %>
@@ -21,7 +21,7 @@
 		<jsp:include page="MenuDefault.html"></jsp:include>
 	<% } %>
 	
-	<h1>Bienvenido al Banco [Nombre Banco]</h1>
+	<h1>Bienvenido al Banco G7</h1>
 	
 	<jsp:include page="LibreriasBody.html"></jsp:include>
 </body>

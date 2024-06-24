@@ -1,12 +1,12 @@
-package negocioImpl;
+package negocioimpl;
 
 import java.util.ArrayList;
 
 import dao.IMovimientoDao;
-import daoImpl.MovimientoDaoImpl;
-import entidad.Cuenta;
-import entidad.Movimiento;
-import entidad.Tipo;
+import daoimpl.MovimientoDaoImpl;
+import entidades.Cuenta;
+import entidades.Movimiento;
+import entidades.Tipo;
 
 public class MovimientoNegocioImpl implements IMovimientoDao {
 	MovimientoDaoImpl movimientoNeogocio = new MovimientoDaoImpl();

@@ -1,9 +1,9 @@
-package negocioImpl;
+package negocioimpl;
 
 import java.util.ArrayList;
 
-import daoImpl.TipoDaoImpl;
-import entidad.Tipo;
+import daoimpl.TipoDaoImpl;
+import entidades.Tipo;
 import negocio.ITipoNegocio;
 
 public class TipoNegocioImpl implements ITipoNegocio {

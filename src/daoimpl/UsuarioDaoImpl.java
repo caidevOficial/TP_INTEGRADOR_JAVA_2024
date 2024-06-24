@@ -1,14 +1,12 @@
-package daoImpl;
+package daoimpl;
 
-import java.io.File;
-import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import dao.IUsuarioDao;
-import entidad.Tipo;
-import entidad.Usuario;
+import entidades.Tipo;
+import entidades.Usuario;
 import exceptions.IngresoDuplicado;
 import exceptions.IngresoLargo;
 import queries.Queries;

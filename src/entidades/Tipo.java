@@ -1,4 +1,4 @@
-package entidad;
+package entidades;
 
 public class Tipo {
 	private int id;

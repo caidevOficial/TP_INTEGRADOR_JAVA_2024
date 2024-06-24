@@ -1,5 +1,5 @@
-<%@page import="entidad.Cliente"%>
-<%@page import="entidad.Usuario"%>
+<%@page import="entidades.Cliente"%>
+<%@page import="entidades.Usuario"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>

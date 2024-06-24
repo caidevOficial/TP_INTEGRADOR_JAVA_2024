@@ -2,8 +2,8 @@ package negocio;
 
 import java.util.ArrayList;
 
-import entidad.Cliente;
-import entidad.Prestamo;
+import entidades.Cliente;
+import entidades.Prestamo;
 
 public interface IPrestamoNegocio {
 	public ArrayList<Prestamo> getPrestamos();

@@ -1,7 +1,5 @@
-package daoImpl;
+package daoimpl;
 
-import java.io.File;
-import java.io.FileReader;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,9 +7,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import dao.ICuentaDao;
-import entidad.Cliente;
-import entidad.Cuenta;
-import entidad.Tipo;
+import entidades.Cliente;
+import entidades.Cuenta;
+import entidades.Tipo;
 import exceptions.IngresoDuplicado;
 import exceptions.NoExiste;
 import exceptions.SaldoNegativo;
@@ -199,7 +197,7 @@ public class CuentaDaoImpl implements ICuentaDao {
 	@Override
 	public int ultimoId() {
 		Connection connection = Conexion.getConexion().getSQLConexion();
-		ArrayList<Cuenta> cuentas = new ArrayList<Cuenta>();
+		//ArrayList<Cuenta> cuentas = new ArrayList<Cuenta>();
 		int id = 0;
 		try {
 			PreparedStatement pStatement =  connection.prepareStatement(this.ultimoId);

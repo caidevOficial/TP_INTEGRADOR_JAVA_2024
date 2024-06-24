@@ -1,10 +1,10 @@
-package negocioImpl;
+package negocioimpl;
 
 import java.util.ArrayList;
 
-import daoImpl.ClienteDaoImpl;
-import entidad.Cliente;
-import entidad.Usuario;
+import daoimpl.ClienteDaoImpl;
+import entidades.Cliente;
+import entidades.Usuario;
 import exceptions.IngresoDuplicado;
 import exceptions.TriggerCreacionExcedida;
 import negocio.IClienteNegocio;

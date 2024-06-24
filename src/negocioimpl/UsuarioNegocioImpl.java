@@ -1,7 +1,7 @@
-package negocioImpl;
+package negocioimpl;
 
-import daoImpl.UsuarioDaoImpl;
-import entidad.Usuario;
+import daoimpl.UsuarioDaoImpl;
+import entidades.Usuario;
 import exceptions.IngresoDuplicado;
 import exceptions.IngresoLargo;
 import negocio.IUsuarioNegocio;

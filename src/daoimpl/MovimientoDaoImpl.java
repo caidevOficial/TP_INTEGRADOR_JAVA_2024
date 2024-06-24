@@ -1,7 +1,5 @@
-package daoImpl;
+package daoimpl;
 
-import java.io.File;
-import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,9 +7,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import dao.IMovimientoDao;
-import entidad.Cuenta;
-import entidad.Movimiento;
-import entidad.Tipo;
+import entidades.Cuenta;
+import entidades.Movimiento;
+import entidades.Tipo;
 import queries.Queries;
 
 public class MovimientoDaoImpl implements IMovimientoDao {

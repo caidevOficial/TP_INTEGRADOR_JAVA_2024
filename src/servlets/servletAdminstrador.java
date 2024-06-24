@@ -12,18 +12,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entidad.Cliente;
-import entidad.Cuenta;
-import entidad.Movimiento;
-import entidad.Prestamo;
-import entidad.Tipo;
-import entidad.Usuario;
-import negocioImpl.ClienteNegocioImpl;
-import negocioImpl.CuentaNegocioImpl;
-import negocioImpl.MovimientoNegocioImpl;
-import negocioImpl.PrestamoNegocioImpl;
-import negocioImpl.TipoNegocioImpl;
-import negocioImpl.UsuarioNegocioImpl;
+import entidades.Cliente;
+import entidades.Cuenta;
+import entidades.Movimiento;
+import entidades.Prestamo;
+import entidades.Tipo;
+import entidades.Usuario;
+import negocioimpl.ClienteNegocioImpl;
+import negocioimpl.CuentaNegocioImpl;
+import negocioimpl.MovimientoNegocioImpl;
+import negocioimpl.PrestamoNegocioImpl;
+import negocioimpl.TipoNegocioImpl;
+import negocioimpl.UsuarioNegocioImpl;
 
 /**
  * Servlet implementation class servletAdminstrador

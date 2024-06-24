@@ -5,7 +5,7 @@ public class Queries {
 	public String queryBuscarId = "SELECT Id FROM Clientes WHERE DNI = ?;";
 	public String buscarIdCliente = "SELECT c.Id FROM Clientes AS c WHERE c.Id_usuario = ?;";
 	
-	public String altaCuenta = 	 "UPDATE Cuentas SET Eliminado = 0 WHERE Id = ?;";
+	public String altaCuenta = "UPDATE Cuentas SET Eliminado = 0 WHERE Id = ?;";
 	public String bajaCuenta = 	 "UPDATE Cuentas SET Eliminado = 1 WHERE Id = ?;";
 	public String crearCuenta =  "INSERT INTO Cuentas (Id_cliente, Nro_cuenta, CBU, Id_tipo_cuenta) VALUES(?, ?, ?, ?);";
 	public String cuentaPorCbu = "" +

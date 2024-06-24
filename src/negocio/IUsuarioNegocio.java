@@ -1,6 +1,6 @@
 package negocio;
 
-import entidad.Usuario;
+import entidades.Usuario;
 import exceptions.IngresoDuplicado;
 import exceptions.IngresoLargo;
 

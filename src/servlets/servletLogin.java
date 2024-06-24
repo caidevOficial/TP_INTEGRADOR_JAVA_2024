@@ -8,9 +8,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import entidad.Usuario;
-import negocioImpl.UsuarioNegocioImpl;
+import entidades.Usuario;
+import negocioimpl.UsuarioNegocioImpl;
 
 /**
  * Servlet implementation class servletLogin
@@ -46,15 +47,19 @@ public class servletLogin extends HttpServlet {
 			UsuarioNegocioImpl usuarioNegocio = new UsuarioNegocioImpl();
 			String mail = request.getParameter("mail").toString();
 			String password = request.getParameter("password").toString();
+			System.out.println(String.format("%s - %s", mail, password));
 			if(mail != null && !mail.isEmpty() && password != null && !password.isEmpty()) {
 				Usuario usuario = new Usuario(mail, password);
 				usuario = usuarioNegocio.login(usuario);
+				
 				if(usuario != null) {
+					HttpSession session = request.getSession(true);
+					session.setAttribute("userName", usuario.getNombreUsuario());
 					request.getSession().setAttribute("usuario", usuario);
 					RequestDispatcher rd = request.getRequestDispatcher("/Inicio.jsp");   
 			        rd.forward(request, response);
 				} else {
-					request.setAttribute("errorLogin", "Email o contraseña invalidos");
+					request.setAttribute("errorLogin", "Email o contrase�a invalidos");
 					RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");   
 			        rd.forward(request, response);
 				}
@@ -63,10 +68,19 @@ public class servletLogin extends HttpServlet {
 				request.setAttribute("errorLogin", "Por favor completa el email y la contraseña");
 				RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");   
 		        rd.forward(request, response);
-			}
-			
-			
+			}	
 		}
+		
+		if (request.getParameter("btnCerrarSesion") != null) {
+			System.out.println("Dentro del boton cerrar");
+			HttpSession session = request.getSession(false);
+			//session.getAttribute("userName");
+		    if (session != null) {
+		        session.invalidate();
+		        System.out.println("Sesion Cerrada");
+		    }
+		}
+		
 	}
 
 }

@@ -2,9 +2,9 @@ package dao;
 
 import java.util.ArrayList;
 
-import entidad.Cuenta;
-import entidad.Movimiento;
-import entidad.Tipo;
+import entidades.Cuenta;
+import entidades.Movimiento;
+import entidades.Tipo;
 
 public interface IMovimientoDao {
 	public Boolean movimientoBanco(Movimiento movimiento);

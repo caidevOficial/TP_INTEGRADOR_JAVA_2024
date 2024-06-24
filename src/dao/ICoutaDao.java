@@ -1,8 +1,9 @@
 package dao;
 
 import java.util.ArrayList;
-import entidad.Couta;
-import entidad.Prestamo;
+
+import entidades.Couta;
+import entidades.Prestamo;
 
 public interface ICoutaDao {
 	public ArrayList<Couta> obtenerCoutas(Prestamo prestamo);

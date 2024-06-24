@@ -1,11 +1,11 @@
-package negocioImpl;
+package negocioimpl;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
-import daoImpl.CuentaDaoImpl;
-import entidad.Cliente;
-import entidad.Cuenta;
+import daoimpl.CuentaDaoImpl;
+import entidades.Cliente;
+import entidades.Cuenta;
 import exceptions.IngresoDuplicado;
 import exceptions.NoExiste;
 import exceptions.SaldoNegativo;

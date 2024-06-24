@@ -1,10 +1,10 @@
-package negocioImpl;
+package negocioimpl;
 
 import java.util.ArrayList;
 
-import daoImpl.PrestamoDaoImpl;
-import entidad.Cliente;
-import entidad.Prestamo;
+import daoimpl.PrestamoDaoImpl;
+import entidades.Cliente;
+import entidades.Prestamo;
 import negocio.IPrestamoNegocio;
 
 public class PrestamoNegocioImpl implements IPrestamoNegocio {
