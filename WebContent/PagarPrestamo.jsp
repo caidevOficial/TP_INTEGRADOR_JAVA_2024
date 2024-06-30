@@ -1,6 +1,6 @@
 <%@page import="java.util.Locale"%>
 <%@page import="java.text.NumberFormat"%>
-<%@page import="entidades.Couta"%>
+<%@page import="entidades.Cuota"%>
 <%@page import="entidades.Prestamo"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Usuario"%>
@@ -17,40 +17,46 @@
 	<jsp:include page="MenuUsuario.html"></jsp:include>
 
 	<%
-	if (request.getSession().getAttribute("usuario") != null) {
-		if (((Usuario) request.getSession().getAttribute("usuario")).getTipoRol().getId() != 2) {
+		if (request.getSession().getAttribute("usuario") != null) {
+			if (((Usuario) request.getSession().getAttribute("usuario")).getTipoRol().getId() != 2) {
+		response.sendRedirect("Inicio.jsp");
+			}
+		} else {
 			response.sendRedirect("Inicio.jsp");
 		}
-	} else {
-		response.sendRedirect("Inicio.jsp");
-	}
 
-	ArrayList<Prestamo> prestamos = request.getSession().getAttribute("prestamos") != null
-			? (ArrayList<Prestamo>) request.getSession().getAttribute("prestamos")
-			: null;
-	Integer selected = request.getSession().getAttribute("selected") != null
-			? Integer.parseInt(request.getSession().getAttribute("selected").toString())
-			: null;
-	Prestamo prestamoPagar = request.getSession().getAttribute("prestamo") != null
-			? (Prestamo)request.getSession().getAttribute("prestamo")
-			: null;
-	ArrayList<Couta> coutas = request.getSession().getAttribute("coutas") != null
-			? (ArrayList<Couta>) request.getSession().getAttribute("coutas")
-			: null;
-	NumberFormat nf_in = NumberFormat.getNumberInstance(Locale.ITALIAN);
+		ArrayList<Prestamo> prestamos = request.getSession().getAttribute("prestamos") != null
+		? (ArrayList<Prestamo>) request.getSession().getAttribute("prestamos")
+		: null;
+		Integer selected = request.getSession().getAttribute("selected") != null
+		? Integer.parseInt(request.getSession().getAttribute("selected").toString())
+		: null;
+		Prestamo prestamoPagar = request.getSession().getAttribute("prestamo") != null
+		? (Prestamo)request.getSession().getAttribute("prestamo")
+		: null;
+		ArrayList<Cuota> coutas = request.getSession().getAttribute("coutas") != null
+		? (ArrayList<Cuota>) request.getSession().getAttribute("coutas")
+		: null;
+		NumberFormat nf_in = NumberFormat.getNumberInstance(Locale.ITALIAN);
 	%>
 
 	<div class="container-fluid w-50 my-5">
 		<h1>Pagar Prestamo</h1>
-		<% if(prestamos != null) if(!prestamos.isEmpty()) {%>
+		<%
+			if(prestamos != null) if(!prestamos.isEmpty()) {
+		%>
 		<form action="servletCliente" method="get">
 		<div class="input-group input-group-sm mb-3">
 			<span class="input-group-text" id="inputGroup-sizing-sm">Prestamo
 				a pagar</span> <select class="form-select" name="ddlPrestamos"
 				aria-label="Default select example">
-				<%if (prestamos != null) for (Prestamo prestamo : prestamos) {	%>
+				<%
+					if (prestamos != null) for (Prestamo prestamo : prestamos) {
+				%>
 				<option value="<%=prestamo.getId()%>"<%=selected != null && selected == prestamo.getId() ? "selected" : " "%>>$<%=prestamo.getMontoSolicitado().intValueExact()%></option>
-				<% } %>
+				<%
+					}
+				%>
 			</select>
 		</div>
 		<div class="mb-3">
@@ -58,13 +64,17 @@
 				Prestamo</button>
 		</div>
 		</form>
-		<% if(coutas != null) if(!coutas.isEmpty()) { %>
+		<%
+			if(coutas != null) if(!coutas.isEmpty()) {
+		%>
 		<form action="servletCliente" method="post" onsubmit="return validation();">
 		<div class="input-group input-group-sm mb-3">
 			<span class="input-group-text" id="inputGroup-sizing-sm">Cuotas
 				a Pagar</span> <select class="form-select" name="ddlCoutas"
 				aria-label="Default select example">
-				<%if (coutas != null) for (Couta couta : coutas) {	%>
+				<%
+					if (coutas != null) for (Cuota couta : coutas) {
+				%>
 				<option value="<%=couta.getId()%>">Couta <%=couta.getNumeroCouta()%> - $<%=nf_in.format(prestamoPagar.getMontoCuota())%></option>
 				<% } %>
 			</select>

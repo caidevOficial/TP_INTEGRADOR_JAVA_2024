@@ -1,1 +1,0 @@
-SELECT Id FROM Clientes WHERE DNI = ?;

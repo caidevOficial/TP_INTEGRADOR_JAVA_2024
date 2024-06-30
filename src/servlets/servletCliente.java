@@ -13,14 +13,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entidades.Cliente;
-import entidades.Couta;
+import entidades.Cuota;
 import entidades.Cuenta;
 import entidades.Movimiento;
 import entidades.Prestamo;
 import entidades.Tipo;
 import entidades.Usuario;
 import negocioimpl.ClienteNegocioImpl;
-import negocioimpl.CoutaNegocioImpl;
+import negocioimpl.CuotaNegocioImpl;
 import negocioimpl.CuentaNegocioImpl;
 import negocioimpl.MovimientoNegocioImpl;
 import negocioimpl.PrestamoNegocioImpl;
@@ -59,19 +59,20 @@ public class servletCliente extends HttpServlet {
 			return;
 		}
 		if (request.getParameter("btnSeleccionarCuenta") != null) {
-			cargarCoutasPrestamo(request, response);
+			cargarCuotasPrestamo(request, response);
 			return;
 		}
 		if (request.getParameter("cargarPerfil") != null) {
 			cargarPerfil(request, response);
 			return;
 		}
-		if (request.getParameter("btnMostrarMovimientos") != null) {
-			cargarMovimientos(request, response);
-			return;
-		}
 		if (request.getParameter("btnPedirPrestamo") != null) {
 			pedirPrestamo(request, response);
+			return;
+		}
+		
+		if (request.getParameter("btnMostrarMovimientos") != null) {
+			cargarMovimientos(request, response);
 			return;
 		}
 		if (request.getParameter("btnBuscarMovimientos") != null) {
@@ -137,7 +138,7 @@ public class servletCliente extends HttpServlet {
 	}
 	
 	protected void pagarPrestamo(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
-		CoutaNegocioImpl coutaNegocio = new CoutaNegocioImpl();
+		CuotaNegocioImpl cuotaNegocio = new CuotaNegocioImpl();
 		MovimientoNegocioImpl movimientoNegocio = new MovimientoNegocioImpl();
 		CuentaNegocioImpl cuentaNegocio = new CuentaNegocioImpl();
 		Prestamo prestamo = (Prestamo)request.getSession().getAttribute("prestamo");
@@ -149,18 +150,18 @@ public class servletCliente extends HttpServlet {
 			movimiento.setConcepto(new Tipo(5));
 			movimiento.setMonto(prestamo.getMontoCuota().negate());
 			movimientoNegocio.movimientoBanco(movimiento);
-			Couta couta = new Couta();
-			couta.setId(Integer.parseInt(request.getParameter("ddlCoutas")));
-			request.setAttribute("coutaPaga", coutaNegocio.coutaPaga(couta));;
+			Cuota cuota = new Cuota();
+			cuota.setId(Integer.parseInt(request.getParameter("ddlCuotas")));
+			request.setAttribute("cuotaPaga", cuotaNegocio.cuotaPaga(cuota));;
 		} catch (SQLException e) {
 			request.setAttribute("errorPago", e.getMessage());
 		}
-		request.getSession().setAttribute("coutas", null);
+		request.getSession().setAttribute("cuotas", null);
 		cargarPrestamoPagar(request, response);
 	}
 	
-	private void cargarCoutasPrestamo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CoutaNegocioImpl coutasNegocioImpl = new CoutaNegocioImpl();
+	private void cargarCuotasPrestamo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		CuotaNegocioImpl cuotasNegocioImpl = new CuotaNegocioImpl();
 		int prestamoSeleccionado = Integer.valueOf(request.getParameter("ddlPrestamos"));
 		request.getSession().setAttribute("selected", prestamoSeleccionado);
 		@SuppressWarnings("unchecked")
@@ -171,7 +172,7 @@ public class servletCliente extends HttpServlet {
 				prestamo = prestamoFor;
 			}
 		}
-		request.getSession().setAttribute("coutas", coutasNegocioImpl.obtenerCoutas(prestamo));
+		request.getSession().setAttribute("cuotas", cuotasNegocioImpl.obtenerCuotas(prestamo));
 		request.getSession().setAttribute("prestamo", prestamo);
 		RequestDispatcher rd = request.getRequestDispatcher("/PagarPrestamo.jsp");   
         rd.forward(request, response);
@@ -215,12 +216,12 @@ public class servletCliente extends HttpServlet {
 	
 	protected void pedirPrestamo(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
 		Prestamo prestamo = new Prestamo();
-		prestamo.setCantidadCuotas(Integer.parseInt(request.getParameter("ddlCoutas")));
+		prestamo.setCantidadCuotas(Integer.parseInt(request.getParameter("ddlCuotas")));
 		Cuenta cuenta = new Cuenta();
 		cuenta.setId(Integer.parseInt(request.getParameter("ddlCuenta")));
 		prestamo.setCuenta(cuenta);
 		prestamo.setMontoSolicitado(BigDecimal.valueOf(Long.parseLong(request.getParameter("txtMonto"))));
-		long montoCuota = (long)((Long.parseLong(request.getParameter("txtMonto")) / Long.parseLong(request.getParameter("ddlCoutas"))) * (long)1.12);
+		long montoCuota = (long)((Long.parseLong(request.getParameter("txtMonto")) / Long.parseLong(request.getParameter("ddlCuotas"))) * (long)1.12);
 		prestamo.setMontoCuota(BigDecimal.valueOf(montoCuota));
 		PrestamoNegocioImpl prestamoNegocio = new PrestamoNegocioImpl();
 		request.setAttribute("insertado", prestamoNegocio.insertarPrestamo(prestamo));
@@ -249,7 +250,8 @@ public class servletCliente extends HttpServlet {
 		cliente.setId(clienteNegocio.buscarId(usuario));
 		request.getSession().setAttribute("cuentas", cuentaNegocio.obtenerCuentas(cliente));
 		RequestDispatcher rd = request.getRequestDispatcher("/PedirPrestamo.jsp");   
-        rd.forward(request, response);
+		System.out.println("Pagina de prestamos cargada");
+		rd.forward(request, response);
 	}
 	
 	protected void cargarCuentas(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {

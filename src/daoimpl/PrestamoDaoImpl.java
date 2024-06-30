@@ -202,28 +202,31 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		String isInsertExitoso = "0";
-		try
-		{
+
+		try {
+			System.out.println(prestamo.toString());
 			statement = conexion.prepareStatement(this.insertarPrestamo);
 			statement.setInt(1, prestamo.getCuenta().getId());
 			statement.setBigDecimal(2, prestamo.getMontoSolicitado());
 			statement.setBigDecimal(3, prestamo.getMontoCuota());
 			statement.setInt(4, prestamo.getCantidadCuotas());
-			
-			if(statement.executeUpdate() > 0)
-			{
+
+			int rowsAffected = statement.executeUpdate();
+			if (rowsAffected > 0) {
 				conexion.commit();
 				isInsertExitoso = "1";
+				System.out.println(String.format("rows affected: %d", rowsAffected));
+			} else {
+				System.out.println("No rows affected. Insertion might have failed.");
 			}
-		} 
-		catch (SQLException e) 
-		{
+		} catch (SQLException e) {
+			System.out.println("Excepcion capturada al insertar un prestamo en la DB");
+			System.out.println(e.getMessage());
 			try {
 				conexion.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			e.getMessage();
 		}
 		
 		return isInsertExitoso;

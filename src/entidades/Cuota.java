@@ -2,23 +2,23 @@ package entidades;
 
 import java.sql.Date;
 
-public class Couta {
+public class Cuota {
 	private int id;
 	private Prestamo prestamo;
 	private Date fecha_pago;
-	private int numeroCouta;
+	private int numeroCuota;
 	private Boolean paga;
 	
-	public Couta() {
+	public Cuota() {
 		
 	}
 
-	public Couta(int id, Prestamo prestamo, Date fecha_pago, int numeroCouta, Boolean paga) {
+	public Cuota(int id, Prestamo prestamo, Date fecha_pago, int numeroCuota, Boolean paga) {
 		super();
 		this.id = id;
 		this.prestamo = prestamo;
 		this.fecha_pago = fecha_pago;
-		this.numeroCouta = numeroCouta;
+		this.numeroCuota = numeroCuota;
 		this.paga = paga;
 	}
 
@@ -48,12 +48,12 @@ public class Couta {
 		this.fecha_pago = fecha_pago;
 	}
 
-	public int getNumeroCouta() {
-		return numeroCouta;
+	public int getNumeroCuota() {
+		return numeroCuota;
 	}
 
-	public void setNumeroCouta(int numeroCouta) {
-		this.numeroCouta = numeroCouta;
+	public void setNumeroCuota(int numeroCuota) {
+		this.numeroCuota = numeroCuota;
 	}
 
 	public Boolean getPaga() {

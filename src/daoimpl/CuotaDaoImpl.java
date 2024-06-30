@@ -6,57 +6,57 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import dao.ICoutaDao;
-import entidades.Couta;
+import dao.ICuotaDao;
+import entidades.Cuota;
 import entidades.Prestamo;
 import queries.Queries;
 
-public class CoutaDaoImpl implements ICoutaDao {
+public class CuotaDaoImpl implements ICuotaDao {
 	
 	Queries queryManager;
 	
-	private String getCoutasPrestamo; 
+	private String getCuotasPrestamo; 
 	private String setCuotasPrestamo;
 			
-	public CoutaDaoImpl() {
-		this.getCoutasPrestamo = this.queryManager.getCoutasPrestamo;
+	public CuotaDaoImpl() {
+		this.getCuotasPrestamo = this.queryManager.getCuotasPrestamo;
 		this.setCuotasPrestamo = this.queryManager.setCuotaPrestamo;
 	}
 
 	@Override
-	public ArrayList<Couta> obtenerCoutas(Prestamo prestamo) {
+	public ArrayList<Cuota> obtenerCuotas(Prestamo prestamo) {
 		Connection connection = Conexion.getConexion().getSQLConexion();
-		ArrayList<Couta> coutas = new ArrayList<Couta>();
+		ArrayList<Cuota> cuotas = new ArrayList<Cuota>();
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(this.getCoutasPrestamo);
+			PreparedStatement pStatement =  connection.prepareStatement(this.getCuotasPrestamo);
 			pStatement.setInt(1, prestamo.getId());
 			ResultSet rSet = pStatement.executeQuery();
 			while(rSet.next()) {
-				Couta couta = new Couta();
-				couta.setId(rSet.getInt("Id"));
-				prestamo.setMontoCuota(rSet.getBigDecimal("MontoCouta"));
-				couta.setPrestamo(prestamo);
-				couta.setFecha_pago(rSet.getDate("FechaPago"));
-				couta.setNumeroCouta(rSet.getInt("NumeroCuota"));
-				couta.setPaga(rSet.getBoolean("Paga"));
-				coutas.add(couta);
+				Cuota cuota = new Cuota();
+				cuota.setId(rSet.getInt("Id"));
+				prestamo.setMontoCuota(rSet.getBigDecimal("MontoCuota"));
+				cuota.setPrestamo(prestamo);
+				cuota.setFecha_pago(rSet.getDate("FechaPago"));
+				cuota.setNumeroCuota(rSet.getInt("NumeroCuota"));
+				cuota.setPaga(rSet.getBoolean("Paga"));
+				cuotas.add(cuota);
 			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return coutas;
+		return cuotas;
 	}
 
 	@Override
-	public Boolean coutaPaga(Couta couta) {
+	public Boolean cuotaPaga(Cuota cuota) {
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		Boolean isInsertExitoso = false;
 		try
 		{
 			statement = conexion.prepareStatement(this.setCuotasPrestamo);
-			statement.setInt(1, couta.getId());
+			statement.setInt(1, cuota.getId());
 			
 			if(statement.executeUpdate() > 0)
 			{

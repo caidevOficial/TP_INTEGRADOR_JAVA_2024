@@ -1,12 +1,7 @@
-/daoImpl/
-/servlets/
-/entidad/
-/exceptions/
 /queries/
-/negocioimpl/
 /daoimpl/
+/servlets/
 /dao/
 /entidades/
 /negocio/
-/negocioIImpl/
-/daoIImpl/
+/negocioimpl/
