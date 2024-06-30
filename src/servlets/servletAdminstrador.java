@@ -146,9 +146,7 @@ public class servletAdminstrador extends HttpServlet {
 	}
 	
 	protected void informePrestamos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrestamoNegocioImpl prestamoNegocioImpl = new PrestamoNegocioImpl();
-		request.setAttribute("informe", prestamoNegocioImpl.informe(Integer.parseInt(request.getParameter("ddlMes"))));
-		RequestDispatcher rd = request.getRequestDispatcher("Informes.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/servletAdminPrestamos?btnPrestamosImporte=1");
 		rd.forward(request, response);
 	}
 	
@@ -245,9 +243,7 @@ public class servletAdminstrador extends HttpServlet {
 	}
 	
 	protected void cargarPrestamosBuscador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrestamoNegocioImpl prestamoNegocio = new PrestamoNegocioImpl();
-		request.getSession().setAttribute("prestamos", prestamoNegocio.getPrestamosPendientes(request.getParameter("txtBuscarPrestamo")));
-		RequestDispatcher rd = request.getRequestDispatcher("Prestamos.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/servletAdminPrestamos?btnPrestamosImporte=1");
 		rd.forward(request, response);
 	}
 	
@@ -305,31 +301,12 @@ public class servletAdminstrador extends HttpServlet {
 	}
 	
 	protected void rechazarPrestamo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrestamoNegocioImpl prestamoNegocio = new PrestamoNegocioImpl();
-		Prestamo prestamo = new Prestamo();
-		prestamo.setId(Integer.parseInt(request.getParameter("txtId")));
-		prestamoNegocio.rechazar(prestamo);
-		RequestDispatcher rd = request.getRequestDispatcher("/servletAdminstrador?cargarPrestamos");   
+		RequestDispatcher rd = request.getRequestDispatcher("/servletAdminPrestamos?btnRechazar=1");   
         rd.forward(request, response);
 	}
 	
 	protected void aprobarPrestamo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrestamoNegocioImpl prestamoNegocio = new PrestamoNegocioImpl();
-		Prestamo prestamo = new Prestamo();
-		prestamo.setId(Integer.parseInt(request.getParameter("txtId")));
-		prestamoNegocio.aprobar(prestamo);
-		MovimientoNegocioImpl movimientoNegocio =  new MovimientoNegocioImpl();
-		Movimiento movimiento = new Movimiento();
-		Cuenta cuenta = new Cuenta();
-		cuenta.setId(Integer.parseInt(request.getParameter("txtIdCuenta")));
-		movimiento.setCuenta(cuenta);
-		movimiento.setTipoMovimiento(new Tipo(2));
-		movimiento.setConcepto(new Tipo(5));
-		movimiento.setMonto(BigDecimal.valueOf(Long.valueOf(request.getParameter("txtMonto"))));
-		movimientoNegocio.movimientoBanco(movimiento);
-		CuentaNegocioImpl cuentaNegocio = new CuentaNegocioImpl();
-		cuentaNegocio.actualizarSaldoSumar(cuenta, BigDecimal.valueOf(Long.valueOf(request.getParameter("txtMonto"))));
-		RequestDispatcher rd = request.getRequestDispatcher("/servletAdminstrador?cargarPrestamos=1");   
+		RequestDispatcher rd = request.getRequestDispatcher("/servletAdminPrestamos?btnAceptar=1");   
         rd.forward(request, response);
 	}
 	
@@ -337,9 +314,7 @@ public class servletAdminstrador extends HttpServlet {
 	// Do Get
 	//
 	protected void cargarPrestamos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrestamoNegocioImpl prestamoNegocio = new PrestamoNegocioImpl();
-		request.getSession().setAttribute("prestamos", prestamoNegocio.getPrestamosPendientes());
-		RequestDispatcher rd = request.getRequestDispatcher("Prestamos.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/servletAdminPrestamos?cargarPrestamos=1");
 		rd.forward(request, response);
 	}
 

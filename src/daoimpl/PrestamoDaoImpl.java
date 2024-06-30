@@ -55,10 +55,10 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 				estado.setId(rSet.getInt("IdEstado"));
 				estado.setDescripcion(rSet.getString("DescripcionEstado"));
 				prestamo.setEstado(estado);
-				//p.Monto_solicitado AS montoSolicitado, p.Monto_cuota AS montoCuota, p.Cantidad_cuotas AS cantCoutas, p.Cuotas_pagas AS cuotasPagas
+				//p.Monto_solicitado AS montoSolicitado, p.Monto_cuota AS montoCuota, p.Cantidad_cuotas AS cantCuotas, p.Cuotas_pagas AS cuotasPagas
 				prestamo.setMontoSolicitado(rSet.getBigDecimal("montoSolicitado"));
 				prestamo.setMontoCuota(rSet.getBigDecimal("montoCuota"));
-				prestamo.setCantidadCuotas(rSet.getInt("cantCoutas"));
+				prestamo.setCantidadCuotas(rSet.getInt("cantCuotas"));
 				prestamos.add(prestamo);
 			}
 			
@@ -89,7 +89,7 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 				prestamo.setEstado(estado);
 				prestamo.setMontoSolicitado(rSet.getBigDecimal("montoSolicitado"));
 				prestamo.setMontoCuota(rSet.getBigDecimal("montoCuota"));
-				prestamo.setCantidadCuotas(rSet.getInt("cantCoutas"));
+				prestamo.setCantidadCuotas(rSet.getInt("cantCuotas"));
 				prestamos.add(prestamo);
 			}
 			
@@ -187,7 +187,7 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 				prestamo.setEstado(estado);
 				prestamo.setMontoSolicitado(rSet.getBigDecimal("montoSolicitado"));
 				prestamo.setMontoCuota(rSet.getBigDecimal("montoCuota"));
-				prestamo.setCantidadCuotas(rSet.getInt("cantCoutas"));
+				prestamo.setCantidadCuotas(rSet.getInt("cantCuotas"));
 				prestamos.add(prestamo);
 			}
 			
@@ -255,7 +255,7 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 				prestamo.setEstado(estado);
 				prestamo.setMontoSolicitado(rSet.getBigDecimal("montoSolicitado"));
 				prestamo.setMontoCuota(rSet.getBigDecimal("montoCuota"));
-				prestamo.setCantidadCuotas(rSet.getInt("cantCoutas"));
+				prestamo.setCantidadCuotas(rSet.getInt("cantCuotas"));
 				prestamos.add(prestamo);
 			}
 			
