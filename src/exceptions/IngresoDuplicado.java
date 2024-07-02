@@ -5,6 +5,7 @@ import java.sql.SQLException;
 public class IngresoDuplicado extends SQLException {
 	private static final long serialVersionUID = 1L;
 	String columnaIngreso = "";
+	
 	public IngresoDuplicado(String columna) {
 		this.columnaIngreso = columna;
 	}

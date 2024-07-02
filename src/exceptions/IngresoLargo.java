@@ -5,6 +5,7 @@ import java.sql.SQLException;
 public class IngresoLargo extends SQLException {
 	private static final long serialVersionUID = 1L;
 	String columnaIngreso = "";
+	
 	public IngresoLargo(String columna) {
 		this.columnaIngreso = columna;
 	}

@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 public class SaldoNegativo extends SQLException {
 	private static final long serialVersionUID = 1L;
+	
 	public SaldoNegativo() {
 		
 	}

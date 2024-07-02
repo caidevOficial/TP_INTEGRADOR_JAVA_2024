@@ -75,7 +75,7 @@
 				<%
 					if (coutas != null) for (Cuota couta : coutas) {
 				%>
-				<option value="<%=couta.getId()%>">Couta <%=couta.getNumeroCouta()%> - $<%=nf_in.format(prestamoPagar.getMontoCuota())%></option>
+				<option value="<%=couta.getId()%>">Cuota <%=couta.getNumeroCuota()%> - $<%=nf_in.format(prestamoPagar.getMontoCuota())%></option>
 				<% } %>
 			</select>
 		</div>
