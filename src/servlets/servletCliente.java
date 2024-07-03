@@ -49,15 +49,15 @@ public class servletCliente extends HttpServlet {
 		if (request.getParameter("cargarSelects") != null) {
 			cargarCuentas(request, response);
 			return;
-		}
+		}//SERVLET CLIENTEPRESTAMO
 		if (request.getParameter("cargarSelectsPrestamo") != null) {
 			cargarPrestamo(request, response);
 			return;
-		}
+		}//SERVLET CLIENTEPRESTAMO
 		if (request.getParameter("cargarSelectsPrestamoPagar") != null) {
 			cargarPrestamoPagar(request, response);
 			return;
-		}
+		}//SERVLET CLIENTEPRESTAMO
 		if (request.getParameter("btnSeleccionarCuenta") != null) {
 			cargarCuotasPrestamo(request, response);
 			return;
@@ -65,7 +65,7 @@ public class servletCliente extends HttpServlet {
 		if (request.getParameter("cargarPerfil") != null) {
 			cargarPerfil(request, response);
 			return;
-		}
+		}//SERVLET CLIENTEPRESTAMO
 		if (request.getParameter("btnPedirPrestamo") != null) {
 			pedirPrestamo(request, response);
 			return;
@@ -91,6 +91,7 @@ public class servletCliente extends HttpServlet {
 	 *      response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
+		//SERVLET CLIENTEPRESTAMO
 		if (request.getParameter("btnPagar") != null) {
 			pagarPrestamo(request, response);
 			return;
@@ -138,55 +139,17 @@ public class servletCliente extends HttpServlet {
 	}
 	
 	protected void pagarPrestamo(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
-		CuotaNegocioImpl cuotaNegocio = new CuotaNegocioImpl();
-		MovimientoNegocioImpl movimientoNegocio = new MovimientoNegocioImpl();
-		CuentaNegocioImpl cuentaNegocio = new CuentaNegocioImpl();
-		Prestamo prestamo = (Prestamo)request.getSession().getAttribute("prestamo");
-		try {
-			cuentaNegocio.actualizarSaldoRestar(prestamo.getCuenta(), prestamo.getMontoCuota());
-			Movimiento movimiento = new Movimiento();
-			movimiento.setCuenta(prestamo.getCuenta());
-			movimiento.setTipoMovimiento(new Tipo(3));
-			movimiento.setConcepto(new Tipo(5));
-			movimiento.setMonto(prestamo.getMontoCuota().negate());
-			movimientoNegocio.movimientoBanco(movimiento);
-			Cuota cuota = new Cuota();
-			cuota.setId(Integer.parseInt(request.getParameter("ddlCuotas")));
-			request.setAttribute("cuotaPaga", cuotaNegocio.cuotaPaga(cuota));;
-		} catch (SQLException e) {
-			request.setAttribute("errorPago", e.getMessage());
-		}
-		request.getSession().setAttribute("cuotas", null);
-		cargarPrestamoPagar(request, response);
+		RequestDispatcher rd = request.getRequestDispatcher("/servletClientePrestamos?btnPagar=1");   
+        rd.forward(request, response);
 	}
 	
 	private void cargarCuotasPrestamo(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		CuotaNegocioImpl cuotasNegocioImpl = new CuotaNegocioImpl();
-		int prestamoSeleccionado = Integer.valueOf(request.getParameter("ddlPrestamos"));
-		request.getSession().setAttribute("selected", prestamoSeleccionado);
-		@SuppressWarnings("unchecked")
-		ArrayList<Prestamo> prestamos = (ArrayList<Prestamo>)request.getSession().getAttribute("prestamos");
-		Prestamo prestamo = new Prestamo();
-		for(Prestamo prestamoFor : prestamos) {
-			if (prestamoFor.getId() == prestamoSeleccionado) {
-				prestamo = prestamoFor;
-			}
-		}
-		request.getSession().setAttribute("cuotas", cuotasNegocioImpl.obtenerCuotas(prestamo));
-		request.getSession().setAttribute("prestamo", prestamo);
-		RequestDispatcher rd = request.getRequestDispatcher("/PagarPrestamo.jsp");   
+		RequestDispatcher rd = request.getRequestDispatcher("/servletClientePrestamos?btnSeleccionarCuenta=1");   
         rd.forward(request, response);
 	}
 	
 	private void cargarPrestamoPagar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		PrestamoNegocioImpl prestamoNegocio = new PrestamoNegocioImpl();
-		Usuario	usuario = new Usuario();
-		usuario = (Usuario)request.getSession().getAttribute("usuario");
-		ClienteNegocioImpl clienteNegocio = new ClienteNegocioImpl();
-		Cliente cliente = new Cliente();
-		cliente.setId(clienteNegocio.buscarId(usuario));
-		request.getSession().setAttribute("prestamos", prestamoNegocio.getPrestamosAprobados(cliente));
-		RequestDispatcher rd = request.getRequestDispatcher("/PagarPrestamo.jsp");   
+		RequestDispatcher rd = request.getRequestDispatcher("/servletClientePrestamos?cargarSelectsPrestamoPagar=1");   
         rd.forward(request, response);
 	}
 	
@@ -215,18 +178,7 @@ public class servletCliente extends HttpServlet {
 	}
 	
 	protected void pedirPrestamo(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
-		Prestamo prestamo = new Prestamo();
-		prestamo.setCantidadCuotas(Integer.parseInt(request.getParameter("ddlCuotas")));
-		Cuenta cuenta = new Cuenta();
-		cuenta.setId(Integer.parseInt(request.getParameter("ddlCuenta")));
-		prestamo.setCuenta(cuenta);
-		prestamo.setMontoSolicitado(BigDecimal.valueOf(Long.parseLong(request.getParameter("txtMonto"))));
-		long montoCuota = (long)((Long.parseLong(request.getParameter("txtMonto")) / Long.parseLong(request.getParameter("ddlCuotas"))) * (long)1.12);
-		prestamo.setMontoCuota(BigDecimal.valueOf(montoCuota));
-		PrestamoNegocioImpl prestamoNegocio = new PrestamoNegocioImpl();
-		request.setAttribute("insertado", prestamoNegocio.insertarPrestamo(prestamo));
-		// cargarSelectsPrestamo
-		RequestDispatcher rd = request.getRequestDispatcher("/PedirPrestamo.jsp");   
+		RequestDispatcher rd = request.getRequestDispatcher("/servletClientePrestamos?btnPedirPrestamo=1");   
         rd.forward(request, response);
 	}
 	
@@ -242,15 +194,7 @@ public class servletCliente extends HttpServlet {
 	}
 	
 	protected void cargarPrestamo(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
-		CuentaNegocioImpl cuentaNegocio = new CuentaNegocioImpl();
-		Usuario	usuario = new Usuario();
-		usuario = (Usuario)request.getSession().getAttribute("usuario");
-		ClienteNegocioImpl clienteNegocio = new ClienteNegocioImpl();
-		Cliente cliente = new Cliente();
-		cliente.setId(clienteNegocio.buscarId(usuario));
-		request.getSession().setAttribute("cuentas", cuentaNegocio.obtenerCuentas(cliente));
-		RequestDispatcher rd = request.getRequestDispatcher("/PedirPrestamo.jsp");   
-		System.out.println("Pagina de prestamos cargada");
+		RequestDispatcher rd = request.getRequestDispatcher("/servletClientePrestamos?cargarSelectsPrestamo=1");
 		rd.forward(request, response);
 	}
 	

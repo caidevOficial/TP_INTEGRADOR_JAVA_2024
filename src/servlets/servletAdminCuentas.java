@@ -39,16 +39,75 @@ public class servletAdminCuentas extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		if (request.getParameter("cargarCuentas") != null) {
+			cargarCuentas(request, response);
+			return;
+		}
+		if(request.getParameter("btnAltaCuenta") != null) {
+			altaCuenta(request, response);
+			return;
+		}
+		if(request.getParameter("btnEliminarCuenta") != null) {
+			bajaCuenta(request, response);
+			return;
+		}
+		if(request.getParameter("btnEditarCuenta") != null) {
+			btnEditarCuenta(request, response);
+			return;
+		}
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		if (request.getParameter("btnCrearCuenta") != null) {
+			crearCuenta(request, response);
+			return;
+		}
+		if (request.getParameter("btnBuscarCuenta") != null) {
+			cargarCuentasBuscador(request, response);
+			return;
+		}
+		if (request.getParameter("editarCuenta") != null) {
+			editarCuenta(request, response);
+			return;
+		}
+	}
+	
+	//DO GET
+	protected void cargarCuentas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		CuentaNegocioImpl cuentaNegocio = new CuentaNegocioImpl();
+		//TERMINAR
+		
+		request.getSession().setAttribute("cuentas", cuentaNegocio.obtenerCuentas());
+		
+		RequestDispatcher rd = request.getRequestDispatcher("Cuentas.jsp");
+		rd.forward(request, response);
+	}
+	
+	protected void altaCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//TERMINAR
+	}
+	
+	protected void bajaCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//TERMINAR
 	}
 
+	protected void btnEditarCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//TERMINAR
+	}
+
+	//DO POST
+	protected void crearCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//TERMINAR
+	}
+
+	protected void cargarCuentasBuscador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//TERMINAR
+	}
+
+	protected void editarCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//TERMINAR
+	}
 }

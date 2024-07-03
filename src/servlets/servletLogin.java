@@ -59,7 +59,7 @@ public class servletLogin extends HttpServlet {
 					RequestDispatcher rd = request.getRequestDispatcher("/Inicio.jsp");   
 			        rd.forward(request, response);
 				} else {
-					request.setAttribute("errorLogin", "Email o contraseña invalidos");
+					request.setAttribute("errorLogin", "Email o contraseï¿½a invalidos");
 					RequestDispatcher rd = request.getRequestDispatcher("/Login.jsp");   
 			        rd.forward(request, response);
 				}
@@ -80,7 +80,5 @@ public class servletLogin extends HttpServlet {
 		        System.out.println("Sesion Cerrada");
 		    }
 		}
-		
 	}
-
 }
