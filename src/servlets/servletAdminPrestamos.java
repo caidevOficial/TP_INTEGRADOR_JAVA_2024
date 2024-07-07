@@ -64,6 +64,10 @@ public class servletAdminPrestamos extends HttpServlet {
 			cargarPrestamosBuscador(request, response);
 			return;
 		}
+		if (request.getParameter("btnBuscarInformeImporteTotal") != null) {
+			buscarImporteTotal(request, response);
+			return;
+		}
 		
 	}
 	
@@ -118,6 +122,14 @@ public class servletAdminPrestamos extends HttpServlet {
 		cuentaNegocio.actualizarSaldoSumar(cuenta, BigDecimal.valueOf(Long.valueOf(request.getParameter("txtMonto"))));
 		RequestDispatcher rd = request.getRequestDispatcher("/servletAdminPrestamos?cargarPrestamos=1");   
         rd.forward(request, response);
+	}
+	
+	protected void buscarImporteTotal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		MovimientoNegocioImpl movimientoNegocioImpl = new MovimientoNegocioImpl();
+		request.setAttribute("importeTotal", movimientoNegocioImpl.importTotal(new Tipo(Integer.parseInt(request.getParameter("ddlTipoMovimiento"))), Integer.parseInt(request.getParameter("ddlMes"))));
+		request.setAttribute("selected", Integer.parseInt(request.getParameter("ddlTipoMovimiento")));
+		RequestDispatcher rd = request.getRequestDispatcher("Informes.jsp");
+		rd.forward(request, response);
 	}
 
 }

@@ -91,7 +91,7 @@ public class servletAdminstrador extends HttpServlet {
 		if(request.getParameter("btnEditarCuenta") != null) {
 			btnEditarCuenta(request, response);
 			return;
-		}
+		}//SERVLET ADMININFORMES
 		if (request.getParameter("cargarInformes") != null) {
 			cargarInformes(request, response);
 			return;
@@ -134,7 +134,7 @@ public class servletAdminstrador extends HttpServlet {
 		if (request.getParameter("editarCuenta") != null) {
 			editarCuenta(request, response);
 			return;
-		}
+		}//SERVLET ADMINPRESTAMOS
 		if (request.getParameter("btnBuscarInformeImporteTotal") != null) {
 			buscarImporteTotal(request, response);
 			return;
@@ -151,17 +151,12 @@ public class servletAdminstrador extends HttpServlet {
 	}
 	
 	protected void buscarImporteTotal(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		MovimientoNegocioImpl movimientoNegocioImpl = new MovimientoNegocioImpl();
-		request.setAttribute("importeTotal", movimientoNegocioImpl.importTotal(new Tipo(Integer.parseInt(request.getParameter("ddlTipoMovimiento"))), Integer.parseInt(request.getParameter("ddlMes"))));
-		request.setAttribute("selected", Integer.parseInt(request.getParameter("ddlTipoMovimiento")));
-		RequestDispatcher rd = request.getRequestDispatcher("Informes.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/servletAdminPrestamos?btnBuscarInformeImporteTotal=1");
 		rd.forward(request, response);
 	}
 	
 	protected void cargarInformes(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		TipoNegocioImpl tipoNegocio = new TipoNegocioImpl();
-		request.getSession().setAttribute("tipoMovimiento", tipoNegocio.getTipos("TipoMovimiento"));
-		RequestDispatcher rd = request.getRequestDispatcher("Informes.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/servletAdminInformes?cargarInformes=1");
 		rd.forward(request, response);
 	}
 	
@@ -201,9 +196,7 @@ public class servletAdminstrador extends HttpServlet {
 	}
 
 	protected void cambiarPass(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UsuarioNegocioImpl usuarioNegocio = new UsuarioNegocioImpl();
-		request.setAttribute("passActualizada", usuarioNegocio.cambiarPassUsuario(Integer.parseInt(request.getSession().getAttribute("idUsuario").toString()), request.getParameter("txtPassword").toString()));
-		RequestDispatcher rd = request.getRequestDispatcher("CambiarPass.jsp");   
+		RequestDispatcher rd = request.getRequestDispatcher("/servletAdminClientes?btnCambiarPass=1");   
         rd.forward(request, response);
 	}
 	

@@ -71,6 +71,10 @@ public class servletAdminClientes extends HttpServlet {
 			btnEditarCliente(request, response);
 			return;
 		}
+		if (request.getParameter("btnCambiarPass") != null) {
+			cambiarPass(request, response);
+			return;
+		}
 	}
 	
 	//DO GET
@@ -218,5 +222,11 @@ public class servletAdminClientes extends HttpServlet {
 		
 		RequestDispatcher rd = request.getRequestDispatcher("EditarCliente.jsp");
 		rd.forward(request, response);
+	}
+	protected void cambiarPass(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		UsuarioNegocioImpl usuarioNegocio = new UsuarioNegocioImpl();
+		request.setAttribute("passActualizada", usuarioNegocio.cambiarPassUsuario(Integer.parseInt(request.getSession().getAttribute("idUsuario").toString()), request.getParameter("txtPassword").toString()));
+		RequestDispatcher rd = request.getRequestDispatcher("CambiarPass.jsp");   
+        rd.forward(request, response);
 	}
 }
