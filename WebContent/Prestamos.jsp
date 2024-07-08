@@ -53,8 +53,8 @@
 				<th scope="col">Monto Solicitado</th>
 				<th scope="col">Monto Cuota</th>
 				<th scope="col">Cantidad Cuotas</th>
-				<th scope="col">Autorizar</th>
 				<th scope="col">Rechazar</th>
+				<th scope="col">Autorizar</th>
 			  </tr>
 			</thead>
 			<tbody>
