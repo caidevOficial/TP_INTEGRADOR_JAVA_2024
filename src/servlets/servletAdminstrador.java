@@ -1,8 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.math.BigDecimal;
-import java.sql.Date;
 import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
@@ -12,17 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entidades.Cliente;
-import entidades.Cuenta;
-import entidades.Movimiento;
-import entidades.Prestamo;
 import entidades.Tipo;
 import entidades.Usuario;
-import negocioimpl.ClienteNegocioImpl;
-import negocioimpl.CuentaNegocioImpl;
-import negocioimpl.MovimientoNegocioImpl;
-import negocioimpl.PrestamoNegocioImpl;
-import negocioimpl.TipoNegocioImpl;
 import negocioimpl.UsuarioNegocioImpl;
 
 /**
