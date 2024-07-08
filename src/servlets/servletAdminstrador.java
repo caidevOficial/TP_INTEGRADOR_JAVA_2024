@@ -239,13 +239,7 @@ public class servletAdminstrador extends HttpServlet {
 	}
 
 	protected void cargarSelects(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		TipoNegocioImpl tipoNegocio = new TipoNegocioImpl();
-		request.getSession().setAttribute("selectProvincias", tipoNegocio.getTipos("Provincias"));
-		request.getSession().setAttribute("selectNacionalidades", tipoNegocio.getTipos("Nacionalidades"));
-		request.getSession().setAttribute("selectLocalidades", tipoNegocio.getTipos("Localidades"));
-		request.getSession().setAttribute("selectTipoCuenta", tipoNegocio.getTipos("TipoCuenta"));
-		request.getSession().setAttribute("selectGeneros", tipoNegocio.getTipos("Genero"));
-		RequestDispatcher rd = request.getRequestDispatcher("/CrearCuentas.jsp");   
+		RequestDispatcher rd = request.getRequestDispatcher("/servletAdminCuentas?cargarSelects=1");   
         rd.forward(request, response);
 	}
 	
