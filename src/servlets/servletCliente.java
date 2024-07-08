@@ -177,13 +177,7 @@ public class servletCliente extends HttpServlet {
 	}
 	
 	protected void cargarPerfil(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
-		Usuario	usuario = new Usuario();
-		usuario = (Usuario)request.getSession().getAttribute("usuario");
-		ClienteNegocioImpl clienteNegocio = new ClienteNegocioImpl();
-		Cliente cliente = new Cliente();
-		cliente.setId(clienteNegocio.buscarId(usuario));
-		request.getSession().setAttribute("cliente", clienteNegocio.obtenerCliente(cliente));
-		RequestDispatcher rd = request.getRequestDispatcher("/MiPerfil.jsp");   
+		RequestDispatcher rd = request.getRequestDispatcher("/servletClientePerfil?cargarPerfil=1");   
         rd.forward(request, response);
 	}
 	
@@ -193,14 +187,7 @@ public class servletCliente extends HttpServlet {
 	}
 	
 	protected void cargarCuentas(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
-		CuentaNegocioImpl cuentaNegocio = new CuentaNegocioImpl();
-		Usuario	usuario = new Usuario();
-		usuario = (Usuario)request.getSession().getAttribute("usuario");
-		ClienteNegocioImpl clienteNegocio = new ClienteNegocioImpl();
-		Cliente cliente = new Cliente();
-		cliente.setId(clienteNegocio.buscarId(usuario));
-		request.getSession().setAttribute("cuentas", cuentaNegocio.obtenerCuentas(cliente));
-		RequestDispatcher rd = request.getRequestDispatcher("/Cuenta.jsp");   
+		RequestDispatcher rd = request.getRequestDispatcher("/servletClienteCuentas?cargarSelects=1");   
         rd.forward(request, response);
 	}
 	
