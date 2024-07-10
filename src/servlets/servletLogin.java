@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import daoimpl.Conexion;
 import entidades.Usuario;
 import negocioimpl.UsuarioNegocioImpl;
 
@@ -36,6 +37,9 @@ public class servletLogin extends HttpServlet {
 			request.getSession().removeAttribute("usuario");
 			RequestDispatcher rd = request.getRequestDispatcher("/Inicio.jsp");   
 	        rd.forward(request, response);
+
+			Conexion conexion = new Conexion();
+	        conexion.cerrarConexion();
 		}
 	}
 
