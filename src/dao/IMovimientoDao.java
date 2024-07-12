@@ -11,4 +11,5 @@ public interface IMovimientoDao {
 	public ArrayList<Movimiento> obtenerMovimientos(Cuenta cuenta);
 	public ArrayList<Movimiento> obtenerMovimientos(Cuenta cuenta, String terminoBuscar);
 	public int importTotal(Tipo tipoMovimiento, int Mes);
+	public int ultimoIdMovimiento();
 }

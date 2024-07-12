@@ -20,12 +20,14 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 	private String getMovimientos;
 	private String getMovimientosBuscar; 
 	private String getImporteTotal;
+	private String getUltimoIdMovimiento;
 	
 	public MovimientoDaoImpl() {
 		this.altaCuentaMovimientos = this.queryManager.altaCuentaMovimiento;
 		this.getMovimientos = this.queryManager.getMovimientos;
 		this.getMovimientosBuscar = this.queryManager.getMovimientosBuscar;
 		this.getImporteTotal = this.queryManager.getImporteTotal;
+		this.getUltimoIdMovimiento = this.queryManager.ultimoIdMovimientos;
 	}
 
 	@Override
@@ -139,4 +141,23 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 		return importeTotal;
 	}
 
+	@Override
+	public int ultimoIdMovimiento() {
+		Connection connection = Conexion.getConexion().getSQLConexion();
+		int id = 0;
+		
+		try {
+			PreparedStatement pStatement =  connection.prepareStatement(this.getUltimoIdMovimiento);
+			ResultSet rSet = pStatement.executeQuery();
+			
+			while(rSet.next()) {
+				id = rSet.getInt("ID");
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return id;
+	}
 }

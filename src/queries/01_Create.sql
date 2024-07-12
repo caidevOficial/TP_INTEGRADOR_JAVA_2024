@@ -18,6 +18,8 @@ DROP TABLE IF EXISTS bdBanco.Clientes;
 DROP TABLE IF EXISTS bdBanco.Cuentas;
 DROP TABLE IF EXISTS bdBanco.Prestamos;
 DROP TABLE IF EXISTS bdBanco.Cuotas;
+DROP TABLE IF EXISTS bdBanco.Movimientos;
+DROP TABLE IF EXISTS bdBanco.Trasnferencias;
 
 
 CREATE TABLE IF NOT EXISTS Roles(
@@ -194,3 +196,43 @@ CREATE TABLE IF NOT EXISTS Cuotas(
 	ON UPDATE RESTRICT
 );
 
+CREATE TABLE Movimientos (
+  Id INT NOT NULL AUTO_INCREMENT,
+  Id_cuenta INT NOT NULL,
+  Id_tipo_movimiento INT(11) NOT NULL,
+  Id_concepto INT NOT NULL,
+  Fecha_movimiento DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  Monto_movimiento DECIMAL(20,2) NOT NULL,
+  PRIMARY KEY (Id),
+  KEY FK_Id_Cuenta_Movimientos (Id_cuenta),
+  KEY FK_Id_tipo_movimiento (Id_tipo_movimiento),
+  KEY FK_Id_concepto (Id_concepto),
+  CONSTRAINT FK_Id_Cuenta_Movimientos FOREIGN KEY (Id_cuenta) REFERENCES Cuentas (Id)
+  ON DELETE RESTRICT
+  ON UPDATE RESTRICT,
+  CONSTRAINT FK_Id_concepto
+  FOREIGN KEY (Id_concepto) REFERENCES Concepto (Id)
+  ON DELETE RESTRICT
+  ON UPDATE RESTRICT,
+  CONSTRAINT FK_Id_tipo_movimiento
+  FOREIGN KEY (Id_tipo_movimiento) REFERENCES TipoMovimiento (Id)
+  ON DELETE RESTRICT
+  ON UPDATE RESTRICT
+);
+
+CREATE TABLE Transferencias (
+  Id INT AUTO_INCREMENT,
+  Id_movimiento INT NOT NULL,
+  Id_cuenta_destino INT NOT NULL,
+  PRIMARY KEY (Id),
+  KEY FK_Id_Transferencia_Movimientos (Id_movimiento),
+  KEY FK_Id_Transferencia_Cuentas (Id_cuenta_destino),
+  CONSTRAINT FK_Id_Transferencia_Cuentas
+  FOREIGN KEY (Id_cuenta_destino) REFERENCES Cuentas (Id)
+  ON DELETE RESTRICT
+  ON UPDATE RESTRICT,
+  CONSTRAINT FK_Id_Transferencia_Movimientos
+  FOREIGN KEY (Id_movimiento) REFERENCES Movimientos (Id)
+  ON DELETE RESTRICT
+  ON UPDATE RESTRICT
+);
