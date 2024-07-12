@@ -52,6 +52,25 @@ public class Queries {
 			 "OR c.Saldo LIKE ? " + 
 			 "OR tc.Descripcion LIKE ?;";
 	
+	public String getBuscarCuenta = "" +
+			 "SELECT c.Id AS Id," + 
+			 "	cl.Id AS IdCliente," + 
+			 "	cl.Nombre AS Nombre," + 
+			 "	cl.Apellido AS Apellido," + 
+			 "	cl.DNI As DNI," + 
+			 "	cl.CUIL AS CUIL," + 
+			 "	c.Fecha_creacion AS FechaCreacion," + 
+			 "	c.Nro_cuenta AS numeroCuenta," + 
+			 "	c.CBU AS CBU," + 
+			 "	c.Saldo AS Saldo," + 
+			 "	tc.Id As IdTipoCuenta," + 
+			 "	tc.Descripcion AS nombreTipoCuenta," + 
+			 "	c.Eliminado AS Eliminado " + 
+			 "FROM Cuentas AS c " + 
+			 "INNER JOIN Clientes AS cl ON cl.Id = c.Id_cliente " + 
+			 "INNER JOIN TipoCuenta AS tc ON tc.Id = c.Id_tipo_cuenta " + 
+			 "WHERE c.Id = ? ";
+	
 	public String getCuentasClientes =  "" +
 			"SELECT c.Id AS Id," + 
 			"	cl.Id AS IdCliente," + 
@@ -450,6 +469,67 @@ public class Queries {
 			"SET Email = ? " + 
 			"WHERE Id = ?;";
 	
+	public String altaTransferencia = "";
+	
+	public String getTransferencias = "SELECT " + 
+			"M.Id AS IDMovimiento, " + 
+			"M.Id_cuenta AS CuentaOrigen, " + 
+			"TM.Id AS IDMovimiento, " + 
+			"TM.Descripcion AS DescripcionMovimiento, " + 
+			"C.Id AS IDConcepto, " + 
+			"C.Descripcion AS DescripcionConcepto, " + 
+			"M.Fecha_movimiento AS Fecha, " + 
+			"M.Monto_movimiento AS Monto, " + 
+			"T.id_cuenta_destino AS CuentaDestino " + 
+			"FROM Transferencias AS T " + 
+			"INNER JOIN Movimientos AS M ON T.Id_movimiento = M.Id " + 
+			"INNER JOIN Concepto AS C ON M.Id_concepto = C.Id " + 
+			"INNER JOIN TipoMovimiento AS TM ON M.Id_tipo_movimiento = TM.Id " + 
+			"WHERE M.Id_cuenta = ? " + 
+			"ORDER BY M.Fecha_movimiento DESC;";
+	
+	public String getTransferenciasFecha = "SELECT " + 
+			"M.Id AS IDMovimiento, " + 
+			"M.Id_cuenta AS CuentaOrigen, " + 
+			"TM.Id AS IDMovimiento, " + 
+			"TM.Descripcion AS DescripcionMovimiento, " + 
+			"C.Id AS IDConcepto, " + 
+			"C.Descripcion AS DescripcionConcepto, " + 
+			"M.Fecha_movimiento AS Fecha, " + 
+			"M.Monto_movimiento AS Monto, " + 
+			"T.id_cuenta_destino AS CuentaDestino " + 
+			"FROM Transferencias AS T " + 
+			"INNER JOIN Movimientos AS M ON T.Id_movimiento = M.Id " + 
+			"INNER JOIN Concepto AS C ON M.Id_concepto = C.Id " + 
+			"INNER JOIN TipoMovimiento AS TM ON M.Id_tipo_movimiento = TM.Id " + 
+			"WHERE M.Id_cuenta = ? " +
+			"YEAR(M.Fecha_movimiento) = YEAR(?) " + 
+			"AND MONTH(M.Fecha_movimiento) = MONTH(?) " + 
+			"AND DAY(M.Fecha_movimiento) = DAY(?) " + 
+			"ORDER BY M.Fecha_movimiento DESC;";
+	
+	public String getTransferenciasFechas = "SELECT " + 
+			"M.Id AS IDMovimiento, " + 
+			"M.Id_cuenta AS CuentaOrigen, " + 
+			"TM.Id AS IDMovimiento, " + 
+			"TM.Descripcion AS DescripcionMovimiento, " + 
+			"C.Id AS IDConcepto, " + 
+			"C.Descripcion AS DescripcionConcepto, " + 
+			"M.Fecha_movimiento AS Fecha, " + 
+			"M.Monto_movimiento AS Monto, " + 
+			"T.id_cuenta_destino AS CuentaDestino " + 
+			"FROM Transferencias AS T " + 
+			"INNER JOIN Movimientos AS M ON T.Id_movimiento = M.Id " + 
+			"INNER JOIN Concepto AS C ON M.Id_concepto = C.Id " + 
+			"INNER JOIN TipoMovimiento AS TM ON M.Id_tipo_movimiento = TM.Id " + 
+			"WHERE M.Id_cuenta = ? " + 
+			"AND YEAR(M.Fecha_movimiento) >= YEAR(?) " + 
+			"AND YEAR(M.Fecha_movimiento) <= YEAR(?) " + 
+			"AND MONTH(M.Fecha_movimiento) >= MONTH(?) " + 
+			"AND MONTH(M.Fecha_movimiento) <= MONTH(?) " + 
+			"AND DAY(M.Fecha_movimiento) >= DAY(?) " + 
+			"AND DAY(M.Fecha_movimiento) <= DAY(?) " + 
+			"ORDER BY M.Fecha_movimiento DESC;";
 	
 	public Queries() {}
 	

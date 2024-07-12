@@ -21,6 +21,7 @@ public class CuentaDaoImpl implements ICuentaDao {
 	Queries queryManager;
 	
 	private String getCuentas;
+	private String getBuscarCuenta;
 	private String getCuentasBuscar;
 	private String getCuentasCliente;
 	private String crearCuenta;
@@ -39,6 +40,7 @@ public class CuentaDaoImpl implements ICuentaDao {
 		this.crearCuenta = this.queryManager.crearCuenta;
 		this.editarCuenta = this.queryManager.editarCuenta;
 		this.getCuentas = this.queryManager.getCuentas;
+		this.getBuscarCuenta = this.queryManager.getBuscarCuenta;
 		this.getCuentasBuscar = this.queryManager.getCuentasBuscar;
 		this.getCuentasCliente = this.queryManager.getCuentasClientes;
 		this.actualizarSaldoSumar = this.queryManager.sumarSaldo;
@@ -441,5 +443,48 @@ public class CuentaDaoImpl implements ICuentaDao {
 		}
 		return isInsertExitoso;
 	}
-	
+
+	@Override
+	public Cuenta obtenerCuenta(int ID) {
+		Connection connection = Conexion.getConexion().getSQLConexion();
+		Cuenta cuenta = new Cuenta();
+		
+		try {
+			PreparedStatement pStatement =  connection.prepareStatement(this.getBuscarCuenta);
+			pStatement.setInt(1, ID);
+			
+			ResultSet rSet = pStatement.executeQuery();
+			
+			while(rSet.next()) {
+				Cuenta ctaAux = new Cuenta();
+				
+				ctaAux.setId(rSet.getInt("Id"));
+				Cliente cliente = new Cliente();
+				
+				cliente.setId(rSet.getInt("IdCliente"));
+				cliente.setNombre(rSet.getString("Nombre"));
+				cliente.setApellido(rSet.getString("Apellido"));
+				cliente.setDni(rSet.getString("DNI"));
+				cliente.setCuil(rSet.getString("CUIL"));
+				ctaAux.setCliente(cliente);
+				ctaAux.setFechaCreacion(rSet.getDate("FechaCreacion"));
+				ctaAux.setNumeroCuenta(rSet.getString("numeroCuenta"));
+				ctaAux.setCbu(rSet.getString("CBU"));
+				ctaAux.setSaldo(rSet.getBigDecimal("Saldo"));
+				Tipo tipo = new Tipo();
+				
+				tipo.setId(rSet.getInt("IdTipoCuenta"));
+				tipo.setDescripcion(rSet.getString("nombreTipoCuenta"));
+				ctaAux.setTipoCuenta(tipo);
+				ctaAux.setEliminado(rSet.getBoolean("Eliminado"));
+				
+				cuenta = ctaAux;
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return cuenta;
+	}
 }

@@ -11,6 +11,7 @@ import exceptions.SaldoNegativo;
 import exceptions.TriggerCreacionExcedida;
 
 public interface ICuentaDao {
+	public Cuenta obtenerCuenta(int ID);
 	public ArrayList<Cuenta> obtenerCuentas();
 	public ArrayList<Cuenta> obtenerCuentas(Cliente cliente);
 	public ArrayList<Cuenta> obtenerCuentas(String terminoBuscar);
