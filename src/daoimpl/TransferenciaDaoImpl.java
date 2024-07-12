@@ -31,8 +31,40 @@ public class TransferenciaDaoImpl implements ITransferenciaDao{
 	
 	@Override
 	public boolean transferenciaBanco(Transferencia transferencia) {
-		// TODO Auto-generated method stub
-		return false;
+		PreparedStatement statement;
+		Connection conexion = Conexion.getConexion().getSQLConexion();
+		MovimientoDaoImpl daoMovimiento = new MovimientoDaoImpl();
+		Boolean isInsertExitoso = false;
+		
+		try
+		{
+			if (daoMovimiento.movimientoBanco(transferencia)) {				
+				statement = conexion.prepareStatement(this.altaTransferencia);
+				statement.setInt(1, daoMovimiento.ultimoIdMovimiento());
+				statement.setInt(2, transferencia.getIdCuentaDestino().getId());
+				
+				if(statement.executeUpdate() > 0)
+				{
+					conexion.commit();
+					isInsertExitoso = true;
+				}
+			}
+			else {
+				System.out.println("Error al dar de alta movimiento");
+			}
+			
+		} 
+		catch (SQLException e) 
+		{
+			try {
+				conexion.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.getMessage();
+		}
+		
+		return isInsertExitoso;
 	}
 
 	@Override

@@ -153,6 +153,8 @@ public class Queries {
 			 "OR m.Monto_movimiento LIKE ? " + 
 			 ");";
 	
+	public String ultimoIdMovimientos = "SELECT MAX(id) AS ID FROM Transferencias;";
+	
 	public String getImporteTotal = "" +
 			"SELECT " +
 			"SUM(m.Monto_movimiento) AS importeTotal " +
@@ -469,7 +471,7 @@ public class Queries {
 			"SET Email = ? " + 
 			"WHERE Id = ?;";
 	
-	public String altaTransferencia = "";
+	public String altaTransferencia = "INSERT INTO Transferencias (Id_movimiento, id_cuenta_destino) VALUES (?, ?);";
 	
 	public String getTransferencias = "SELECT " + 
 			"M.Id AS IDMovimiento, " + 
