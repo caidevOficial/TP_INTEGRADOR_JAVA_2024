@@ -35,5 +35,10 @@ public class MovimientoNegocioImpl implements IMovimientoDao {
 		// TODO Auto-generated method stub
 		return movimientoNeogocio.importTotal(tipoMovimiento, Mes);
 	}
+	
+	@Override
+	public int ultimoIdMovimiento() {
+		return movimientoNeogocio.ultimoIdMovimiento();
+	}
 
 }
