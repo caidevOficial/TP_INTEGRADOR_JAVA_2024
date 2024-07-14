@@ -52,8 +52,8 @@
 				<thead>
 					<tr>
 						<th scope="col">Id</th>
-						<th scope="col">Nombre</th>
 						<th scope="col">Apellido</th>
+						<th scope="col">Nombre</th>
 						<th scope="col">DNI</th>
 						<th scope="col">Fecha Creacion</th>
 						<th scope="col">Nro. Cuenta</th>
@@ -73,8 +73,8 @@
 					%>
 					<tr>
 						<th><%=cuenta.getId()%></th>
-						<td><%=cuenta.getCliente().getNombre()%></td>
 						<td><%=cuenta.getCliente().getApellido()%></td>
+						<td><%=cuenta.getCliente().getNombre()%></td>
 						<td><%=cuenta.getCliente().getDni()%></td>
 						<td><%=cuenta.getFechaCreacion()%></td>
 						<td><%=cuenta.getNumeroCuenta()%></td>

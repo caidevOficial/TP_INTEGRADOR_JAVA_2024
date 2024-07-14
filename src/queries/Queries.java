@@ -97,8 +97,8 @@ public class Queries {
 	private String getCuentas =  "" +
 			"SELECT c.Id AS Id, " + 
 			"	cl.Id AS IdCliente, " + 
-			"	cl.Nombre AS Nombre, " + 
 			"	cl.Apellido AS Apellido, " + 
+			"	cl.Nombre AS Nombre, " + 
 			"	cl.DNI As DNI, " + 
 			"	cl.CUIL AS CUIL, " + 
 			"	c.Fecha_creacion AS FechaCreacion, " + 
@@ -112,8 +112,7 @@ public class Queries {
 			"INNER JOIN Clientes AS cl ON cl.Id = c.Id_cliente " + 
 			"INNER JOIN TipoCuenta AS tc ON tc.Id = c.Id_tipo_cuenta " +
 			"ORDER BY " + 
-			"cl.Apellido ASC, " + 
-			"cl.Nombre ASC;";
+			"Apellido ASC;";
 	
 	private String idPorIdCliente = "SELECT c.Id AS Id, cl.Id AS IdCliente FROM Cuentas AS c INNER JOIN Clientes AS cl ON cl.Id = c.Id_cliente WHERE cl.Id = ?;";
 	private String restarSaldo = "UPDATE Cuentas SET Saldo = Saldo - ? WHERE Id = ?;";
