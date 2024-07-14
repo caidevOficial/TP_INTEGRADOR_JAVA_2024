@@ -22,6 +22,7 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 	private String getUltimoIdMovimiento;
 	
 	public MovimientoDaoImpl() {
+		this.queryManager = new Queries();
 		this.altaCuentaMovimientos = this.queryManager.getAltaCuentaMovimiento();
 		this.getMovimientos = this.queryManager.getGetMovimientos();
 		this.getMovimientosBuscar = this.queryManager.getGetMovimientosBuscar();

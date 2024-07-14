@@ -62,7 +62,7 @@
 						<th scope="col">Tipo Cuenta</th>
 						<th scope="col">Habilitada</th>
 						<th scope="col"></th>
-						<th scope="col"></th>
+						<th scope="col">Acción</th>
 						<th scope="col"></th>
 					</tr>
 				</thead>
@@ -82,11 +82,11 @@
 						<td><%=nf_in.format(cuenta.getSaldo().longValue())%></td>
 						<td><%=cuenta.getTipoCuenta().getDescripcion()%></td>
 						<td><%=cuenta.getEliminado() ? "Deshabilitado" : "Habilitado"%></td>
-						<td><input type="submit" value="Eliminar" name="btnEliminar"
+						<td><input type="submit" value="⛔ Eliminar" name="btnEliminar"
 							onclick="return btnConfirmEliminar('servletAdminstrador', 'btnEliminarCuenta=1', 'txtId=<%=cuenta.getId()%>');" /></td>
-						<td><input type="submit" value="Alta" name="btnAlta"
+						<td><input type="submit" value="🚹 Alta" name="btnAlta"
 							onclick="return btnConfirmAlta('servletAdminstrador', 'btnAltaCuenta=1', 'txtId=<%=cuenta.getId()%>');" /></td>
-						<td><input type="submit" value="Editar" name="btnEditar"
+						<td><input type="submit" value="⚠️ Editar" name="btnEditar"
 							onclick="return btnEditar('servletAdminstrador', 'btnEditarCuenta=1', 'txtCBU=<%=cuenta.getCbu()%>');" /></td>
 					</tr>
 					<%
