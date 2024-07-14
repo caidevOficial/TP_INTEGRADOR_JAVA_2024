@@ -2,13 +2,13 @@ package queries;
 
 public class Queries {
 	
-	public String queryBuscarId = "SELECT Id FROM Clientes WHERE DNI = ?;";
-	public String buscarIdCliente = "SELECT c.Id FROM Clientes AS c WHERE c.Id_usuario = ?;";
+	private String queryBuscarId = "SELECT Id FROM Clientes WHERE DNI = ?;";
+	private String buscarIdCliente = "SELECT c.Id FROM Clientes AS c WHERE c.Id_usuario = ?;";
 	
-	public String altaCuenta = "UPDATE Cuentas SET Eliminado = 0 WHERE Id = ?;";
-	public String bajaCuenta = 	 "UPDATE Cuentas SET Eliminado = 1 WHERE Id = ?;";
-	public String crearCuenta =  "INSERT INTO Cuentas (Id_cliente, Nro_cuenta, CBU, Id_tipo_cuenta) VALUES(?, ?, ?, ?);";
-	public String cuentaPorCbu = "" +
+	private String altaCuenta = "UPDATE Cuentas SET Eliminado = 0 WHERE Id = ?;";
+	private String bajaCuenta = 	 "UPDATE Cuentas SET Eliminado = 1 WHERE Id = ?;";
+	private String crearCuenta =  "INSERT INTO Cuentas (Id_cliente, Nro_cuenta, CBU, Id_tipo_cuenta) VALUES(?, ?, ?, ?);";
+	private String cuentaPorCbu = "" +
 			 "SELECT c.Id AS Id," + 
 			 "	cl.Id AS IdCliente," + 
 			 "	c.Fecha_creacion AS FechaCreacion," + 
@@ -23,9 +23,9 @@ public class Queries {
 			 "INNER JOIN TipoCuenta AS tc ON tc.Id = c.Id_tipo_cuenta " + 
 			 "WHERE CBU = ?;";
 	
-	public String editarCuenta = "UPDATE Cuentas SET Nro_cuenta = ?, CBU = ?, Saldo = ?, Id_tipo_cuenta = ? WHERE Id = ?;";
+	private String editarCuenta = "UPDATE Cuentas SET Nro_cuenta = ?, CBU = ?, Saldo = ?, Id_tipo_cuenta = ? WHERE Id = ?;";
 	
-	public String getCuentasBuscar = "" +
+	private String getCuentasBuscar = "" +
 			 "SELECT c.Id AS Id," + 
 			 "	cl.Id AS IdCliente," + 
 			 "	cl.Nombre AS Nombre," + 
@@ -52,7 +52,7 @@ public class Queries {
 			 "OR c.Saldo LIKE ? " + 
 			 "OR tc.Descripcion LIKE ?;";
 	
-	public String getBuscarCuenta = "" +
+	private String getBuscarCuenta = "" +
 			 "SELECT c.Id AS Id," + 
 			 "	cl.Id AS IdCliente," + 
 			 "	cl.Nombre AS Nombre," + 
@@ -71,7 +71,7 @@ public class Queries {
 			 "INNER JOIN TipoCuenta AS tc ON tc.Id = c.Id_tipo_cuenta " + 
 			 "WHERE c.Id = ? ";
 	
-	public String getCuentasClientes =  "" +
+	private String getCuentasClientes =  "" +
 			"SELECT c.Id AS Id," + 
 			"	cl.Id AS IdCliente," + 
 			"	cl.Nombre AS Nombre," + 
@@ -89,33 +89,39 @@ public class Queries {
 			"INNER JOIN Clientes AS cl ON cl.Id = c.Id_cliente " + 
 			"INNER JOIN TipoCuenta AS tc ON tc.Id = c.Id_tipo_cuenta " + 
 			"WHERE cl.Id = ? " + 
-			"AND c.Eliminado = 0;";
+			"AND c.Eliminado = 0" + 
+			"ORDER BY " + 
+			"cl.Apellido ASC, " + 
+			"cl.Nombre ASC;";
 	
-	public String getCuentas =  "" +
-			"SELECT c.Id AS Id," + 
-			"	cl.Id AS IdCliente," + 
-			"	cl.Nombre AS Nombre," + 
-			"	cl.Apellido AS Apellido," + 
-			"	cl.DNI As DNI," + 
-			"	cl.CUIL AS CUIL," + 
-			"	c.Fecha_creacion AS FechaCreacion," + 
-			"	c.Nro_cuenta AS numeroCuenta," + 
-			"	c.CBU AS CBU," + 
-			"	c.Saldo AS Saldo," + 
-			"	tc.Id As IdTipoCuenta," + 
-			"	tc.Descripcion AS nombreTipoCuenta," + 
+	private String getCuentas =  "" +
+			"SELECT c.Id AS Id, " + 
+			"	cl.Id AS IdCliente, " + 
+			"	cl.Nombre AS Nombre, " + 
+			"	cl.Apellido AS Apellido, " + 
+			"	cl.DNI As DNI, " + 
+			"	cl.CUIL AS CUIL, " + 
+			"	c.Fecha_creacion AS FechaCreacion, " + 
+			"	c.Nro_cuenta AS numeroCuenta, " + 
+			"	c.CBU AS CBU, " + 
+			"	c.Saldo AS Saldo, " + 
+			"	tc.Id As IdTipoCuenta, " + 
+			"	tc.Descripcion AS nombreTipoCuenta, " + 
 			"	c.Eliminado AS Eliminado " + 
 			"FROM Cuentas AS c " + 
 			"INNER JOIN Clientes AS cl ON cl.Id = c.Id_cliente " + 
-			"INNER JOIN TipoCuenta AS tc ON tc.Id = c.Id_tipo_cuenta ";
+			"INNER JOIN TipoCuenta AS tc ON tc.Id = c.Id_tipo_cuenta " +
+			"ORDER BY " + 
+			"cl.Apellido ASC, " + 
+			"cl.Nombre ASC;";
 	
-	public String idPorIdCliente = "SELECT c.Id AS Id, cl.Id AS IdCliente FROM Cuentas AS c INNER JOIN Clientes AS cl ON cl.Id = c.Id_cliente WHERE cl.Id = ?;";
-	public String restarSaldo = "UPDATE Cuentas SET Saldo = Saldo - ? WHERE Id = ?;";
-	public String sumarSaldo = "UPDATE Cuentas SET Saldo = Saldo + ? WHERE Id = ?;";
-	public String ultimoId = "SELECT MAX(c.Id) + 1 AS Id FROM Cuentas AS c;";	
-	public String altaCuentaMovimiento = "INSERT INTO Movimientos (Id_cuenta, Id_tipo_movimiento, Id_concepto, Monto_movimiento) VALUES (?, ?, ?, ?);";
+	private String idPorIdCliente = "SELECT c.Id AS Id, cl.Id AS IdCliente FROM Cuentas AS c INNER JOIN Clientes AS cl ON cl.Id = c.Id_cliente WHERE cl.Id = ?;";
+	private String restarSaldo = "UPDATE Cuentas SET Saldo = Saldo - ? WHERE Id = ?;";
+	private String sumarSaldo = "UPDATE Cuentas SET Saldo = Saldo + ? WHERE Id = ?;";
+	private String ultimoId = "SELECT MAX(c.Id) + 1 AS Id FROM Cuentas AS c;";	
+	private String altaCuentaMovimiento = "INSERT INTO Movimientos (Id_cuenta, Id_tipo_movimiento, Id_concepto, Monto_movimiento) VALUES (?, ?, ?, ?);";
 	
-	public String getMovimientos =  "" +
+	private String getMovimientos =  "" +
 			"SELECT m.Id AS Id," + 
 			"	c.Id AS IdCuenta," + 
 			"	c.Saldo AS Saldo," + 
@@ -131,7 +137,7 @@ public class Queries {
 			"INNER JOIN Concepto AS con ON con.Id = m.Id_concepto " + 
 			"WHERE c.Id = ?;";
 	
-	public String getMovimientosBuscar = "" +
+	private String getMovimientosBuscar = "" +
 			"SELECT m.Id AS Id," + 
 			 "	c.Id AS IdCuenta," + 
 			 "	c.Saldo AS Saldo," + 
@@ -153,9 +159,9 @@ public class Queries {
 			 "OR m.Monto_movimiento LIKE ? " + 
 			 ");";
 	
-	public String ultimoIdMovimientos = "SELECT MAX(id) AS ID FROM Transferencias;";
+	private String ultimoIdMovimientos = "SELECT MAX(id) AS ID FROM Transferencias;";
 	
-	public String getImporteTotal = "" +
+	private String getImporteTotal = "" +
 			"SELECT " +
 			"SUM(m.Monto_movimiento) AS importeTotal " +
 			"FROM Movimientos AS m " +
@@ -163,7 +169,7 @@ public class Queries {
 			"	ON tm.Id = m.Id_tipo_movimiento " +
 			"WHERE tm.Id = ? AND MONTH(m.Fecha_movimiento) = ?;";
 	
-	public String getCuotasPrestamo =   "" +
+	private String getCuotasPrestamo =   "" +
 			"SELECT c.Id AS Id," + 
 			"	p.Id AS IdPrestamo," + 
 			"	p.Monto_cuota AS MontoCuota," + 
@@ -176,9 +182,9 @@ public class Queries {
 			"AND c.Paga = 0 " + 
 			"AND DATE(c.Fecha_pago) <= DATE(NOW());";
 	
-	public String setCuotaPrestamo = "UPDATE Cuotas SET Paga = 1 WHERE Id = ?;";
+	private String setCuotaPrestamo = "UPDATE Cuotas SET Paga = 1 WHERE Id = ?;";
 	
-	public String getClientes = "" +
+	private String getClientes = "" +
 			"SELECT c.Id AS Id, " + 
 			"    c.Nombre AS Nombre, " + 
 			"    c.Apellido AS Apellido, " + 
@@ -213,7 +219,7 @@ public class Queries {
 			"    INNER JOIN Usuarios AS u ON u.Id = c.Id_usuario " + 
 			"    INNER JOIN Roles AS r On u.Id_rol = r.Id;";
 	
-	public String getCliente = "" +
+	private String getCliente = "" +
 			"SELECT c.Id AS Id, " + 
 			"    c.Nombre AS Nombre, " + 
 			"    c.Apellido AS Apellido, " + 
@@ -249,7 +255,7 @@ public class Queries {
 			"    INNER JOIN Roles AS r On u.Id_rol = r.Id " + 
 			"WHERE c.Id = ?;";
 	
-	public String getClientesPorTermino = "" +
+	private String getClientesPorTermino = "" +
 			"SELECT c.Id AS Id, " + 
 			"    c.Nombre AS Nombre, " + 
 			"    c.Apellido AS Apellido, " + 
@@ -295,7 +301,7 @@ public class Queries {
 			"    OR g.Descripcion LIKE ? " + 
 			"    OR c.Fecha_nacimiento LIKE ?;";
 	
-	public String crearCliente = "" +
+	private String crearCliente = "" +
 			"INSERT INTO Clientes ( " + 
 			"        Nombre, " + 
 			"        Apellido, " + 
@@ -312,11 +318,11 @@ public class Queries {
 			"    ) " + 
 			"VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
 	
-	public String bajaCliente = "UPDATE Clientes  SET Eliminado = 1 WHERE DNI = ?;";
+	private String bajaCliente = "UPDATE Clientes  SET Eliminado = 1 WHERE DNI = ?;";
 	
-	public String altaCliente = "UPDATE Clientes  SET Eliminado = 0 WHERE DNI = ?;";
+	private String altaCliente = "UPDATE Clientes  SET Eliminado = 0 WHERE DNI = ?;";
 	
-	public String editarCliente = "UPDATE Clientes " + 
+	private String editarCliente = "UPDATE Clientes " + 
 			"SET Nombre = ?, " + 
 			"    Apellido = ?, " + 
 			"    DNI = ?, " + 
@@ -330,7 +336,7 @@ public class Queries {
 			"    Telefono = ? " + 
 			"WHERE Id = ?;";
 	
-	public String getPrestamos = "" +
+	private String getPrestamos = "" +
 			"SELECT p.Id AS Id, " + 
 			"    c.Id AS IdCuenta, " + 
 			"    c.Nro_cuenta AS numeroCuenta, " + 
@@ -345,7 +351,7 @@ public class Queries {
 			"    INNER JOIN Cuentas AS c ON c.Id = p.Id " + 
 			"    INNER JOIN EstadoPrestamo AS ep ON ep.Id = p.Id_estado;";
 	
-	public String getPrestamosPendientes = "" +
+	private String getPrestamosPendientes = "" +
 			"SELECT p.Id AS Id, " + 
 			"    c.Id AS IdCuenta, " + 
 			"    c.Nro_cuenta AS numeroCuenta, " + 
@@ -361,7 +367,7 @@ public class Queries {
 			"    INNER JOIN EstadoPrestamo AS ep ON ep.Id = p.Id_estado " + 
 			"WHERE ep.Id = 3;";
 	
-	public String getPrestamosAprobados = "" +
+	private String getPrestamosAprobados = "" +
 			"SELECT p.Id AS Id, " + 
 			"    c.Id AS IdCuenta, " + 
 			"    c.Nro_cuenta AS numeroCuenta, " + 
@@ -377,7 +383,7 @@ public class Queries {
 			"    INNER JOIN EstadoPrestamo AS ep ON ep.Id = p.Id_estado " + 
 			"WHERE ep.Id = 1 AND c.Id = ?;";
 	
-	public String getPrestamosPendientesBuscar = "" +
+	private String getPrestamosPendientesBuscar = "" +
 			"SELECT p.Id AS Id, " + 
 			"    c.Id AS IdCuenta, " + 
 			"    c.Nro_cuenta AS numeroCuenta, " + 
@@ -402,17 +408,17 @@ public class Queries {
 			"        OR p.Cantidad_cuotas LIKE ? " + 
 			"    );";
 	
-	public String rechazarPrestamo = ""+
+	private String rechazarPrestamo = ""+
 			"UPDATE Prestamos " + 
 			"SET Id_estado = 2 " + 
 			"WHERE Id = ?;";
 	
-	public String aceptarPrestamo = "" +
+	private String aceptarPrestamo = "" +
 			"UPDATE Prestamos " + 
 			"SET Id_estado = 1 " + 
 			"WHERE Id = ?;";
 	
-	public String insertarPrestamo = "" +
+	private String insertarPrestamo = "" +
 			"INSERT INTO Prestamos ( " + 
 			"        Id_cuenta, " + 
 			"        Id_estado, " + 
@@ -421,16 +427,16 @@ public class Queries {
 			"        Cantidad_cuotas " + 
 			"    ) " + 
 			"VALUES(?, 3, ?, ?, ?);";
-	public String informe = "" +
+	private String informe = "" +
 			"SELECT COUNT(*) AS CantidadPrestamos, " + 
 			"    SUM(p.Monto_solicitado) AS ImporteTotal, " + 
 			"    SUM(p.Monto_cuota * p.Cantidad_cuotas) - SUM(p.Monto_solicitado) AS Intereses " + 
 			"FROM Prestamos AS p " + 
 			"WHERE MONTH(p.Fecha_pedido) = ?;";
 	
-	public String getTipo = "SELECT Id, Descripcion, Eliminado FROM ";
+	private String getTipo = "SELECT Id, Descripcion, Eliminado FROM ";
 	
-	public String loginUsuario = "" +
+	private String loginUsuario = "" +
 			"SELECT Id, " + 
 			"    Id_rol, " + 
 			"    Nombre_usuario, " + 
@@ -442,38 +448,38 @@ public class Queries {
 			"    AND Pass = ? " + 
 			"    AND Eliminado = 0;";
 			
-	public String insertarUsuario = "" +
+	private String insertarUsuario = "" +
 			"INSERT INTO Usuarios (Id_rol, Nombre_usuario, Email, Pass) " + 
 			"VALUES(?, ?, ?, ?);";
 	
-	public String buscarIdUsuario = "" +
+	private String buscarIdUsuario = "" +
 			"SELECT Id " + 
 			"FROM Usuarios " + 
 			"WHERE Nombre_usuario = ?;";
 	
-	public String bajaUsuario = "" +
+	private String bajaUsuario = "" +
 			"UPDATE Usuarios " + 
 			"SET Eliminado = 1 " + 
 			"WHERE Id = ?;";
 	
-	public String altaUsuario = "" +
+	private String altaUsuario = "" +
 			"UPDATE Usuarios " + 
 			"SET Eliminado = 0 " + 
 			"WHERE Id = ?;";
 	
-	public String cambioPassUsuario = "" +
+	private String cambioPassUsuario = "" +
 			"UPDATE Usuarios " + 
 			"SET Pass = ? " + 
 			"WHERE Id = ?;";
 	
-	public String editarUsuario = "" +
+	private String editarUsuario = "" +
 			"UPDATE Usuarios " + 
 			"SET Email = ? " + 
 			"WHERE Id = ?;";
 	
-	public String altaTransferencia = "INSERT INTO Transferencias (Id_movimiento, id_cuenta_destino) VALUES (?, ?);";
+	private String altaTransferencia = "INSERT INTO Transferencias (Id_movimiento, id_cuenta_destino) VALUES (?, ?);";
 	
-	public String getTransferencias = "SELECT " + 
+	private String getTransferencias = "SELECT " + 
 			"M.Id AS IDMovimiento, " + 
 			"M.Id_cuenta AS CuentaOrigen, " + 
 			"TM.Id AS IDMovimiento, " + 
@@ -490,7 +496,7 @@ public class Queries {
 			"WHERE M.Id_cuenta = ? " + 
 			"ORDER BY M.Fecha_movimiento DESC;";
 	
-	public String getTransferenciasFecha = "SELECT " + 
+	private String getTransferenciasFecha = "SELECT " + 
 			"M.Id AS IDMovimiento, " + 
 			"M.Id_cuenta AS CuentaOrigen, " + 
 			"TM.Id AS IDMovimiento, " + 
@@ -510,7 +516,7 @@ public class Queries {
 			"AND DAY(M.Fecha_movimiento) = DAY(?) " + 
 			"ORDER BY M.Fecha_movimiento DESC;";
 	
-	public String getTransferenciasFechas = "SELECT " + 
+	private String getTransferenciasFechas = "SELECT " + 
 			"M.Id AS IDMovimiento, " + 
 			"M.Id_cuenta AS CuentaOrigen, " + 
 			"TM.Id AS IDMovimiento, " + 
@@ -535,6 +541,349 @@ public class Queries {
 	
 	public Queries() {}
 	
+	/**
+	 * @return the queryBuscarId
+	 */
+	public String getQueryBuscarId() {
+		return this.queryBuscarId;
+	}
+
+	/**
+	 * @return the buscarIdCliente
+	 */
+	public String getBuscarIdCliente() {
+		return this.buscarIdCliente;
+	}
+
+	/**
+	 * @return the altaCuenta
+	 */
+	public String getAltaCuenta() {
+		return this.altaCuenta;
+	}
+
+	/**
+	 * @return the bajaCuenta
+	 */
+	public String getBajaCuenta() {
+		return this.bajaCuenta;
+	}
+
+	/**
+	 * @return the crearCuenta
+	 */
+	public String getCrearCuenta() {
+		return this.crearCuenta;
+	}
+
+	/**
+	 * @return the cuentaPorCbu
+	 */
+	public String getCuentaPorCbu() {
+		return this.cuentaPorCbu;
+	}
+
+	/**
+	 * @return the editarCuenta
+	 */
+	public String getEditarCuenta() {
+		return this.editarCuenta;
+	}
+
+	/**
+	 * @return the getCuentasBuscar
+	 */
+	public String getGetCuentasBuscar() {
+		return this.getCuentasBuscar;
+	}
+
+	/**
+	 * @return the getBuscarCuenta
+	 */
+	public String getGetBuscarCuenta() {
+		return this.getBuscarCuenta;
+	}
+
+	/**
+	 * @return the getCuentasClientes
+	 */
+	public String getGetCuentasClientes() {
+		return this.getCuentasClientes;
+	}
+
+	/**
+	 * @return the getCuentas
+	 */
+	public String getGetCuentas() {
+		return this.getCuentas;
+	}
+
+	/**
+	 * @return the idPorIdCliente
+	 */
+	public String getIdPorIdCliente() {
+		return this.idPorIdCliente;
+	}
+
+	/**
+	 * @return the restarSaldo
+	 */
+	public String getRestarSaldo() {
+		return this.restarSaldo;
+	}
+
+	/**
+	 * @return the sumarSaldo
+	 */
+	public String getSumarSaldo() {
+		return this.sumarSaldo;
+	}
+
+	/**
+	 * @return the ultimoId
+	 */
+	public String getUltimoId() {
+		return this.ultimoId;
+	}
+
+	/**
+	 * @return the altaCuentaMovimiento
+	 */
+	public String getAltaCuentaMovimiento() {
+		return this.altaCuentaMovimiento;
+	}
+
+	/**
+	 * @return the getMovimientos
+	 */
+	public String getGetMovimientos() {
+		return this.getMovimientos;
+	}
+
+	/**
+	 * @return the getMovimientosBuscar
+	 */
+	public String getGetMovimientosBuscar() {
+		return this.getMovimientosBuscar;
+	}
+
+	/**
+	 * @return the ultimoIdMovimientos
+	 */
+	public String getUltimoIdMovimientos() {
+		return this.ultimoIdMovimientos;
+	}
+
+	/**
+	 * @return the getImporteTotal
+	 */
+	public String getGetImporteTotal() {
+		return this.getImporteTotal;
+	}
+
+	/**
+	 * @return the getCuotasPrestamo
+	 */
+	public String getGetCuotasPrestamo() {
+		return this.getCuotasPrestamo;
+	}
+
+	/**
+	 * @return the setCuotaPrestamo
+	 */
+	public String getSetCuotaPrestamo() {
+		return this.setCuotaPrestamo;
+	}
+
+	/**
+	 * @return the getClientes
+	 */
+	public String getGetClientes() {
+		return this.getClientes;
+	}
+
+	/**
+	 * @return the getCliente
+	 */
+	public String getGetCliente() {
+		return this.getCliente;
+	}
+
+	/**
+	 * @return the getClientesPorTermino
+	 */
+	public String getGetClientesPorTermino() {
+		return this.getClientesPorTermino;
+	}
+
+	/**
+	 * @return the crearCliente
+	 */
+	public String getCrearCliente() {
+		return this.crearCliente;
+	}
+
+	/**
+	 * @return the bajaCliente
+	 */
+	public String getBajaCliente() {
+		return this.bajaCliente;
+	}
+
+	/**
+	 * @return the altaCliente
+	 */
+	public String getAltaCliente() {
+		return this.altaCliente;
+	}
+
+	/**
+	 * @return the editarCliente
+	 */
+	public String getEditarCliente() {
+		return this.editarCliente;
+	}
+
+	/**
+	 * @return the getPrestamos
+	 */
+	public String getGetPrestamos() {
+		return this.getPrestamos;
+	}
+
+	/**
+	 * @return the getPrestamosPendientes
+	 */
+	public String getGetPrestamosPendientes() {
+		return this.getPrestamosPendientes;
+	}
+
+	/**
+	 * @return the getPrestamosAprobados
+	 */
+	public String getGetPrestamosAprobados() {
+		return this.getPrestamosAprobados;
+	}
+
+	/**
+	 * @return the getPrestamosPendientesBuscar
+	 */
+	public String getGetPrestamosPendientesBuscar() {
+		return this.getPrestamosPendientesBuscar;
+	}
+
+	/**
+	 * @return the rechazarPrestamo
+	 */
+	public String getRechazarPrestamo() {
+		return this.rechazarPrestamo;
+	}
+
+	/**
+	 * @return the aceptarPrestamo
+	 */
+	public String getAceptarPrestamo() {
+		return this.aceptarPrestamo;
+	}
+
+	/**
+	 * @return the insertarPrestamo
+	 */
+	public String getInsertarPrestamo() {
+		return this.insertarPrestamo;
+	}
+
+	/**
+	 * @return the informe
+	 */
+	public String getInforme() {
+		return this.informe;
+	}
+
+	/**
+	 * @return the getTipo
+	 */
+	public String getGetTipo() {
+		return this.getTipo;
+	}
+
+	/**
+	 * @return the loginUsuario
+	 */
+	public String getLoginUsuario() {
+		return this.loginUsuario;
+	}
+
+	/**
+	 * @return the insertarUsuario
+	 */
+	public String getInsertarUsuario() {
+		return this.insertarUsuario;
+	}
+
+	/**
+	 * @return the buscarIdUsuario
+	 */
+	public String getBuscarIdUsuario() {
+		return this.buscarIdUsuario;
+	}
+
+	/**
+	 * @return the bajaUsuario
+	 */
+	public String getBajaUsuario() {
+		return this.bajaUsuario;
+	}
+
+	/**
+	 * @return the altaUsuario
+	 */
+	public String getAltaUsuario() {
+		return this.altaUsuario;
+	}
+
+	/**
+	 * @return the cambioPassUsuario
+	 */
+	public String getCambioPassUsuario() {
+		return this.cambioPassUsuario;
+	}
+
+	/**
+	 * @return the editarUsuario
+	 */
+	public String getEditarUsuario() {
+		return this.editarUsuario;
+	}
+
+	/**
+	 * @return the altaTransferencia
+	 */
+	public String getAltaTransferencia() {
+		return this.altaTransferencia;
+	}
+
+	/**
+	 * @return the getTransferencias
+	 */
+	public String getGetTransferencias() {
+		return this.getTransferencias;
+	}
+
+	/**
+	 * @return the getTransferenciasFecha
+	 */
+	public String getGetTransferenciasFecha() {
+		return this.getTransferenciasFecha;
+	}
+
+	/**
+	 * @return the getTransferenciasFechas
+	 */
+	public String getGetTransferenciasFechas() {
+		return this.getTransferenciasFechas;
+	}
+
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 

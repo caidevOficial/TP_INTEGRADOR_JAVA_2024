@@ -15,7 +15,7 @@ import exceptions.TriggerCreacionExcedida;
 import queries.Queries;
 
 public class ClienteDaoImpl implements IClienteDao {
-	Queries queryManager;
+	private Queries queryManager;
 	private String buscarId;
 	private String buscarIdUsuario;
 	private String getClientes;
@@ -31,15 +31,15 @@ public class ClienteDaoImpl implements IClienteDao {
 	 */
 	public ClienteDaoImpl() {
 		this.queryManager = new Queries();
-		this.buscarId = this.queryManager.queryBuscarId;
-		this.buscarIdUsuario = this.queryManager.buscarIdCliente;
-		this.getClientes = this.queryManager.getClientes;
-		this.getCliente = this.queryManager.getCliente;
-		this.getClientesPorTermino = this.queryManager.getClientesPorTermino;
-		this.crearCliente = this.queryManager.crearCliente;
-		this.bajaCliente = this.queryManager.bajaCliente;
-		this.altaCliente = this.queryManager.altaCliente;
-		this.editarCliente = this.queryManager.editarCliente;
+		this.buscarId = this.queryManager.getQueryBuscarId();
+		this.buscarIdUsuario = this.queryManager.getBuscarIdCliente();
+		this.getClientes = this.queryManager.getGetClientes();
+		this.getCliente = this.queryManager.getGetCliente();
+		this.getClientesPorTermino = this.queryManager.getGetClientesPorTermino();
+		this.crearCliente = this.queryManager.getCrearCliente();
+		this.bajaCliente = this.queryManager.getBajaCliente();
+		this.altaCliente = this.queryManager.getAltaCliente();
+		this.editarCliente = this.queryManager.getEditarCliente();
 	}
 
 	/**

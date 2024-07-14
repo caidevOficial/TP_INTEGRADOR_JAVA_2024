@@ -13,7 +13,7 @@ import entidades.Tipo;
 import queries.Queries;
 
 public class PrestamoDaoImpl implements IPrestamoDao {
-	Queries queryManager;
+	private Queries queryManager;
 	private String getPrestamos;
 	private String getPrestamosPendientes;
 	private String getPrestamosAprobados;
@@ -25,14 +25,14 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 
 	public PrestamoDaoImpl() {
 		this.queryManager = new Queries();
-		this.getPrestamos = this.queryManager.getPrestamos;
-		this.getPrestamosPendientes = this.queryManager.getPrestamosPendientes;
-		this.getPrestamosAprobados = this.queryManager.getPrestamosAprobados;
-		this.getPrestamosPendientesBuscar = this.queryManager.getPrestamosPendientesBuscar;
-		this.rechazar = this.queryManager.rechazarPrestamo;
-		this.aceptar = this.queryManager.aceptarPrestamo;
-		this.insertarPrestamo = this.queryManager.insertarPrestamo;
-		this.informe = this.queryManager.informe;
+		this.getPrestamos = this.queryManager.getGetPrestamos();
+		this.getPrestamosPendientes = this.queryManager.getGetPrestamosPendientes();
+		this.getPrestamosAprobados = this.queryManager.getGetPrestamosAprobados();
+		this.getPrestamosPendientesBuscar = this.queryManager.getGetPrestamosPendientesBuscar();
+		this.rechazar = this.queryManager.getRechazarPrestamo();
+		this.aceptar = this.queryManager.getAceptarPrestamo();
+		this.insertarPrestamo = this.queryManager.getInsertarPrestamo();
+		this.informe = this.queryManager.getInforme();
 	}
 	
 	@Override
@@ -237,7 +237,7 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 		Connection connection = Conexion.getConexion().getSQLConexion();
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(this.queryManager.getImporteTotal);
+			PreparedStatement pStatement =  connection.prepareStatement(this.queryManager.getGetImporteTotal());
 			pStatement.setInt(1, cliente.getId());
 			ResultSet rSet = pStatement.executeQuery();
 			while(rSet.next()) {

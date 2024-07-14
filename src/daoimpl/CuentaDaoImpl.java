@@ -18,7 +18,7 @@ import queries.Queries;
 
 public class CuentaDaoImpl implements ICuentaDao {
 	
-	Queries queryManager;
+	private Queries queryManager;
 	
 	private String getCuentas;
 	private String getBuscarCuenta;
@@ -35,19 +35,20 @@ public class CuentaDaoImpl implements ICuentaDao {
 	private String editarCuenta;
 	
 	public CuentaDaoImpl() {
-		this.altaCuenta = this.queryManager.altaCuenta;
-		this.bajaCuenta = this.queryManager.bajaCuenta;
-		this.crearCuenta = this.queryManager.crearCuenta;
-		this.editarCuenta = this.queryManager.editarCuenta;
-		this.getCuentas = this.queryManager.getCuentas;
-		this.getBuscarCuenta = this.queryManager.getBuscarCuenta;
-		this.getCuentasBuscar = this.queryManager.getCuentasBuscar;
-		this.getCuentasCliente = this.queryManager.getCuentasClientes;
-		this.actualizarSaldoSumar = this.queryManager.sumarSaldo;
-		this.actualizarSaldoRestar = this.queryManager.restarSaldo;
-		this.ultimoId = this.queryManager.ultimoId;
-		this.cuentaPorCBU = this.queryManager.cuentaPorCbu;
-		this.idPorIdCliente = this.queryManager.idPorIdCliente;
+		this.queryManager = new Queries();
+		this.altaCuenta = this.queryManager.getAltaCuenta();
+		this.bajaCuenta = this.queryManager.getBajaCuenta();
+		this.crearCuenta = this.queryManager.getCrearCuenta();
+		this.editarCuenta = this.queryManager.getEditarCuenta();
+		this.getCuentas = this.queryManager.getGetCuentas();
+		this.getBuscarCuenta = this.queryManager.getGetBuscarCuenta();
+		this.getCuentasBuscar = this.queryManager.getGetCuentasBuscar();
+		this.getCuentasCliente = this.queryManager.getGetCuentasClientes();
+		this.actualizarSaldoSumar = this.queryManager.getSumarSaldo();
+		this.actualizarSaldoRestar = this.queryManager.getRestarSaldo();
+		this.ultimoId = this.queryManager.getUltimoId();
+		this.cuentaPorCBU = this.queryManager.getCuentaPorCbu();
+		this.idPorIdCliente = this.queryManager.getIdPorIdCliente();
 	}
 
 	public ArrayList<Cuenta> obtenerCuentas() {

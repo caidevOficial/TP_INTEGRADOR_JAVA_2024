@@ -15,18 +15,18 @@ import queries.Queries;
 
 public class TransferenciaDaoImpl implements ITransferenciaDao{
 
-	Queries queryManager;
-	
+	private Queries queryManager;
 	private String altaTransferencia;
 	private String getTransferencias;
 	private String getTransferenciasFecha;
 	private String getTransferenciasFechas;
 	
 	public TransferenciaDaoImpl() {
-		this.altaTransferencia = this.queryManager.altaTransferencia;
-		this.getTransferencias = this.queryManager.getTransferencias;
-		this.getTransferenciasFecha = this.queryManager.getTransferenciasFecha;
-		this.getTransferenciasFechas = this.queryManager.getTransferenciasFechas;
+		this.queryManager = new Queries();
+		this.altaTransferencia = this.queryManager.getAltaTransferencia();
+		this.getTransferencias = this.queryManager.getGetTransferencias();
+		this.getTransferenciasFecha = this.queryManager.getGetTransferenciasFecha();
+		this.getTransferenciasFechas = this.queryManager.getGetTransferenciasFechas();
 	}
 	
 	@Override

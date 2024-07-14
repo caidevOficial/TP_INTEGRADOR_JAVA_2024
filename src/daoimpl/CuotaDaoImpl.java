@@ -13,14 +13,14 @@ import queries.Queries;
 
 public class CuotaDaoImpl implements ICuotaDao {
 	
-	Queries queryManager;
-	
+	private Queries queryManager;
 	private String getCuotasPrestamo; 
 	private String setCuotasPrestamo;
 			
 	public CuotaDaoImpl() {
-		this.getCuotasPrestamo = this.queryManager.getCuotasPrestamo;
-		this.setCuotasPrestamo = this.queryManager.setCuotaPrestamo;
+		this.queryManager = new Queries();
+		this.getCuotasPrestamo = this.queryManager.getGetCuotasPrestamo();
+		this.setCuotasPrestamo = this.queryManager.getSetCuotaPrestamo();
 	}
 
 	@Override

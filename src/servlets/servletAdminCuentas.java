@@ -91,10 +91,7 @@ public class servletAdminCuentas extends HttpServlet {
 	
 	protected void cargarCuentas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CuentaNegocioImpl cuentaNegocio = new CuentaNegocioImpl();
-		//TERMINAR
-		
 		request.getSession().setAttribute("cuentas", cuentaNegocio.obtenerCuentas());
-		
 		RequestDispatcher rd = request.getRequestDispatcher("Cuentas.jsp");
 		rd.forward(request, response);
 	}

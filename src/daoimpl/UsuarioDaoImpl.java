@@ -12,9 +12,8 @@ import exceptions.IngresoLargo;
 import queries.Queries;
 
 public class UsuarioDaoImpl implements IUsuarioDao {
-	Queries queryManager;
+	private Queries queryManager;
 	private String login;
-	
 	private String insertar;
 	private String buscarId;
 	private String bajaUsuario;
@@ -24,13 +23,13 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 	
 	public UsuarioDaoImpl() {
 		this.queryManager = new Queries();
-		this.login = this.queryManager.loginUsuario;
-		this.insertar = this.queryManager.insertarUsuario;
-		this.buscarId = this.queryManager.buscarIdUsuario;
-		this.bajaUsuario = this.queryManager.bajaUsuario;
-		this.altaUsuario = this.queryManager.altaUsuario;
-		this.cambioPassUsuario = this.queryManager.cambioPassUsuario;
-		this.editarUsuario = this.queryManager.editarUsuario;
+		this.login = this.queryManager.getLoginUsuario();
+		this.insertar = this.queryManager.getInsertarUsuario();
+		this.buscarId = this.queryManager.getBuscarIdUsuario();
+		this.bajaUsuario = this.queryManager.getBajaUsuario();
+		this.altaUsuario = this.queryManager.getAltaUsuario();
+		this.cambioPassUsuario = this.queryManager.getCambioPassUsuario();
+		this.editarUsuario = this.queryManager.getEditarUsuario();
 	}
 		
 	/**

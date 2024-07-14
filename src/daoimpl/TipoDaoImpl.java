@@ -11,12 +11,12 @@ import dao.ITipoDao;
 import entidades.Tipo;
 
 public class TipoDaoImpl implements ITipoDao {
+	private Queries queryManager;
 	private String getTipo;
-	Queries queryManager;
 
 	public TipoDaoImpl() {
 		this.queryManager = new Queries();
-		this.getTipo = this.queryManager.getTipo;
+		this.getTipo = this.queryManager.getGetTipo();
 	}
 	
 	public ArrayList<Tipo> getTipos(String tipoBuscar) {

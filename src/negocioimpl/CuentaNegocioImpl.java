@@ -13,7 +13,11 @@ import exceptions.TriggerCreacionExcedida;
 import negocio.ICuentaNegocio;
 
 public class CuentaNegocioImpl implements ICuentaNegocio {
-	CuentaDaoImpl cuentasNegocio = new CuentaDaoImpl();
+	private CuentaDaoImpl cuentasNegocio;
+	
+	public CuentaNegocioImpl() {
+		this.cuentasNegocio = new CuentaDaoImpl();
+	}
 	
 	public ArrayList<Cuenta> obtenerCuentas() {
 		return cuentasNegocio.obtenerCuentas();

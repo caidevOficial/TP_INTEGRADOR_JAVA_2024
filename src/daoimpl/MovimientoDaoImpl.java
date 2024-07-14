@@ -14,8 +14,7 @@ import queries.Queries;
 
 public class MovimientoDaoImpl implements IMovimientoDao {
 	
-	Queries queryManager;
-	
+	private Queries queryManager;
 	private String altaCuentaMovimientos;
 	private String getMovimientos;
 	private String getMovimientosBuscar; 
@@ -23,11 +22,11 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 	private String getUltimoIdMovimiento;
 	
 	public MovimientoDaoImpl() {
-		this.altaCuentaMovimientos = this.queryManager.altaCuentaMovimiento;
-		this.getMovimientos = this.queryManager.getMovimientos;
-		this.getMovimientosBuscar = this.queryManager.getMovimientosBuscar;
-		this.getImporteTotal = this.queryManager.getImporteTotal;
-		this.getUltimoIdMovimiento = this.queryManager.ultimoIdMovimientos;
+		this.altaCuentaMovimientos = this.queryManager.getAltaCuentaMovimiento();
+		this.getMovimientos = this.queryManager.getGetMovimientos();
+		this.getMovimientosBuscar = this.queryManager.getGetMovimientosBuscar();
+		this.getImporteTotal = this.queryManager.getGetImporteTotal();
+		this.getUltimoIdMovimiento = this.queryManager.getUltimoIdMovimientos();
 	}
 
 	@Override
