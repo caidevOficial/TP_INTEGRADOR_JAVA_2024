@@ -14,7 +14,7 @@
 <title>Pagar Prestamo</title>
 </head>
 <body>
-	<jsp:include page="MenuUsuario.html"></jsp:include>
+	<jsp:include page="MenuUsuario.jsp"></jsp:include>
 
 	<%
 		if (request.getSession().getAttribute("usuario") != null) {
@@ -34,8 +34,8 @@
 		Prestamo prestamoPagar = request.getSession().getAttribute("prestamo") != null
 		? (Prestamo)request.getSession().getAttribute("prestamo")
 		: null;
-		ArrayList<Cuota> coutas = request.getSession().getAttribute("coutas") != null
-		? (ArrayList<Cuota>) request.getSession().getAttribute("coutas")
+		ArrayList<Cuota> cuotas = request.getSession().getAttribute("cuotas") != null
+		? (ArrayList<Cuota>) request.getSession().getAttribute("cuotas")
 		: null;
 		NumberFormat nf_in = NumberFormat.getNumberInstance(Locale.ITALIAN);
 	%>
@@ -65,7 +65,7 @@
 		</div>
 		</form>
 		<%
-			if(coutas != null) if(!coutas.isEmpty()) {
+			if(cuotas != null) if(!cuotas.isEmpty()) {
 		%>
 		<form action="servletCliente" method="post" onsubmit="return validation();">
 		<div class="input-group input-group-sm mb-3">
@@ -73,9 +73,9 @@
 				a Pagar</span> <select class="form-select" name="ddlCoutas"
 				aria-label="Default select example">
 				<%
-					if (coutas != null) for (Cuota couta : coutas) {
+					if (cuotas != null) for (Cuota cuota : cuotas) {
 				%>
-				<option value="<%=couta.getId()%>">Cuota <%=couta.getNumeroCuota()%> - $<%=nf_in.format(prestamoPagar.getMontoCuota())%></option>
+				<option value="<%=cuota.getId()%>">Cuota <%=cuota.getNumeroCuota()%> - $<%=nf_in.format(prestamoPagar.getMontoCuota())%></option>
 				<% } %>
 			</select>
 		</div>
@@ -87,8 +87,8 @@
 		} else { %>
 		<p>No tenes prestamos aprobados</p>
 		<% } %>
-		<%if(request.getAttribute("coutaPaga") != null){ %>
-						<span style="color: green;"><%= Boolean.parseBoolean(request.getAttribute("coutaPaga").toString()) ? "El pago de la couta se realizo correctamente" : "" %></span>
+		<%if(request.getAttribute("cuotaPaga") != null){ %>
+						<span style="color: green;"><%= Boolean.parseBoolean(request.getAttribute("cuotaPaga").toString()) ? "El pago de la couta se realizo correctamente" : "" %></span>
 					<% } %>
 			<%if (request.getAttribute("errorPago") != null){	%>
 						<span style="color: red;"><%= request.getAttribute("errorPago").toString()%></span>

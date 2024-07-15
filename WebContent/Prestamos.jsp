@@ -13,7 +13,7 @@
 <title>Prestamos</title>
 </head>
 <body>
-    <jsp:include page="MenuAdministrador.html"></jsp:include>
+    <jsp:include page="MenuAdministrador.jsp"></jsp:include>
     
     <%
     if(request.getSession().getAttribute("usuario") != null){

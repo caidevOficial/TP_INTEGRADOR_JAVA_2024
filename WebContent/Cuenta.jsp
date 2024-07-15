@@ -14,7 +14,7 @@
 <title>Mi Cuenta</title>
 </head>
 <body>
-	<jsp:include page="MenuUsuario.html"></jsp:include>
+	<jsp:include page="MenuUsuario.jsp"></jsp:include>
 	<%
 	if (request.getSession().getAttribute("usuario") != null) {
 		if (((Usuario) request.getSession().getAttribute("usuario")).getTipoRol().getId() != 2) {

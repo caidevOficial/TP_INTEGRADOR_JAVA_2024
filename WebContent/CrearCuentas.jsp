@@ -11,7 +11,7 @@
 <title>Register</title>
 </head>
 <body>
-	<jsp:include page="MenuAdministrador.html"></jsp:include>
+	<jsp:include page="MenuAdministrador.jsp"></jsp:include>
 	<%
 	if(request.getSession().getAttribute("usuario") != null){
 		if(((Usuario)request.getSession().getAttribute("usuario")).getTipoRol().getId() != 1){

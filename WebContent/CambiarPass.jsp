@@ -18,7 +18,7 @@ if(request.getSession().getAttribute("usuario") != null){
 	response.sendRedirect("Inicio.jsp");
 }
 %>
-<jsp:include page="MenuAdministrador.html"></jsp:include>
+<jsp:include page="MenuAdministrador.jsp"></jsp:include>
 			<%
 			if(request.getParameter("txtIdUsuario") != null){
 				request.getSession().setAttribute("idUsuario", Integer.parseInt(request.getParameter("txtIdUsuario")));

@@ -13,9 +13,9 @@
 	<% Usuario usuario = (Usuario)request.getSession().getAttribute("usuario"); %>
 	<% if(usuario != null) { 
 			if(usuario.getTipoRol().getId() == 1){ %>
-				<jsp:include page="MenuAdministrador.html"></jsp:include>
+				<jsp:include page="MenuAdministrador.jsp"></jsp:include>
 			<% } else { %>
-				<jsp:include page="MenuUsuario.html"></jsp:include>
+				<jsp:include page="MenuUsuario.jsp"></jsp:include>
 			<% } %>
 	<% } else { %>
 		<jsp:include page="MenuDefault.html"></jsp:include>

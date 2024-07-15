@@ -11,7 +11,7 @@
 <title>Prestamos</title>
 </head>
 <body>
-	<jsp:include page="MenuUsuario.html"></jsp:include>
+	<jsp:include page="MenuUsuario.jsp"></jsp:include>
 
 	<%
 	if (request.getSession().getAttribute("usuario") != null) {
@@ -43,7 +43,7 @@
 			<div class="input-group input-group-sm mb-3">
 			<span class="input-group-text" id="inputGroup-sizing-sm">Cuotas</span>
 			<select class="form-select" aria-label="Default select example"
-					name="ddlCoutas">
+					name="ddlCuotas">
 					<option value="3">3</option>
 					<option value="6">6</option>
 					<option value="12">12</option>

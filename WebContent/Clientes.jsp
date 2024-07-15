@@ -27,7 +27,7 @@
 			? (ArrayList<Cliente>) request.getSession().getAttribute("clientes")
 			: null;	
 	%>
-	<jsp:include page="MenuAdministrador.html"></jsp:include>
+	<jsp:include page="MenuAdministrador.jsp"></jsp:include>
 
 	<div class="container-fluid px-5">
 		<div class="row">

@@ -12,7 +12,7 @@
 <title>Transferir</title>
 </head>
 <body>
-	<jsp:include page="MenuUsuario.html"></jsp:include>
+	<jsp:include page="MenuUsuario.jsp"></jsp:include>
 
 	<%
 	if (request.getSession().getAttribute("usuario") != null) {
@@ -88,7 +88,7 @@
 			<div>
 				<button class="btn btn-primary" type="submit" name="btnTransferir">Transferir</button>
 				<%if (request.getAttribute("insertado") != null) {%>
-				<span style="color: green;"><%=(Boolean) request.getAttribute("insertado") ? "Se realizo correctamnete la transferencia" : ""%></span>
+				<span style="color: green;"><%=(Boolean) request.getAttribute("insertado") ? "Se realizo correctamente la transferencia" : ""%></span>
 				<%
 				}
 				%>
