@@ -1,15 +1,7 @@
 <table>
     <tr>
         <td align='center'>
-            <img alt="Logo UTN Large" src="https://github.com/caidevOficial/Java_FRGP_Trabajos/blob/main/assets/logo_utn_large.png?raw=true" href="https://www.frgp.utn.edu.ar/" width="390px"/>
-        </td>
-        <td align='center'>
-            <img alt="Logo UTN Small" src="https://github.com/caidevOficial/Java_FRGP_Trabajos/blob/main/assets/logo_utn_small.png?raw=true" href="https://frgp.cvg.utn.edu.ar/" width="120px"/>
-        </td>
-    </tr>
-    <tr>
-        <td align="center" colspan='2'>
-            <img alt="Logo Java" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg?raw=true" height="90px" />
+            <img alt="Logo UTN Large" src="banner.png?raw=true" href="https://www.frgp.utn.edu.ar/" width="750px"/>
         </td>
     </tr>
 </table></br>
