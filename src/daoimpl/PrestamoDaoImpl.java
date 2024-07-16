@@ -237,7 +237,7 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 		Connection connection = Conexion.getConexion().getSQLConexion();
 		ArrayList<Prestamo> prestamos = new ArrayList<Prestamo>();
 		try {
-			PreparedStatement pStatement =  connection.prepareStatement(this.queryManager.getGetImporteTotal());
+			PreparedStatement pStatement =  connection.prepareStatement(this.getPrestamosAprobados);
 			pStatement.setInt(1, cliente.getId());
 			ResultSet rSet = pStatement.executeQuery();
 			while(rSet.next()) {
@@ -283,6 +283,4 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 		}
 		return info;
 	}
-	
-
 }

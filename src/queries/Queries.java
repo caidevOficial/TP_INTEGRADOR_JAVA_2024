@@ -366,21 +366,22 @@ public class Queries {
 			"    INNER JOIN EstadoPrestamo AS ep ON ep.Id = p.Id_estado " + 
 			"WHERE ep.Id = 3;";
 	
-	private String getPrestamosAprobados = "" +
-			"SELECT p.Id AS Id, " + 
-			"    c.Id AS IdCuenta, " + 
-			"    c.Nro_cuenta AS numeroCuenta, " + 
-			"    c.CBU AS CBUCuenta, " + 
-			"    p.Fecha_pedido AS FechaPedido, " + 
-			"    ep.Id AS IdEstado, " + 
-			"    ep.Descripcion AS DescripcionEstado, " + 
-			"    p.Monto_solicitado AS montoSolicitado, " + 
-			"    p.Monto_cuota AS montoCuota, " + 
-			"    p.Cantidad_cuotas AS cantCuotas " + 
+	private String getPrestamosAprobados = "SELECT " + 
+			"p.Id AS Id, " + 
+			"c.Id AS IdCuenta, " + 
+			"c.Nro_cuenta AS numeroCuenta, " + 
+			"c.CBU AS CBUCuenta, " + 
+			"p.Fecha_pedido AS FechaPedido, " + 
+			"ep.Id AS IdEstado, " + 
+			"ep.Descripcion AS DescripcionEstado, " + 
+			"p.Monto_solicitado AS montoSolicitado, " + 
+			"p.Monto_cuota AS montoCuota, " + 
+			"p.Cantidad_cuotas AS cantCuotas " + 
 			"FROM Prestamos AS p " + 
-			"    INNER JOIN Cuentas AS c ON c.Id = p.Id_cuenta " + 
-			"    INNER JOIN EstadoPrestamo AS ep ON ep.Id = p.Id_estado " + 
-			"WHERE ep.Id = 1 AND c.Id = ?;";
+			"INNER JOIN Cuentas AS c ON c.Id = p.Id_cuenta " + 
+			"INNER JOIN Clientes AS cl ON c.Id_cliente = cl.Id " + 
+			"INNER JOIN EstadoPrestamo AS ep ON ep.Id = p.Id_estado " + 
+			"WHERE ep.Id = 1 AND cl.Id = ?;";
 	
 	private String getPrestamosPendientesBuscar = "" +
 			"SELECT p.Id AS Id, " + 
