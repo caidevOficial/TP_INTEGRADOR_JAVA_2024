@@ -35,7 +35,7 @@
 			<p>Direccion: <%= cliente.getDireccion() %></p>
 			<p>Localidad: <%= cliente.getLocalidad().getDescripcion() %></p>
 			<p>Provincia: <%= cliente.getProvincia().getDescripcion() %></p>
-			<p>Nacionalidad: <%= cliente.getLocalidad().getDescripcion() %></p>
+			<p>Nacionalidad: <%= cliente.getNacionalidad().getDescripcion() %></p>
 		<% } %>
 	</div>
 

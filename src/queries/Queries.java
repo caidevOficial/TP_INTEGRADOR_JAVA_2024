@@ -71,8 +71,7 @@ public class Queries {
 			 "INNER JOIN TipoCuenta AS tc ON tc.Id = c.Id_tipo_cuenta " + 
 			 "WHERE c.Id = ? ";
 	
-	private String getCuentasClientes =  "" +
-			"SELECT c.Id AS Id," + 
+	private String getCuentasClientes = "SELECT c.Id AS Id," + 
 			"	cl.Id AS IdCliente," + 
 			"	cl.Nombre AS Nombre," + 
 			"	cl.Apellido AS Apellido," + 
@@ -89,10 +88,8 @@ public class Queries {
 			"INNER JOIN Clientes AS cl ON cl.Id = c.Id_cliente " + 
 			"INNER JOIN TipoCuenta AS tc ON tc.Id = c.Id_tipo_cuenta " + 
 			"WHERE cl.Id = ? " + 
-			"AND c.Eliminado = 0" + 
-			"ORDER BY " + 
-			"cl.Apellido ASC, " + 
-			"cl.Nombre ASC;";
+			"AND c.Eliminado = 0 " + 
+			"ORDER BY cl.Apellido ASC, cl.Nombre ASC;";
 	
 	private String getCuentas =  "" +
 			"SELECT c.Id AS Id, " + 
