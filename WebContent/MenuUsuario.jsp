@@ -12,7 +12,7 @@
 <header>
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
 		<div class="container-fluid">
-			<img src="logo_bank.gif" alt="Descripcion del GIF">
+			<img class="mx-auto" src="logo_bank.gif" alt="Descripcion del GIF">
 		</div>
 	</nav>
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -24,7 +24,7 @@
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
 					<a class="nav-link" href="Inicio.jsp">Inicio</a>
 					<a class="nav-link" href="servletCliente?cargarSelects=1">Cuenta</a> 
@@ -33,7 +33,9 @@
 					<a class="nav-link"	href="servletCliente?cargarSelectsPrestamoPagar=1">Pagar Prestamo</a>
 					<a class="nav-link" href="servletCliente?transferir=1">Transferir</a>
 					<a class="nav-link" href="servletLogin?btnCerrarSesion=1">Cerrar Sesion</a>
-					<label id="nombreUsuario"><%= ((Usuario)request.getSession().getAttribute("usuario")).getNombreUsuario().toUpperCase() %></label>
+				</div>
+				<div class="navbar-nav text-end">
+					<label id="nombreUsuario">Usuario: <b><%= ((Usuario)request.getSession().getAttribute("usuario")).getNombreUsuario().toUpperCase() %></b></label>
 				</div>
 			</div>
 		</div>

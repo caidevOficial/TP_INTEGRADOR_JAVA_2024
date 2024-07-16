@@ -11,8 +11,8 @@
 <body>
 <header>
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
-		<div class="container-fluid">
-			<img src="logo_bank.gif" alt="Descripcion del GIF">
+		<div class="container-fluid justify-content-between">
+			<img class="mx-auto" src="logo_bank.gif" alt="Descripcion del GIF">
 		</div>
 	</nav>
 	<nav class="navbar navbar-expand-lg bg-body-tertiary">
@@ -24,7 +24,7 @@
 				aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
-			<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+			<div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
 					<a class="nav-link" href="servletAdminstrador?cargarClientes=1">Clientes</a> 
 					<a class="nav-link" href="servletAdminstrador?cargarCuentas=1">Cuentas</a> 
@@ -32,7 +32,9 @@
 					<a class="nav-link" href="servletAdminstrador?cargarSelects=1">Crear Cuentas</a>
 					<a class="nav-link" href="servletAdminstrador?cargarInformes=1">Informes</a> 
 					<a class="nav-link" href="servletLogin?btnCerrarSesion=1">Cerrar Sesion</a>
-					<label id="nombreUsuario"><%= ((Usuario)request.getSession().getAttribute("usuario")).getNombreUsuario().toUpperCase() %></label>
+				</div>
+				<div class="navbar-nav text-end">
+					<label id="nombreUsuario">Administrador: <b><%= ((Usuario)request.getSession().getAttribute("usuario")).getNombreUsuario().toUpperCase() %></b></label>
 				</div>
 			</div>
 		</div>
