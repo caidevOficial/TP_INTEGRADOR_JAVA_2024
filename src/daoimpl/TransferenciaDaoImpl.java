@@ -63,7 +63,10 @@ public class TransferenciaDaoImpl implements ITransferenciaDao{
 			}
 			e.getMessage();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 
@@ -99,7 +102,10 @@ public class TransferenciaDaoImpl implements ITransferenciaDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return transferencias;
 	}
 
@@ -140,7 +146,10 @@ public class TransferenciaDaoImpl implements ITransferenciaDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return transferencias;
 	}
 
@@ -184,7 +193,10 @@ public class TransferenciaDaoImpl implements ITransferenciaDao{
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return transferencias;
 	}
 }

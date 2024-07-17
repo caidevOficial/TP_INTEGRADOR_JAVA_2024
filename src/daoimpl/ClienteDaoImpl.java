@@ -62,6 +62,9 @@ public class ClienteDaoImpl implements IClienteDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
 		return id;
 	}
 	
@@ -79,6 +82,10 @@ public class ClienteDaoImpl implements IClienteDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return id;
 	}
 
@@ -141,7 +148,10 @@ public class ClienteDaoImpl implements IClienteDao {
 			}
 			e.getMessage();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 
@@ -198,7 +208,10 @@ public class ClienteDaoImpl implements IClienteDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}		finally {
+			Conexion.getConexion().cerrarConexion();
 		}
+
 		return clientes;
 	}
 
@@ -227,7 +240,10 @@ public class ClienteDaoImpl implements IClienteDao {
 			}
 			e.getMessage();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 
@@ -256,7 +272,10 @@ public class ClienteDaoImpl implements IClienteDao {
 			}
 			e.getMessage();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 
@@ -308,7 +327,10 @@ public class ClienteDaoImpl implements IClienteDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}		finally {
+			Conexion.getConexion().cerrarConexion();
 		}
+
 		return cliente;
 	}
 
@@ -373,7 +395,10 @@ public class ClienteDaoImpl implements IClienteDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}		finally {
+			Conexion.getConexion().cerrarConexion();
 		}
+
 		return clientes;
 	}
 
@@ -412,8 +437,10 @@ public class ClienteDaoImpl implements IClienteDao {
 				e1.printStackTrace();
 			}
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
-	
 }

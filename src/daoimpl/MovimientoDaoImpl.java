@@ -58,7 +58,10 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 			}
 			e.getMessage();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 	
@@ -86,6 +89,10 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return movimientos;
 	}
 
@@ -119,6 +126,10 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return movimientos;
 	}
 
@@ -138,6 +149,10 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return importeTotal;
 	}
 
@@ -157,7 +172,10 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return id;
 	}
 }

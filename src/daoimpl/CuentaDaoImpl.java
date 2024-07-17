@@ -82,6 +82,10 @@ public class CuentaDaoImpl implements ICuentaDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return cuentas;
 	}
 
@@ -135,7 +139,10 @@ public class CuentaDaoImpl implements ICuentaDao {
 			}
 			e.getMessage();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 
@@ -164,7 +171,10 @@ public class CuentaDaoImpl implements ICuentaDao {
 			}
 			e.getMessage();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 
@@ -193,7 +203,10 @@ public class CuentaDaoImpl implements ICuentaDao {
 			}
 			e.getMessage();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 
@@ -212,6 +225,10 @@ public class CuentaDaoImpl implements ICuentaDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return id;
 	}
 
@@ -241,7 +258,10 @@ public class CuentaDaoImpl implements ICuentaDao {
 			}
 			e.getMessage();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 
@@ -275,6 +295,10 @@ public class CuentaDaoImpl implements ICuentaDao {
 			}
 			e.getMessage();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 
@@ -311,6 +335,10 @@ public class CuentaDaoImpl implements ICuentaDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return cuentas;
 	}
 
@@ -357,6 +385,10 @@ public class CuentaDaoImpl implements ICuentaDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return cuentas;
 	}
 
@@ -379,8 +411,12 @@ public class CuentaDaoImpl implements ICuentaDao {
 				cuenta.setSaldo(rSet.getBigDecimal("Saldo"));
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return cuenta;
 	}
 
@@ -396,8 +432,12 @@ public class CuentaDaoImpl implements ICuentaDao {
 				cuenta.setId(rSet.getInt("IdCliente"));
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return cuenta.getId();
 	}
 
@@ -442,6 +482,10 @@ public class CuentaDaoImpl implements ICuentaDao {
 			}
 			e.getMessage();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 
@@ -485,7 +529,10 @@ public class CuentaDaoImpl implements ICuentaDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return cuenta;
 	}
 }

@@ -45,6 +45,10 @@ public class CuotaDaoImpl implements ICuotaDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return cuotas;
 	}
 
@@ -73,7 +77,10 @@ public class CuotaDaoImpl implements ICuotaDao {
 			}
 			e.getMessage();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 }

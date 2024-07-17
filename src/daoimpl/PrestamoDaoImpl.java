@@ -65,6 +65,10 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return prestamos;
 	}
 	
@@ -96,6 +100,10 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return prestamos;
 	}
 
@@ -124,7 +132,10 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 			}
 			e.getMessage();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 
@@ -153,7 +164,10 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 			}
 			e.getMessage();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 
@@ -194,6 +208,10 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return prestamos;
 	}
 
@@ -228,7 +246,10 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 				e1.printStackTrace();
 			}
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 
@@ -262,6 +283,10 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return prestamos;
 	}
 
@@ -281,6 +306,10 @@ public class PrestamoDaoImpl implements IPrestamoDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return info;
 	}
 }

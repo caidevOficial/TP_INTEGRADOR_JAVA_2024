@@ -36,6 +36,10 @@ public class TipoDaoImpl implements ITipoDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return tipos;
 	}
 }

@@ -68,7 +68,10 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			System.out.println("Se rompe acá");
+		}		finally {
+			Conexion.getConexion().cerrarConexion();
 		}
+
 		if(usuario.getId() != 0) {
 			return usuario;
 		} else {
@@ -123,7 +126,10 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 			}
 			return e.getMessage();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 	
@@ -141,6 +147,10 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return id;
 	}
 	@Override
@@ -168,7 +178,10 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 			}
 			e.getMessage();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 	@Override
@@ -196,7 +209,10 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 			}
 			e.getMessage();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 	@Override
@@ -225,7 +241,10 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 			}
 			e.getMessage();
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 	@Override
@@ -254,7 +273,10 @@ public class UsuarioDaoImpl implements IUsuarioDao {
 				e1.printStackTrace();
 			}
 		}
-		
+		finally {
+			Conexion.getConexion().cerrarConexion();
+		}
+
 		return isInsertExitoso;
 	}
 }
