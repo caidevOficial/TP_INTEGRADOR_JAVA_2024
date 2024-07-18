@@ -139,10 +139,10 @@ public class servletAdminCuentas extends HttpServlet {
 		cuenta.setNumeroCuenta(generateNumeroCuenta());
 		cuenta.setCbu(generateCBU());
 		try {
-			int IdCuenta = cuentaNegocio.ultimoId();
-			cuenta.setId(IdCuenta);
 			cuenta.setSaldo(BigDecimal.valueOf(10000));
 			String cuentaInsertada = cuentaNegocio.crearCuenta(cuenta);
+			int IdCuenta = cuentaNegocio.ultimoId() - 1;
+			cuenta.setId(IdCuenta);
 			movimiento.setCuenta(cuenta);
 			movimiento.setConcepto(new Tipo(4));
 			System.out.println(String.format("Saldo a insertar: %f", cuenta.getSaldo()));

@@ -99,7 +99,7 @@ public class servletCliente extends HttpServlet {
 	}
 	
 	protected void transferir(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/servletClientePrestamos?btnTransferir=1");   
+		RequestDispatcher rd = request.getRequestDispatcher("/servletClienteTransferencia?btnTransferir=1");   
         rd.forward(request, response);
 	}
 	
