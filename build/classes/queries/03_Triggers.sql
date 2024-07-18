@@ -59,3 +59,13 @@ BEGIN
 END;
 //
 DELIMITER ;
+
+DELIMITER //
+CREATE TRIGGER incrementar_monto_cuota
+BEFORE INSERT ON `Prestamos`
+FOR EACH ROW
+BEGIN
+    SET NEW.monto_cuota = NEW.monto_cuota * 1.10;
+END;
+//
+DELIMITER ;

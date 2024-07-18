@@ -159,7 +159,7 @@ public class Queries {
 	
 	private String getImporteTotal = "" +
 			"SELECT " +
-			"SUM(m.Monto_movimiento) AS importeTotal " +
+			"SUM(ABS(m.Monto_movimiento)) AS importeTotal " +
 			"FROM Movimientos AS m " +
 			"INNER JOIN TipoMovimiento AS tm " +
 			"	ON tm.Id = m.Id_tipo_movimiento " +
@@ -429,7 +429,8 @@ public class Queries {
 			"    SUM(p.Monto_solicitado) AS ImporteTotal, " + 
 			"    SUM(p.Monto_cuota * p.Cantidad_cuotas) - SUM(p.Monto_solicitado) AS Intereses " + 
 			"FROM Prestamos AS p " + 
-			"WHERE MONTH(p.Fecha_pedido) = ?;";
+			"WHERE MONTH(p.Fecha_pedido) = ? " +
+			"AND p.Id_estado = 1;";
 	
 	private String getTipo = "SELECT Id, Descripcion, Eliminado FROM ";
 	

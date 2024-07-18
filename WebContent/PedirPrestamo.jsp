@@ -54,7 +54,7 @@
 					<option value="42">42</option>
 					<option value="48">48</option>
 					<option value="54">54</option>
-					<option value="54">60</option>
+					<option value="60">60</option>
 				</select>
 			</div>
 			<div class="input-group input-group-sm mb-3">
