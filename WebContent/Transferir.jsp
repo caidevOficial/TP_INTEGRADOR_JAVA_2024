@@ -121,7 +121,7 @@
 				return false;
 			}
 			txtCBUInvalido.innerText = " "
-			if (confirm("Esta seguro que desea realizar la transferencia")) {
+			if (confirm("Esta seguro que desea realizar la transferencia?")) {
 				return true;
 			}
 			return false;

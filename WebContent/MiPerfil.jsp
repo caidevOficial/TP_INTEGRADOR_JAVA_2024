@@ -32,7 +32,7 @@
 			<p>CUIL: <%= cliente.getCuil() %></p>
 			<p>Telefono: <%= cliente.getTelefono() %></p>
 			<p>Genero: <%= cliente.getGenero().getDescripcion() %></p>
-			<p>Direccion: <%= cliente.getDireccion() %></p>
+			<p>Direcci&oacute;n: <%= cliente.getDireccion() %></p>
 			<p>Localidad: <%= cliente.getLocalidad().getDescripcion() %></p>
 			<p>Provincia: <%= cliente.getProvincia().getDescripcion() %></p>
 			<p>Nacionalidad: <%= cliente.getNacionalidad().getDescripcion() %></p>

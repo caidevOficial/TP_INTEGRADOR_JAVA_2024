@@ -54,6 +54,7 @@
 					<option value="42">42</option>
 					<option value="48">48</option>
 					<option value="54">54</option>
+					<option value="54">60</option>
 				</select>
 			</div>
 			<div class="input-group input-group-sm mb-3">
@@ -95,7 +96,7 @@
 			txtNumeroInvalido.style.color = "red";
 			return false;
 		}
-		if(confirm("Estas seguro de pedir un prestamo de " + txtMonto.value)){
+		if(confirm("Estas seguro de pedir un prestamo de " + txtMonto.value + "?")){
 			return true;
 		}
 		return false;

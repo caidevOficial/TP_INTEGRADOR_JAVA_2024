@@ -137,7 +137,7 @@
 						pattern="^(20|2[3-7]|30|3[3-4])(\d{8})(\d)$" title="Ingrese un cuil valido no puede contener las barras separadoras">
 				</div>
 				<div class="input-group input-group-sm mb-3">
-					<span class="input-group-text" id="inputGroup-sizing-sm">Direccion</span>
+					<span class="input-group-text" id="inputGroup-sizing-sm">Direcci&oacute;n</span>
 					<input type="text" class="form-control"
 						aria-label="Sizing example input"
 						aria-describedby="inputGroup-sizing-sm" name="txtDireccion"
@@ -187,7 +187,7 @@
 					</select>
 				</div>
 				<div class="input-group input-group-sm mb-3">
-					<span class="input-group-text" id="inputGroup-sizing-sm">Genero</span>
+					<span class="input-group-text" id="inputGroup-sizing-sm">G&eacute;nero</span>
 					<select class="form-select" aria-label="Default select example"
 						name="ddlGenero" required>
 						<%
@@ -209,7 +209,7 @@
 						placeholder="Ingrese fecha de nacimiento del usuario">
 				</div>
 				<div class="input-group input-group-sm mb-3">
-					<span class="input-group-text" id="inputGroup-sizing-sm">Telefono</span>
+					<span class="input-group-text" id="inputGroup-sizing-sm">Tel&eacute;fono</span>
 					<input type="text" class="form-control"
 						aria-label="Sizing example input"
 						aria-describedby="inputGroup-sizing-sm" required

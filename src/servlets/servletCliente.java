@@ -149,7 +149,7 @@ public class servletCliente extends HttpServlet {
 	}
 	
 	protected void cargarMovimientos(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
-		RequestDispatcher rd = request.getRequestDispatcher("/servletClientePrestamos?btnMostrarMovimientos=1");   
+		RequestDispatcher rd = request.getRequestDispatcher("/servletClienteCuentas?btnMostrarMovimientos=1");   
         rd.forward(request, response);
 	}
 }

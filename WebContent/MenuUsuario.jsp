@@ -31,7 +31,7 @@
 					<a class="nav-link fa-solid fa-hand-holding-dollar" href="servletCliente?cargarSelectsPrestamo=1">  Pedir Prestamo</a>
 					<a class="nav-link fa-solid fa-money-bill-trend-up"	href="servletCliente?cargarSelectsPrestamoPagar=1">  Pagar Prestamo</a>
 					<a class="nav-link fa-solid fa-money-bill-transfer" href="servletCliente?transferir=1">  Transferir</a>
-					<a class="nav-link fa-solid fa-user-xmark" href="servletLogin?btnCerrarSesion=1">  Cerrar Sesion</a>
+					<a class="nav-link fa-solid fa-user-xmark" href="servletLogin?btnCerrarSesion=1">  Cerrar Sesi&Oacute;n</a>
 				</div>
 				<div class="navbar-nav text-end">
 					<label class="fa-solid fa-user" id="nombreUsuario">  Usuario: <b><%= ((Usuario)request.getSession().getAttribute("usuario")).getNombreUsuario().toUpperCase() %></b></label>

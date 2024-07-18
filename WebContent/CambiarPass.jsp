@@ -70,10 +70,12 @@ if(request.getSession().getAttribute("usuario") != null){
 		const pattern = /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{6,8})\S$/;
 		if (!pattern.test(txtContraseña.value)) {
 			invalido.innerText = "Ingresa una contraseña valida tiene que tener un mínimo de 6 caracteres y maximo 8, al menos 1 letra mayúscula, 1 letra minúscula y 1 número sin espacios"
+				invalido.style.color = "red";
 			return false;
 		}
 		if(txtContraseña.value != txtRepetirContraseña.value){
 			invalido.innerText = "Las contraseñas no coinciden";
+			invalido.style.color = "red";
 			return false;
 		}
 		invalido.innerText = " ";

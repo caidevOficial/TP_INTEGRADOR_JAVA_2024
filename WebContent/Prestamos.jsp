@@ -78,13 +78,13 @@
 
 	<script type="text/javascript">
 		function btnConfirmRechazar(servlet, btnRechazar, txtId) {
-			if (confirm("Estas seguro que desea rechazar el prestamo")) {
+			if (confirm("Estas seguro que desea rechazar el prestamo?")) {
 				window.location.href = servlet + "?" + btnRechazar + "&" + txtId;
 			}
 			return false;
 		}
 		function btnConfirmAprobar(servlet, btnAlta, txtId, txtIdCuenta, txtMonto) {
-			if (confirm("Estas seguro que desea aprobar el prestamo")) {
+			if (confirm("Estas seguro que desea aprobar el prestamo?")) {
 				window.location.href = servlet + "?" + btnAlta + "&" + txtId + "&" + txtIdCuenta + "&" + txtMonto;
 			}
 			return false;

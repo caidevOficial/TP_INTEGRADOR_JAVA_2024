@@ -53,11 +53,11 @@
 						<th scope="col">Nombre</th>
 						<th scope="col">Apellido</th>
 						<th scope="col">Telefono</th>
-						<th scope="col">Direccion</th>
+						<th scope="col">Direcci&oacute;n</th>
 						<th scope="col">Localidad</th>
 						<th scope="col">Provincia</th>
 						<th scope="col">Nacionalidad</th>
-						<th scope="col">Genero</th>
+						<th scope="col">G&eacute;nero</th>
 						<th scope="col">Fecha de nacimiento</th>
 						<th scope="col">Eliminado</th>
 						<th scope="col"></th>
@@ -103,25 +103,25 @@
 	</div>
 	<script type="text/javascript">
 	function btnConfirmEliminar(servlet, btn, txtDni, txtIdUsuario) {
-		if (confirm("Estas seguro que desea eliminar el usuario?")) {
+		if (confirm("Esta seguro que desea eliminar el usuario?")) {
 			window.location.href = servlet + "?" + btn + "&" + txtDni + "&" + txtIdUsuario;
 		}
 		return false;
 	}
 	function btnConfirmAlta(servlet, btnAlta, txtDni, txtIdUsuario) {
-		if (confirm("Estas seguro que desea dar de alta el usuario?")) {
+		if (confirm("Esta seguro que desea dar de alta el usuario?")) {
 			window.location.href = servlet + "?" + btnAlta + "&" + txtDni + "&" + txtIdUsuario;
 		}
 		return false;
 	}
 	function btnCambiarContraseña(servlet, btnCambiarPass, txtId) {
-		if (confirm("Estas seguro que desea cambiar la contraseña?")) {
+		if (confirm("Esta seguro que desea cambiar la contraseña?")) {
 			window.location.href = servlet + "?" + btnCambiarPass + "&" + txtId;
 		}
 		return false;
 	}
 	function btnEditar(servlet, btnEditar, txtId) {
-		if (confirm("Estas seguro que desea editar el cliente?")) {
+		if (confirm("Esta seguro que desea editar el cliente?")) {
 			window.location.href = servlet + "?" + btnEditar + "&" + txtId;
 		}
 		return false;

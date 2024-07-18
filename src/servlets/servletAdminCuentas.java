@@ -13,9 +13,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import entidades.Cliente;
 import entidades.Cuenta;
+import entidades.Movimiento;
 import entidades.Tipo;
 import negocioimpl.ClienteNegocioImpl;
 import negocioimpl.CuentaNegocioImpl;
+import negocioimpl.MovimientoNegocioImpl;
 import negocioimpl.TipoNegocioImpl;
 
 /**
@@ -125,8 +127,10 @@ public class servletAdminCuentas extends HttpServlet {
 	protected void crearCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CuentaNegocioImpl cuentaNegocio = new CuentaNegocioImpl();
 		ClienteNegocioImpl clienteNegocio = new ClienteNegocioImpl();
+		MovimientoNegocioImpl movimientoNegocio = new MovimientoNegocioImpl();
 		Cuenta cuenta = new Cuenta();
 		Tipo tipoCuenta = new Tipo();
+		Movimiento movimiento = new Movimiento();
 		tipoCuenta.setId(Integer.parseInt(request.getParameter("ddlTipoCuenta")));
 		cuenta.setTipoCuenta(tipoCuenta);
 		Cliente cliente = new Cliente();
@@ -135,9 +139,17 @@ public class servletAdminCuentas extends HttpServlet {
 		cuenta.setNumeroCuenta(generateNumeroCuenta());
 		cuenta.setCbu(generateCBU());
 		try {
-			request.setAttribute("cuentaInsertada", cuentaNegocio.crearCuenta(cuenta));
 			int IdCuenta = cuentaNegocio.ultimoId();
 			cuenta.setId(IdCuenta);
+			cuenta.setSaldo(BigDecimal.valueOf(10000));
+			String cuentaInsertada = cuentaNegocio.crearCuenta(cuenta);
+			movimiento.setCuenta(cuenta);
+			movimiento.setConcepto(new Tipo(4));
+			System.out.println(String.format("Saldo a insertar: %f", cuenta.getSaldo()));
+			movimiento.setMonto(cuenta.getSaldo());
+			movimiento.setTipoMovimiento(new Tipo(1));
+			boolean movimientoInsertado = movimientoNegocio.movimientoBanco(movimiento);
+			request.setAttribute("cuentaInsertada", cuentaInsertada);
 		} catch (SQLException e) {
 			request.setAttribute("cuentaError", e.getMessage());
 		}

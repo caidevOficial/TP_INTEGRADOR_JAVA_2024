@@ -31,7 +31,7 @@
 					<a class="nav-link fa-solid fa-hand-holding-dollar" href="servletAdminstrador?cargarPrestamos=1">  Prestamos</a>
 					<a class="nav-link fa-solid fa-house-chimney-medical" href="servletAdminstrador?cargarSelects=1">  Crear Cuentas</a>
 					<a class="nav-link fa-solid fa-chart-pie" href="servletAdminstrador?cargarInformes=1">  Informes</a> 
-					<a class="nav-link fa-solid fa-user-xmark" href="servletLogin?btnCerrarSesion=1">  Cerrar Sesion</a>
+					<a class="nav-link fa-solid fa-user-xmark" href="servletLogin?btnCerrarSesion=1">  Cerrar Sesi&Oacute;n</a>
 				</div>
 				<div class="navbar-nav text-end">
 					<label class="fa-solid fa-user-shield" id="nombreUsuario">  Administrador: <b><%= ((Usuario)request.getSession().getAttribute("usuario")).getNombreUsuario().toUpperCase() %></b></label>

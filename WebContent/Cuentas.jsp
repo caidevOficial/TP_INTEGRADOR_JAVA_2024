@@ -63,7 +63,7 @@
 						<th scope="col">Tipo Cuenta</th>
 						<th scope="col">Habilitada</th>
 						<th scope="col"></th>
-						<th scope="col">Acción</th>
+						<th scope="col">Acci&oacute;n</th>
 						<th scope="col"></th>
 					</tr>
 				</thead>
@@ -100,19 +100,19 @@
 
 	<script type="text/javascript">
 		function btnConfirmEliminar(servlet, btnEliminarCuenta, txtId) {
-			if (confirm("Estas seguro que desea eliminar el cliente")) {
+			if (confirm("Esta seguro que desea eliminar el cliente?")) {
 				window.location.href = servlet + "?" + btnEliminarCuenta + "&" + txtId;
 			}
 			return false;
 		}
 		function btnConfirmAlta(servlet, btnAltaCuenta, txtId) {
-			if (confirm("Estas seguro que desea dar de alta el cliente")) {
+			if (confirm("Esta seguro que desea dar de alta el cliente?")) {
 				window.location.href = servlet + "?" + btnAltaCuenta + "&" + txtId;
 			}
 			return false;
 		}
 		function btnEditar(servlet, btnEditar, txtCBU) {
-			if (confirm("Estas seguro que desea editar el cliente")) {
+			if (confirm("Esta seguro que desea editar el cliente?")) {
 				window.location.href = servlet + "?" + btnEditar + "&" + txtCBU;
 			}
 			return false;
