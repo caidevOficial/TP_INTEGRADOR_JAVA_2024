@@ -219,20 +219,3 @@ CREATE TABLE Movimientos (
   ON DELETE RESTRICT
   ON UPDATE RESTRICT
 );
-
-CREATE TABLE Transferencias (
-  Id INT AUTO_INCREMENT,
-  Id_movimiento INT NOT NULL,
-  Id_cuenta_destino INT NOT NULL,
-  PRIMARY KEY (Id),
-  KEY FK_Id_Transferencia_Movimientos (Id_movimiento),
-  KEY FK_Id_Transferencia_Cuentas (Id_cuenta_destino),
-  CONSTRAINT FK_Id_Transferencia_Cuentas
-  FOREIGN KEY (Id_cuenta_destino) REFERENCES Cuentas (Id)
-  ON DELETE RESTRICT
-  ON UPDATE RESTRICT,
-  CONSTRAINT FK_Id_Transferencia_Movimientos
-  FOREIGN KEY (Id_movimiento) REFERENCES Movimientos (Id)
-  ON DELETE RESTRICT
-  ON UPDATE RESTRICT
-);

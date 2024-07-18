@@ -92,7 +92,7 @@ public class servletAdminCuentas extends HttpServlet {
 	protected void cargarCuentas(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CuentaNegocioImpl cuentaNegocio = new CuentaNegocioImpl();
 		request.getSession().setAttribute("cuentas", cuentaNegocio.obtenerCuentas());
-		RequestDispatcher rd = request.getRequestDispatcher("Cuentas.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/Cuentas.jsp");
 		rd.include(request, response);
 	}
 	
@@ -148,7 +148,7 @@ public class servletAdminCuentas extends HttpServlet {
 	protected void cargarCuentasBuscador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		CuentaNegocioImpl cuentaNegocio = new CuentaNegocioImpl();
 		request.getSession().setAttribute("cuentas", cuentaNegocio.obtenerCuentas(request.getParameter("txtBuscarCuenta")));
-		RequestDispatcher rd = request.getRequestDispatcher("Cuentas.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/Cuentas.jsp");
 		rd.forward(request, response);
 	}
 
@@ -166,7 +166,7 @@ public class servletAdminCuentas extends HttpServlet {
 		}
 		
 		request.getSession().setAttribute("cuenta", cuenta);
-		RequestDispatcher rd = request.getRequestDispatcher("EditarCuenta.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/EditarCuenta.jsp");
 		rd.forward(request, response);
 	}
 	

@@ -29,7 +29,7 @@ ArrayList<Tipo> tipoCuenta = (ArrayList<Tipo>) request.getSession().getAttribute
 Cuenta cuenta = request.getSession().getAttribute("cuenta") != null ? (Cuenta)request.getSession().getAttribute("cuenta") : null; 
 
 %>
-	<div class="container w-50 my-5">
+	<div class="container w-50 my-5 bg-dark text-white">
 		<div class="row">
 			<form action="servletAdminstrador" method="post" onsubmit="return validate();">
 				<h1>Editar Cuenta</h1>

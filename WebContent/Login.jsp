@@ -9,7 +9,7 @@
 </head>
 <body>
 	<jsp:include page="MenuDefault.html"></jsp:include>
-
+<div class="bg-dark text-white">
 	<form action="servletLogin" method="post">
 		<div class="container my-5">
 			<div class="row">
@@ -46,7 +46,7 @@
 			</div>
 		</div>
 	</form>
-
+</div>
 	<jsp:include page="LibreriasBody.html"></jsp:include>
 </body>
 </html>

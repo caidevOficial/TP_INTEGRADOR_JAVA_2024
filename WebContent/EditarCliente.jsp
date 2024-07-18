@@ -35,7 +35,7 @@ ArrayList<Tipo> generos = (ArrayList<Tipo>) request.getSession().getAttribute("s
 : null;
 Cliente cliente = request.getSession().getAttribute("cliente") != null ? (Cliente)request.getSession().getAttribute("cliente") : null;
 %>
-	<div class="container w-50 my-5">
+	<div class="container w-50 my-5 bg-dark text-white">
 		<div class="row">
 			<form action="servletAdminstrador" method="post" onsubmit="return validate();">
 				<h1>Editar Cliente</h1>

@@ -21,8 +21,10 @@
 		<jsp:include page="MenuDefault.html"></jsp:include>
 	<% } %>
 	
+<div class="bg-dark text-white">
 	<h1>Bienvenido al UTN GAMING BANK</h1>
 	
 	<jsp:include page="LibreriasBody.html"></jsp:include>
+	</div>
 </body>
 </html>

@@ -29,6 +29,7 @@
 	
 	NumberFormat nf_in = NumberFormat.getNumberInstance(Locale.ITALIAN);
 	%>
+<div class="bg-dark text-white">
 	<jsp:include page="MenuAdministrador.jsp"></jsp:include>
 
 	<div class="container-fluid px-5">
@@ -119,5 +120,6 @@
 		</script>
 
 	<jsp:include page="LibreriasBody.html"></jsp:include>
+	</div>
 </body>
 </html>

@@ -29,7 +29,7 @@
 	%>
 	<jsp:include page="MenuAdministrador.jsp"></jsp:include>
 
-	<div class="container-fluid px-5">
+	<div class="container-fluid px-5 bg-dark text-white">
 		<div class="row">
 			<h1>Clientes</h1>
 		</div>

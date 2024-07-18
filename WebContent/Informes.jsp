@@ -30,7 +30,7 @@
 	NumberFormat nf_in = NumberFormat.getNumberInstance(Locale.ITALIAN);
 	%>
 
-	<div class="container">
+	<div class="container bg-dark text-white">
 		<div class="row">
 			<div class="col">
 				<h1>Importe por Tipos de Movimientos</h1>

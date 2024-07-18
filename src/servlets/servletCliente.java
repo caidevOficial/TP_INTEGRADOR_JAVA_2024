@@ -73,6 +73,7 @@ public class servletCliente extends HttpServlet {
 			cargarMovimientosBuscar(request, response);
 			return;
 		}
+		//SERVLET CLIENTETRANSFERENCIA
 		if (request.getParameter("transferir") != null) {
 			cargarTranferir(request, response);
 			return;
@@ -90,7 +91,7 @@ public class servletCliente extends HttpServlet {
 			pagarPrestamo(request, response);
 			return;
 		}
-		
+		//SERVLET CLIENTETRANSFERENCIA
 		if (request.getParameter("btnTransferir") != null) {
 			transferir(request, response);
 			return;
@@ -98,42 +99,7 @@ public class servletCliente extends HttpServlet {
 	}
 	
 	protected void transferir(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
-		CuentaNegocioImpl cuentaNegocio = new CuentaNegocioImpl();
-		Cuenta cuenta = new Cuenta();
-		cuenta.setId(Integer.parseInt(request.getParameter("ddlCuenta")));
-		Cuenta cuentaATransferir = new Cuenta();
-		cuentaATransferir.setCbu(request.getParameter("txtCBU"));
-		cuentaATransferir = cuentaNegocio.obtenerCBU(cuentaATransferir);
-		if (cuentaATransferir.getId() != 0) {
-			try {
-				boolean movimientoExitoso = false;
-				cuentaNegocio.actualizarSaldoRestar(cuenta, BigDecimal.valueOf(Long.valueOf(request.getParameter("txtMonto"))));
-				cuentaNegocio.actualizarSaldoSumar(cuentaATransferir, BigDecimal.valueOf(Long.valueOf(request.getParameter("txtMonto"))));
-				
-				MovimientoNegocioImpl movimientoNegocio = new MovimientoNegocioImpl();
-				
-				Movimiento movimiento = new Movimiento();
-				movimiento.setCuenta(cuenta);
-				movimiento.setConcepto(new Tipo(Integer.parseInt(request.getParameter("ddlConcepto"))));
-				movimiento.setTipoMovimiento(new Tipo(4));
-				movimiento.setMonto(BigDecimal.valueOf(Long.valueOf(request.getParameter("txtMonto"))).negate());
-				
-				movimientoExitoso = movimientoNegocio.movimientoBanco(movimiento);
-				
-				movimiento.setCuenta(cuentaATransferir);
-				movimiento.setConcepto(new Tipo(Integer.parseInt(request.getParameter("ddlConcepto"))));
-				movimiento.setTipoMovimiento(new Tipo(4));
-				movimiento.setMonto(BigDecimal.valueOf(Long.valueOf(request.getParameter("txtMonto"))));
-				movimientoExitoso = movimientoNegocio.movimientoBanco(movimiento);
-				request.setAttribute("insertado", movimientoExitoso);
-			} catch (Exception e) {
-				request.setAttribute("errorTransferir", e.getMessage());
-			}
-			
-		} else {
-			request.setAttribute("errorTransferir", "CBU no encontrado");
-		}
-		RequestDispatcher rd = request.getRequestDispatcher("/Transferir.jsp");   
+		RequestDispatcher rd = request.getRequestDispatcher("/servletClientePrestamos?btnTransferir=1");   
         rd.forward(request, response);
 	}
 	
@@ -152,27 +118,13 @@ public class servletCliente extends HttpServlet {
         rd.forward(request, response);
 	}
 	
-	protected void cargarTranferir(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
-		TipoNegocioImpl tipoNegocio = new TipoNegocioImpl();
-		request.getSession().setAttribute("concepto", tipoNegocio.getTipos("Concepto"));
-		CuentaNegocioImpl cuentaNegocio = new CuentaNegocioImpl();
-		Usuario	usuario = new Usuario();
-		usuario = (Usuario)request.getSession().getAttribute("usuario");
-		ClienteNegocioImpl clienteNegocio = new ClienteNegocioImpl();
-		Cliente cliente = new Cliente();
-		cliente.setId(clienteNegocio.buscarId(usuario));
-		request.getSession().setAttribute("cuentas", cuentaNegocio.obtenerCuentas(cliente));
-		RequestDispatcher rd = request.getRequestDispatcher("/Transferir.jsp");   
+	protected void cargarTranferir(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		RequestDispatcher rd = request.getRequestDispatcher("/servletClienteTransferencia?transferir=1");   
         rd.forward(request, response);
 	}
 
-	
 	protected void cargarMovimientosBuscar(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
-		MovimientoNegocioImpl movimientoNegocio = new MovimientoNegocioImpl();
-		Cuenta cuenta = new Cuenta();
-		cuenta.setId(Integer.parseInt(request.getSession().getAttribute("selected").toString()));
-		request.getSession().setAttribute("movimientos", movimientoNegocio.obtenerMovimientos(cuenta, request.getParameter("txtBuscar")));
-		RequestDispatcher rd = request.getRequestDispatcher("/Cuenta.jsp");   
+		RequestDispatcher rd = request.getRequestDispatcher("/servletClienteCuentas?btnBuscarMovimientos=1");   
         rd.forward(request, response);
 	}
 	
@@ -197,12 +149,7 @@ public class servletCliente extends HttpServlet {
 	}
 	
 	protected void cargarMovimientos(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
-		MovimientoNegocioImpl movimientoNegocio = new MovimientoNegocioImpl();
-		Cuenta cuenta = new Cuenta();
-		cuenta.setId(Integer.parseInt(request.getParameter("ddlCuenta")));
-		request.getSession().setAttribute("selected", Integer.parseInt(request.getParameter("ddlCuenta")));
-		request.getSession().setAttribute("movimientos", movimientoNegocio.obtenerMovimientos(cuenta));
-		RequestDispatcher rd = request.getRequestDispatcher("/Cuenta.jsp");   
+		RequestDispatcher rd = request.getRequestDispatcher("/servletClientePrestamos?btnMostrarMovimientos=1");   
         rd.forward(request, response);
 	}
 }

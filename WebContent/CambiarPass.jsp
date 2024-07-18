@@ -25,7 +25,7 @@ if(request.getSession().getAttribute("usuario") != null){
 			}
 			%>
 
-<div class="container w-50 my-5">	
+<div class="container w-50 my-5 bg-dark text-white">	
 		<div class="row">
 			<h1>Cambiar Contraseña</h1>
 			<form action="servletAdminstrador" method="post" onsubmit="return validate();">

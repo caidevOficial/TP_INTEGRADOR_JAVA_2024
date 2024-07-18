@@ -23,7 +23,7 @@
 	%>
 
 
-	<div class="container-fluid w-50 my-5">
+	<div class="container-fluid w-50 my-5 bg-dark text-white">
 		<h1>Informacion Personal</h1>
 		<% if(cliente != null) {%>
 			<p>Nombre: <%= cliente.getNombre() %></p>

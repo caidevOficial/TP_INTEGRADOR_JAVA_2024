@@ -31,7 +31,7 @@
 			: null;
 	%>
 
-	<div class="container-fluid w-50 my-5">
+	<div class="container-fluid w-50 my-5 bg-dark text-white">
 		<h1>Transferir</h1>
 		<form action="servletCliente" method="post"
 			onsubmit="return validation();">

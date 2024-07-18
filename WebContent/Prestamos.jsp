@@ -28,7 +28,7 @@
     NumberFormat nf_in = NumberFormat.getNumberInstance(Locale.ITALIAN);
     %>
 
-	<div class="container-fluid px-5">
+	<div class="container-fluid px-5 bg-dark text-white">
 		<div class="row"><h1>Prestamos</h1></div>
 		<div class="row">
 		<form action="servletAdminstrador" method="post">

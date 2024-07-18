@@ -36,7 +36,7 @@
 	NumberFormat nf_in = NumberFormat.getNumberInstance(Locale.ITALIAN);
 	%>
 
-	<div class="container-fluid px-5 my-3">
+	<div class="container-fluid px-5 my-3 bg-dark text-white">
 		<form action="servletCliente" method="get">
 			<div class="row">
 				<div class="col">

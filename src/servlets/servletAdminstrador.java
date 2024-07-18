@@ -243,20 +243,7 @@ public class servletAdminstrador extends HttpServlet {
 	}
 	
 	protected void crearUsuarioAdministrador(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		UsuarioNegocioImpl usuarioNegocio = new UsuarioNegocioImpl();
-		Usuario usuario = new Usuario();
-		Tipo tipoRol = new Tipo();
-		tipoRol.setId(1);
-		usuario.setTipoRol(tipoRol);
-		usuario.setNombreUsuario(request.getParameter("txtNombreUsuario"));
-		usuario.setEmail(request.getParameter("txtEmail"));
-		usuario.setPassword(request.getParameter("txtPassword"));
-		try {
-			request.setAttribute("usuarioInsertado", usuarioNegocio.crearUsuario(usuario));
-		} catch (SQLException e) {
-			request.setAttribute("usuarioError", e.getMessage());
-		}
-		RequestDispatcher rd = request.getRequestDispatcher("/CrearCuentas.jsp");   
+		RequestDispatcher rd = request.getRequestDispatcher("/servletAdminUsuario?btnCrearAdmin=1");   
         rd.forward(request, response);
 	}
 	
@@ -269,22 +256,4 @@ public class servletAdminstrador extends HttpServlet {
 		RequestDispatcher rd = request.getRequestDispatcher("/servletAdminCuentas?btnCrearCuenta=1");
 		rd.forward(request, response);
 	}
-	
-	public static String generateNumeroCuenta() {
-    	char digits[] = {'0','1','2','3','4','5','6','7','8','9'};
-        StringBuilder result = new StringBuilder();
-        for(int i=0; i<13; i++) {
-            result.append(digits[(int)Math.floor(Math.random() * 10)]);
-        }
-        return result.toString();
-    }
-    
-    public static String generateCBU() {
-    	char digits[] = {'0','1','2','3','4','5','6','7','8','9'};
-        StringBuilder result = new StringBuilder();
-        for(int i=0; i<22; i++) {
-            result.append(digits[(int)Math.floor(Math.random() * 10)]);
-        }
-        return result.toString();
-    }
 }

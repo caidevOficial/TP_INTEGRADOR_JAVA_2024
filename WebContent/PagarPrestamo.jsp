@@ -40,7 +40,7 @@
 		NumberFormat nf_in = NumberFormat.getNumberInstance(Locale.ITALIAN);
 	%>
 
-	<div class="container-fluid w-50 my-5">
+	<div class="container-fluid w-50 my-5 bg-dark text-white">
 		<h1>Pagar Prestamo</h1>
 		<%
 			if(prestamos != null) if(!prestamos.isEmpty()) {
