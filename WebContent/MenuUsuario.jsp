@@ -26,7 +26,6 @@
 			</button>
 			<div class="collapse navbar-collapse justify-content-between" id="navbarNavAltMarkup">
 				<div class="navbar-nav">
-					<a class="nav-link" href="Inicio.jsp">Inicio</a>
 					<a class="nav-link" href="servletCliente?cargarSelects=1">Cuenta</a> 
 					<a class="nav-link" href="servletCliente?cargarPerfil=1">Mi Perfil</a>
 					<a class="nav-link" href="servletCliente?cargarSelectsPrestamo=1">Pedir Prestamo</a>

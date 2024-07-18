@@ -67,20 +67,31 @@
 				<h1>Movimientos</h1>
 			</div>
 			<div class="row">
-				<div class="col">
-					<div class="input-group mb-3">
-						<%
-							if (cuentas != null)
-								for (Cuenta cuenta : cuentas) {
-							%>
-						<span class="input-group-text">CBU:</span>
-							<label type="text" class="form-control" name="txtCBU" id="txtCBU" placeholder="Ingrese el termino a buscar"><%= selected != null && selected == cuenta.getId() ? cuenta.getCbu() : " " %></label>
-						<button class="btn btn-outline-secondary" type="submit" id="btnCopiarCBU"><img src="images/clipboard.svg" width="30px"><span id="copiado"></span></button>
-						<% } %>
-					</div>
-				</div>
-				<div class="col"></div>
-				<div class="col"></div>
+			    <div class="col">
+			        <div class="input-group mb-3">
+			            <%
+			            if (cuentas != null) {
+			                for (Cuenta cuenta : cuentas) {
+			                    String cbu = (selected != null && selected.equals(cuenta.getId())) ? cuenta.getCbu() : " ";
+			                    if (!cbu.trim().isEmpty()) {
+			            %>
+			                    <span class="input-group-text">CBU:</span>
+			                    <label type="text" class="form-control" name="txtCBU" id="txtCBU" placeholder="Ingrese el término a buscar">
+			                        <%= cbu %>
+			                    </label>
+			                    <button class="btn btn-outline-secondary" type="submit" id="btnCopiarCBU">
+			                        <img src="images/clipboard.svg" width="30px">
+			                        <span id="copiado"></span>
+			                    </button>
+			            <%
+			                    }
+			                }
+			            }
+			            %>
+			        </div>
+			    </div>
+			    <div class="col"></div>
+			    <div class="col"></div>
 			</div>
 			<div class="row">
 				<form action="servletCliente" method="get">
