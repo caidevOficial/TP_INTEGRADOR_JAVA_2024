@@ -106,21 +106,26 @@ public class servletCliente extends HttpServlet {
 		cuentaATransferir = cuentaNegocio.obtenerCBU(cuentaATransferir);
 		if (cuentaATransferir.getId() != 0) {
 			try {
+				boolean movimientoExitoso = false;
 				cuentaNegocio.actualizarSaldoRestar(cuenta, BigDecimal.valueOf(Long.valueOf(request.getParameter("txtMonto"))));
 				cuentaNegocio.actualizarSaldoSumar(cuentaATransferir, BigDecimal.valueOf(Long.valueOf(request.getParameter("txtMonto"))));
+				
 				MovimientoNegocioImpl movimientoNegocio = new MovimientoNegocioImpl();
+				
 				Movimiento movimiento = new Movimiento();
 				movimiento.setCuenta(cuenta);
 				movimiento.setConcepto(new Tipo(Integer.parseInt(request.getParameter("ddlConcepto"))));
 				movimiento.setTipoMovimiento(new Tipo(4));
 				movimiento.setMonto(BigDecimal.valueOf(Long.valueOf(request.getParameter("txtMonto"))).negate());
-				movimientoNegocio.movimientoBanco(movimiento);
+				
+				movimientoExitoso = movimientoNegocio.movimientoBanco(movimiento);
+				
 				movimiento.setCuenta(cuentaATransferir);
 				movimiento.setConcepto(new Tipo(Integer.parseInt(request.getParameter("ddlConcepto"))));
 				movimiento.setTipoMovimiento(new Tipo(4));
 				movimiento.setMonto(BigDecimal.valueOf(Long.valueOf(request.getParameter("txtMonto"))));
-				movimientoNegocio.movimientoBanco(movimiento);
-				request.setAttribute("insertado", movimientoNegocio.movimientoBanco(movimiento));
+				movimientoExitoso = movimientoNegocio.movimientoBanco(movimiento);
+				request.setAttribute("insertado", movimientoExitoso);
 			} catch (Exception e) {
 				request.setAttribute("errorTransferir", e.getMessage());
 			}

@@ -43,13 +43,13 @@
 					<div class="input-group input-group-sm mb-3">
 						<span class="input-group-text" id="inputGroup-sizing-sm">Seleccione
 							una cuenta</span> <select class="form-select"
-							aria-label="Default select example" name="ddlCuenta">
+							name="ddlCuenta">
 							<%
 							if (cuentas != null)
 								for (Cuenta cuenta : cuentas) {
 							%>
 							<option value="<%=cuenta.getId()%>"
-								<%=selected != null && selected == cuenta.getId() ? "selected" : " "%>><%=cuenta.getNumeroCuenta()%></option>
+							<%=selected != null && selected == cuenta.getId() ? "selected" : " "%>><%=cuenta.getNumeroCuenta()%></option>
 							<%
 							}
 							%>
@@ -73,9 +73,8 @@
 							if (cuentas != null)
 								for (Cuenta cuenta : cuentas) {
 							%>
-						<span class="input-group-text">CBU:</span><label type="text" class="form-control" name="txtCBU" id="txtCBU"
-							placeholder="Ingrese el termino a buscar"
-							aria-label="Ingrese el termino a buscar"><%= selected != null && selected == cuenta.getId() ? cuenta.getCbu() : " " %></label>
+						<span class="input-group-text">CBU:</span>
+							<label type="text" class="form-control" name="txtCBU" id="txtCBU" placeholder="Ingrese el termino a buscar"><%= selected != null && selected == cuenta.getId() ? cuenta.getCbu() : " " %></label>
 						<button class="btn btn-outline-secondary" type="submit" id="btnCopiarCBU"><img src="images/clipboard.svg" width="30px"><span id="copiado"></span></button>
 						<% } %>
 					</div>
@@ -122,15 +121,16 @@
 				</table>
 			</div>
 			<div class="row">
-				<%
-				if (movimientos != null) {
-				%>
-				<h4>
-					Total en cuenta: $<%=nf_in.format(movimientos.get(0).getCuenta().getSaldo().intValue())%></h4>
-				<%
-				}
-				%>
-			</div>
+    <%
+    if (movimientos != null && !movimientos.isEmpty() && movimientos.get(0).getCuenta() != null && movimientos.get(0).getCuenta().getSaldo() != null) {
+    %>
+        <h4>
+            Total en cuenta: $<%= nf_in.format(movimientos.get(0).getCuenta().getSaldo().intValue()) %>
+        </h4>
+    <%
+    }
+    %>
+</div>
 		</div>
 	</div>
 	<script type="text/javascript">
@@ -147,7 +147,7 @@
 	    document.getElementById("copiado").innerText = "Copiado al portapapeles";
 	    setTimeout(()=>{
 	    	document.getElementById("copiado").innerText = " ";
-		}, 2000)
+		}, 2000);
 	}
 	</script>
 	<jsp:include page="LibreriasBody.html"></jsp:include>

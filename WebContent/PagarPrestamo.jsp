@@ -70,7 +70,7 @@
 		<form action="servletCliente" method="post" onsubmit="return validation();">
 		<div class="input-group input-group-sm mb-3">
 			<span class="input-group-text" id="inputGroup-sizing-sm">Cuotas
-				a Pagar</span> <select class="form-select" name="ddlCoutas"
+				a Pagar</span> <select class="form-select" name="ddlCuotas"
 				aria-label="Default select example">
 				<%
 					if (cuotas != null) for (Cuota cuota : cuotas) {
@@ -88,7 +88,7 @@
 		<p>No tenes prestamos aprobados</p>
 		<% } %>
 		<%if(request.getAttribute("cuotaPaga") != null){ %>
-						<span style="color: green;"><%= Boolean.parseBoolean(request.getAttribute("cuotaPaga").toString()) ? "El pago de la couta se realizo correctamente" : "" %></span>
+						<span style="color: green;"><%= Boolean.parseBoolean(request.getAttribute("cuotaPaga").toString()) ? "El pago de la cuota se realizo correctamente" : "" %></span>
 					<% } %>
 			<%if (request.getAttribute("errorPago") != null){	%>
 						<span style="color: red;"><%= request.getAttribute("errorPago").toString()%></span>
@@ -97,7 +97,7 @@
 	
 	<script type="text/javascript">
 	function validation() {
-		if(confirm("Esta seguro que desea pagar prestamo")){
+		if(confirm("Esta seguro que desea pagar prestamo?")){
 			return true;
 		}
 		return false;

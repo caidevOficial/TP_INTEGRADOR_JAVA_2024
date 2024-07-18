@@ -32,6 +32,7 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 
 	@Override
 	public Boolean movimientoBanco(Movimiento movimiento) {
+		System.out.println("Dentro de movimiento banco");
 		PreparedStatement statement;
 		Connection conexion = Conexion.getConexion().getSQLConexion();
 		Boolean isInsertExitoso = false;
@@ -46,6 +47,7 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
+				System.out.println("Commit movimiento");
 				isInsertExitoso = true;
 			}
 		} 
@@ -56,7 +58,7 @@ public class MovimientoDaoImpl implements IMovimientoDao {
 			} catch (SQLException e1) {
 				e1.printStackTrace();
 			}
-			e.getMessage();
+			System.out.println(e.getMessage());
 		}
 		finally {
 			Conexion.getConexion().cerrarConexion();

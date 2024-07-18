@@ -112,14 +112,17 @@ public class servletClientePrestamos extends HttpServlet {
 		
 		@SuppressWarnings("unchecked")
 		ArrayList<Prestamo> prestamos = (ArrayList<Prestamo>)request.getSession().getAttribute("prestamos");
+		System.out.println(prestamos.size());
 		Prestamo prestamo = new Prestamo();
 		
 		for(Prestamo prestamoFor : prestamos) {
+			System.out.println(prestamoSeleccionado);
+			System.out.println(prestamoFor.getId());
 			if (prestamoFor.getId() == prestamoSeleccionado) {
 				prestamo = prestamoFor;
 			}
 		}
-		
+		System.out.println(prestamo.getId());
 		request.getSession().setAttribute("cuotas", cuotasNegocioImpl.obtenerCuotas(prestamo));
 		request.getSession().setAttribute("prestamo", prestamo);
 		
@@ -163,7 +166,7 @@ public class servletClientePrestamos extends HttpServlet {
 			movimiento.setMonto(prestamo.getMontoCuota().negate());
 			movimientoNegocio.movimientoBanco(movimiento);
 			Cuota cuota = new Cuota();
-			
+			System.out.println(request.getParameter("ddlCuotas"));
 			cuota.setId(Integer.parseInt(request.getParameter("ddlCuotas")));
 			request.setAttribute("cuotaPaga", cuotaNegocio.cuotaPaga(cuota));;
 		} catch (SQLException e) {

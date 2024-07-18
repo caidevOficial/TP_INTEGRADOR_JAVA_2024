@@ -246,6 +246,7 @@ public class CuentaDaoImpl implements ICuentaDao {
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
+				System.out.println("Commit saldo sumar");
 				isInsertExitoso = true;
 			}
 		} 
@@ -279,11 +280,13 @@ public class CuentaDaoImpl implements ICuentaDao {
 			if(statement.executeUpdate() > 0)
 			{
 				conexion.commit();
+				System.out.println("Se comiteo la query saldo restar");
 				isInsertExitoso = "1";
 			}
 		} 
 		catch (SQLException e) 
 		{
+			System.out.println("Dentro del primer catch");
 			try {
 				conexion.rollback();
 			} catch (SQLException e1) {
