@@ -157,6 +157,7 @@ public class Queries {
 	
 	private String ultimoIdMovimientos = "SELECT MAX(id) AS ID FROM Transferencias;";
 	
+	// Aplicar filtro a cuentas activas
 	private String getImporteTotal = "" +
 			"SELECT " +
 			"SUM(ABS(m.Monto_movimiento)) AS importeTotal " +
